@@ -19,7 +19,7 @@ jobs:
       path_to_notebooks: 'website'
       build_command: 'cp -r ../README.md ../docs ../notebooks .; jupyter-book build .'
       # this is a bit hacky, but the only way to 'inject' a shell command before the build. 
-      output_path: '_build/html'
+      output_path: 'website/_build/html'
   deploy:
     needs: build
     uses: ProjectPythia/cookbook-actions/.github/workflows/deploy-book.yaml@main
