@@ -1,0 +1,32 @@
+# Environment
+seed: 0
+
+# System
+num_nodes: 5
+num_timesteps: 100
+node_dim: 3
+scm_confounders: True
+graph: "scale-free" # "scale-free" or "all_uniform"
+# Specify a name such as 'Lorenz' corresponding to a dystr dynamical system class
+# Alternatively, set it to 'random' to randomly sample a system
+# from the list of available systems
+system_name: "random"
+time_lag: 5
+time_lag_edge_probability: 0.1
+make_trajectory_kwargs:
+  noise: 0.1
+init_ratios: [1., 0.2] # Assign root node driver systems ratios: system, periodic
+
+# Plotting
+plot: True
+save_plot: True
+show_plot: False
+create_animation: True
+return_html_anim: False # only used in notebooks
+
+# Data output
+save_data: True
+out_dir_base: "output"
+out_dir_data: "data"
+out_dir_plots: "plots"
+add_outdir_timestamp: True
