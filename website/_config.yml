@@ -45,4 +45,8 @@ html:
   use_repository_button: true
   baseurl: "/CausalDynamics/"
 
+sphinx:
+  config:
+    html_use_relative_urls: true
+
 
