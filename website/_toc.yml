@@ -7,6 +7,3 @@ chapters:
 - file: challenge
 - file: quickstart
 - file: benchmark
-  sections:
-  - file: notebooks/causal_climate.ipynb
-- file: notebooks/eval_pipeline.ipynb
