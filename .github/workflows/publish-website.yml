@@ -16,9 +16,9 @@ jobs:
     with:
       environment_file: 'website/environment.yml'
       environment_name: causaldynamics-docs-env
-      path_to_notebooks: 'website'
-      build_command: 'cp -r ../README.md ../docs .; jupyter-book build .; find _build/html -name '*.html' -print0 | xargs -0 sed -i 's|<head>|<head><base href="https://juannat7.github.io/CausalDynamics/" />|'
-'
+      path_to_notebooks: 'website'        
+      build_command: "cp -r ../README.md ../docs .; jupyter-book build .; find _build/html -name '*.html' -print0 | xargs -0 sed -i 's|<head>|<head><base href=\"https://juannat7.github.io/CausalDynamics/\" />|'"
+
       # this is a bit hacky, but the only way to 'inject' a shell command before the build. 
       output_path: '_build/html'
   deploy:
