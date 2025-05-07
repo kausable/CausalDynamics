@@ -55,4 +55,3 @@ Examples to run baselines can be found in `notebooks/eval_pipeline.ipynb`. Follo
 - [x] Neural GC: https://github.com/iancovert/Neural-GC
 - [x] CUTS+: https://github.com/jarrycyx/unn
 - [x] TSCI: https://github.com/KurtButler/tangentspace
-- [ ] ...
