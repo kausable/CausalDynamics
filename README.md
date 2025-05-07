@@ -6,7 +6,7 @@ These include thousands of coupled ordinary and stochastic differential equation
 The benchmark evaluates the performance of state-of-the-art causal discovery methods under realistic conditions such as lagged dependencies and stochasticity that better reflect the nature of real-world systems.
 Importantly, CausalDynamics supports a plug-and-play coupling workflow across component subsystems to construct a hierarchy of complexity.
 The benchmark serves as a timely foundation for advancing the next generation of causal inference tools in scientific domains where dynamics are rich and interventions are rare. 
- 
+
 
 ## Installation
 ```shell

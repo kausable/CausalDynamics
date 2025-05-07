@@ -47,6 +47,6 @@ html:
 
 sphinx:
   config:
-    html_use_relative_urls: true
-
+    html_extrahead: |
+      <base href="https://juannat7.github.io/CausalDynamics/" />
 
