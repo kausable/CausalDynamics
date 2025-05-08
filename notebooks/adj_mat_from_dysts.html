@@ -1,0 +1,958 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Retrieve the adjacency matrices from dysts &#8212; CausalDynamics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/adj_mat_from_dysts';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CausalDynamics</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    CausalDynamics: A large-scale benchmark for structural discovery of dynamical causal models
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../challenge.html">Challenge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../benchmark.html">Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="climate_causal_models.html">Climate Causal Models</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="eval_pipeline.html">Evaluation</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kausable/CausalDynamics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kausable/CausalDynamics/issues/new?title=Issue%20on%20page%20%2Fnotebooks/adj_mat_from_dysts.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/adj_mat_from_dysts.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Retrieve the adjacency matrices from dysts</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="retrieve-the-adjacency-matrices-from-dysts">
+<h1>Retrieve the adjacency matrices from dysts<a class="headerlink" href="#retrieve-the-adjacency-matrices-from-dysts" title="Link to this heading">#</a></h1>
+<p>This notebooks showcases how adjacency matrices are retrieved from the <code class="docutils literal notranslate"><span class="pre">dysts</span></code> package for the simplex systems and how they look like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">dysts.flows</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">flows</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.systems</span><span class="w"> </span><span class="kn">import</span> <span class="n">_DYSTS_3D_CHAOTIC_SYSTEMS</span><span class="p">,</span> <span class="n">get_adjacency_matrix_from_jac</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">_DYSTS_3D_CHAOTIC_SYSTEMS</span></code> dictionary containes all the dynamical system names. We can get the actual <code class="docutils literal notranslate"><span class="pre">dysts.flows</span></code> classes by calling the attribute. Let’s have a look at an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sys_name</span> <span class="o">=</span> <span class="n">_DYSTS_3D_CHAOTIC_SYSTEMS</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sys</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">flows</span><span class="p">,</span> <span class="n">sys_name</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sys_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lorenz
+&lt;class &#39;dysts.flows.Lorenz&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get the adjacency matrix from a system, call the <code class="docutils literal notranslate"><span class="pre">get_adjacency_matrix_from_jac</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">get_adjacency_matrix_from_jac</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 1, 0],
+       [0, 1, 1],
+       [1, 1, 1]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s create a dictionary with all the adjacency matrices of all 3D <code class="docutils literal notranslate"><span class="pre">dysts</span></code> systems.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">_DYSTS_3D_CHAOTIC_SYSTEMS</span><span class="p">:</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">flows</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">get_adjacency_matrix_from_jac</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">res</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span>
+<span class="n">res</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Lorenz&#39;: array([[1, 1, 0],
+        [0, 1, 1],
+        [1, 1, 1]]),
+ &#39;LorenzBounded&#39;: array(1),
+ &#39;Lorenz84&#39;: array([[1, 1, 1],
+        [0, 0, 1],
+        [1, 1, 0]]),
+ &#39;Rossler&#39;: array([[0, 1, 1],
+        [1, 1, 0],
+        [1, 0, 0]]),
+ &#39;Thomas&#39;: array([[1, 1, 0],
+        [0, 1, 1],
+        [1, 0, 1]]),
+ &#39;ThomasLabyrinth&#39;: array([[1, 1, 0],
+        [0, 1, 1],
+        [1, 0, 1]]),
+ &#39;GlycolyticOscillation&#39;: array(1),
+ &#39;GuckenheimerHolmes&#39;: array(1),
+ &#39;Halvorsen&#39;: array([[1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]]),
+ &#39;Chua&#39;: array([[1, 1, 0],
+        [1, 1, 1],
+        [0, 1, 0]]),
+ &#39;MultiChua&#39;: array(1),
+ &#39;Duffing&#39;: array([[0, 1, 0],
+        [1, 1, 1],
+        [0, 0, 0]]),
+ &#39;DoubleGyre&#39;: array(1),
+ &#39;BlinkingRotlet&#39;: array(1),
+ &#39;LidDrivenCavityFlow&#39;: array(1),
+ &#39;BlinkingVortex&#39;: array(1),
+ &#39;InteriorSquirmer&#39;: array(1),
+ &#39;OscillatingFlow&#39;: array(1),
+ &#39;BickleyJet&#39;: array(1),
+ &#39;ArnoldBeltramiChildress&#39;: array(1),
+ &#39;JerkCircuit&#39;: array([[0, 1, 0],
+        [0, 0, 1],
+        [1, 1, 1]]),
+ &#39;ForcedBrusselator&#39;: array(1),
+ &#39;WindmiReduced&#39;: array(1),
+ &#39;MooreSpiegel&#39;: array([[0, 1, 0],
+        [0, 0, 1],
+        [1, 0, 1]]),
+ &#39;CoevolvingPredatorPrey&#39;: array(1),
+ &#39;KawczynskiStrizhak&#39;: array([[0, 1, 0],
+        [1, 1, 1],
+        [1, 0, 1]]),
+ &#39;BelousovZhabotinsky&#39;: array(1),
+ &#39;IsothermalChemical&#39;: array(1),
+ &#39;VallisElNino&#39;: array(1),
+ &#39;RabinovichFabrikant&#39;: array(1),
+ &#39;NoseHoover&#39;: array(1),
+ &#39;Dadras&#39;: array(1),
+ &#39;RikitakeDynamo&#39;: array([[1, 1, 1],
+        [0, 1, 1],
+        [1, 1, 0]]),
+ &#39;PehlivanWei&#39;: array([[0, 0, 1],
+        [1, 1, 1],
+        [1, 1, 0]]),
+ &#39;SprottTorus&#39;: array([[1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 0]]),
+ &#39;SprottJerk&#39;: array([[0, 1, 0],
+        [0, 0, 1],
+        [1, 1, 1]]),
+ &#39;SprottA&#39;: array([[0, 1, 0],
+        [1, 1, 1],
+        [0, 1, 0]]),
+ &#39;SprottB&#39;: array([[0, 1, 1],
+        [1, 1, 0],
+        [1, 1, 0]]),
+ &#39;SprottC&#39;: array([[0, 1, 1],
+        [1, 1, 0],
+        [1, 0, 0]]),
+ &#39;SprottD&#39;: array([[0, 1, 0],
+        [1, 0, 1],
+        [1, 1, 1]]),
+ &#39;SprottE&#39;: array([[0, 1, 1],
+        [1, 1, 0],
+        [1, 0, 0]]),
+ &#39;SprottF&#39;: array([[0, 1, 1],
+        [1, 1, 0],
+        [1, 0, 1]]),
+ &#39;SprottG&#39;: array([[1, 0, 1],
+        [1, 1, 1],
+        [1, 1, 0]]),
+ &#39;SprottH&#39;: array([[0, 1, 1],
+        [1, 1, 0],
+        [1, 0, 1]]),
+ &#39;SprottI&#39;: array([[0, 1, 0],
+        [1, 0, 1],
+        [1, 1, 1]]),
+ &#39;SprottJ&#39;: array([[0, 0, 1],
+        [0, 1, 1],
+        [1, 1, 0]]),
+ &#39;SprottK&#39;: array([[1, 1, 1],
+        [1, 1, 0],
+        [1, 0, 1]]),
+ &#39;SprottL&#39;: array([[0, 1, 1],
+        [1, 1, 0],
+        [1, 0, 0]]),
+ &#39;SprottM&#39;: array([[0, 0, 1],
+        [1, 1, 0],
+        [1, 1, 0]]),
+ &#39;SprottN&#39;: array([[0, 1, 0],
+        [1, 0, 1],
+        [0, 1, 1]]),
+ &#39;SprottO&#39;: array([[0, 1, 0],
+        [1, 0, 1],
+        [1, 1, 1]]),
+ &#39;SprottP&#39;: array([[0, 1, 1],
+        [1, 1, 0],
+        [1, 1, 0]]),
+ &#39;SprottQ&#39;: array([[0, 0, 1],
+        [1, 1, 0],
+        [1, 1, 1]]),
+ &#39;SprottR&#39;: array([[0, 1, 0],
+        [0, 0, 1],
+        [1, 1, 1]]),
+ &#39;SprottS&#39;: array([[1, 1, 0],
+        [1, 0, 1],
+        [1, 0, 0]]),
+ &#39;SprottMore&#39;: array(1),
+ &#39;Arneodo&#39;: array([[0, 1, 0],
+        [0, 0, 1],
+        [1, 1, 1]]),
+ &#39;Coullet&#39;: array([[0, 1, 0],
+        [0, 0, 1],
+        [1, 1, 1]]),
+ &#39;Rucklidge&#39;: array([[1, 0, 1],
+        [1, 0, 0],
+        [0, 1, 1]]),
+ &#39;Sakarya&#39;: array([[1, 1, 1],
+        [0, 1, 1],
+        [1, 1, 1]]),
+ &#39;LiuChen&#39;: array([[1, 1, 1],
+        [0, 1, 1],
+        [1, 1, 1]]),
+ &#39;RayleighBenard&#39;: array([[1, 1, 0],
+        [1, 1, 1],
+        [1, 1, 1]]),
+ &#39;Finance&#39;: array([[1, 1, 1],
+        [1, 1, 0],
+        [1, 0, 1]]),
+ &#39;Bouali2&#39;: array(1),
+ &#39;Bouali&#39;: array(1),
+ &#39;LuChenCheng&#39;: array([[1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]]),
+ &#39;LuChen&#39;: array([[1, 1, 0],
+        [1, 1, 1],
+        [1, 1, 1]]),
+ &#39;QiChen&#39;: array([[1, 1, 1],
+        [0, 1, 1],
+        [1, 1, 1]]),
+ &#39;ZhouChen&#39;: array([[1, 1, 1],
+        [1, 1, 0],
+        [1, 1, 1]]),
+ &#39;BurkeShaw&#39;: array([[1, 1, 0],
+        [1, 1, 1],
+        [1, 1, 0]]),
+ &#39;Chen&#39;: array([[1, 1, 0],
+        [1, 1, 1],
+        [1, 1, 1]]),
+ &#39;ChenLee&#39;: array([[1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]]),
+ &#39;WangSun&#39;: array([[1, 1, 1],
+        [0, 1, 1],
+        [1, 1, 1]]),
+ &#39;YuWang&#39;: array([[1, 1, 0],
+        [0, 0, 1],
+        [1, 1, 1]]),
+ &#39;YuWang2&#39;: array([[1, 1, 0],
+        [0, 0, 1],
+        [1, 1, 1]]),
+ &#39;SanUmSrisuchinwong&#39;: array([[1, 1, 0],
+        [1, 0, 1],
+        [1, 1, 0]]),
+ &#39;DequanLi&#39;: array([[0, 1, 1],
+        [0, 1, 1],
+        [1, 1, 1]]),
+ &#39;PanXuZhou&#39;: array([[0, 1, 1],
+        [0, 1, 1],
+        [1, 1, 1]]),
+ &#39;Tsucs2&#39;: array([[0, 1, 1],
+        [0, 1, 1],
+        [1, 1, 1]]),
+ &#39;NewtonLiepnik&#39;: array(1),
+ &#39;SaltonSea&#39;: array(1),
+ &#39;ExcitableCell&#39;: array(1),
+ &#39;CaTwoPlus&#39;: array(1),
+ &#39;FluidTrampoline&#39;: array(1),
+ &#39;Aizawa&#39;: array(1),
+ &#39;AnishchenkoAstakhov&#39;: array(1),
+ &#39;ShimizuMorioka&#39;: array([[0, 1, 0],
+        [0, 1, 1],
+        [1, 0, 1]]),
+ &#39;GenesioTesi&#39;: array([[0, 1, 0],
+        [0, 0, 1],
+        [1, 1, 1]]),
+ &#39;AtmosphericRegime&#39;: array(1),
+ &#39;Hadley&#39;: array([[1, 1, 1],
+        [0, 0, 1],
+        [1, 1, 0]]),
+ &#39;ForcedVanDerPol&#39;: array(1),
+ &#39;ForcedFitzHughNagumo&#39;: array(1),
+ &#39;HindmarshRose&#39;: array(1),
+ &#39;Colpitts&#39;: array(1),
+ &#39;Laser&#39;: array([[1, 1, 1],
+        [1, 0, 1],
+        [1, 0, 1]]),
+ &#39;Blasius&#39;: array(1),
+ &#39;TurchinHanski&#39;: array(1),
+ &#39;StickSlipOscillator&#39;: array(1),
+ &#39;HastingsPowell&#39;: array(1),
+ &#39;CellularNeuralNetwork&#39;: array(1),
+ &#39;BeerRNN&#39;: array(1),
+ &#39;Torus&#39;: array(1),
+ &#39;CaTwoPlusQuasiperiodic&#39;: array(1),
+ &#39;ItikBanksTumor&#39;: array(1)}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we filter out the systems, that do not have a three dimensional adjacency matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Count systems with valid adjacency matrices</span>
+<span class="n">valid_matrices</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">A</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">total_systems</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Systems with valid adjacency matrices: </span><span class="si">{</span><span class="n">valid_matrices</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_systems</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">valid_matrices</span><span class="o">/</span><span class="n">total_systems</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Systems with valid adjacency matrices: 59/104 (56.7%)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s have a look at the network densities, i.e., the ratio of actual connections to possible connections.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">densities</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">system</span><span class="p">,</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">A</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Number of nodes</span>
+        <span class="n">possible_connections</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span>  <span class="c1"># Including self-connections</span>
+        <span class="n">actual_connections</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="n">densities</span><span class="p">[</span><span class="n">system</span><span class="p">]</span> <span class="o">=</span> <span class="n">actual_connections</span> <span class="o">/</span> <span class="n">possible_connections</span>
+
+<span class="c1"># Print systems sorted by network density</span>
+<span class="k">if</span> <span class="n">densities</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Network density (sorted):&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">system</span><span class="p">,</span> <span class="n">density</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">densities</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">system</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">density</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate average density</span>
+    <span class="n">avg_density</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">densities</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">densities</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Average network density: </span><span class="si">{</span><span class="n">avg_density</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Network density (sorted):
+Halvorsen: 1.00
+LuChenCheng: 1.00
+ChenLee: 1.00
+SprottTorus: 0.89
+Sakarya: 0.89
+LiuChen: 0.89
+RayleighBenard: 0.89
+LuChen: 0.89
+QiChen: 0.89
+ZhouChen: 0.89
+Chen: 0.89
+WangSun: 0.89
+Lorenz: 0.78
+RikitakeDynamo: 0.78
+SprottG: 0.78
+SprottK: 0.78
+Finance: 0.78
+BurkeShaw: 0.78
+DequanLi: 0.78
+PanXuZhou: 0.78
+Tsucs2: 0.78
+Laser: 0.78
+Lorenz84: 0.67
+Thomas: 0.67
+ThomasLabyrinth: 0.67
+Chua: 0.67
+KawczynskiStrizhak: 0.67
+PehlivanWei: 0.67
+SprottB: 0.67
+SprottD: 0.67
+SprottF: 0.67
+SprottH: 0.67
+SprottI: 0.67
+SprottO: 0.67
+SprottP: 0.67
+SprottQ: 0.67
+YuWang: 0.67
+YuWang2: 0.67
+SanUmSrisuchinwong: 0.67
+Hadley: 0.67
+Rossler: 0.56
+JerkCircuit: 0.56
+SprottJerk: 0.56
+SprottA: 0.56
+SprottC: 0.56
+SprottE: 0.56
+SprottJ: 0.56
+SprottL: 0.56
+SprottM: 0.56
+SprottN: 0.56
+SprottR: 0.56
+SprottS: 0.56
+Arneodo: 0.56
+Coullet: 0.56
+Rucklidge: 0.56
+ShimizuMorioka: 0.56
+GenesioTesi: 0.56
+Duffing: 0.44
+MooreSpiegel: 0.44
+
+Average network density: 0.70
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s visualize the network structure of the dynamical systems together with their adjacency matrices.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select systems with valid adjacency matrices</span>
+<span class="n">valid_systems</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> 
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">A</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">valid_systems</span><span class="p">:</span>
+    <span class="c1"># Visualize all systems</span>
+    <span class="c1"># Calculate grid dimensions based on number of systems</span>
+    <span class="n">n_systems</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_systems</span><span class="p">)</span>
+    <span class="n">n_cols</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">n_systems</span><span class="p">)</span>  <span class="c1"># Maximum 4 columns</span>
+    <span class="n">n_rows</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_systems</span> <span class="o">+</span> <span class="n">n_cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">n_cols</span>  <span class="c1"># Ceiling division</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">n_cols</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">n_rows</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">n_systems</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">axes</span><span class="p">])</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">system</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">valid_systems</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">system</span><span class="p">]</span>
+            <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+            
+            <span class="c1"># Draw the network</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+            <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> 
+                             <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                             <span class="n">arrowsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">system</span><span class="si">}</span><span class="s2"> Network Structure&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Hide any unused subplots</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes</span><span class="p">)):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+<span class="k">if</span> <span class="n">valid_systems</span><span class="p">:</span>
+    <span class="c1"># Visualize all systems as binary adjacency matrices</span>
+    <span class="c1"># Calculate grid dimensions based on number of systems</span>
+    <span class="n">n_systems</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_systems</span><span class="p">)</span>
+    <span class="n">n_cols</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">n_systems</span><span class="p">)</span>  <span class="c1"># More columns for smaller plots</span>
+    <span class="n">n_rows</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_systems</span> <span class="o">+</span> <span class="n">n_cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">n_cols</span>  <span class="c1"># Ceiling division</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n_cols</span><span class="p">,</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">n_rows</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">n_systems</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">axes</span><span class="p">])</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">system</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">valid_systems</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>  <span class="c1"># Safety check</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">system</span><span class="p">]</span>
+            
+            <span class="c1"># Draw the adjacency matrix as a binary heatmap</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            
+            <span class="c1"># Add labels but with smaller font</span>
+            <span class="n">n_nodes</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_nodes</span><span class="p">))</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_nodes</span><span class="p">))</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_nodes</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_nodes</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">system</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="c1"># Hide any unused subplots</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">axes</span><span class="p">)):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9f5a1e190b04b46257d8c553134c1ba3517462e8294bf5f55941146b941fd10b.png" src="../_images/9f5a1e190b04b46257d8c553134c1ba3517462e8294bf5f55941146b941fd10b.png" />
+<img alt="../_images/fd7be2151538879a1517b61fb5dfd0165411f2c23835d9d3d57d6afd32f2d4b1.png" src="../_images/fd7be2151538879a1517b61fb5dfd0165411f2c23835d9d3d57d6afd32f2d4b1.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The CausalDynamics Maintainers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
