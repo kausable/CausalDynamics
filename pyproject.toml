@@ -7,8 +7,9 @@ authors = [
     {name = "Juan Nathaniel", email = "jn2808@columbia.edu"},
 ]
 dependencies = [
+    "numpy<2.0",
     "dysts>=0.95",
-    "numba>=0.61.2",
+    "numba<=0.61.0",
     "matplotlib>=3.10.1",
     "seaborn>=0.13.2",
     "jupyter>=1.1.1",
@@ -27,6 +28,7 @@ dependencies = [
     "sdeint>=0.3.0",
     "zarr>=2.18.3",
     "qgs>=1.0.0",
+    "sparse<=0.15.5",
 ]
 requires-python = ">=3.10, <3.11"
 readme = "README.md"
@@ -41,7 +43,7 @@ build-backend = "pdm.backend"
 distribution = true
 
 [tool.pdm.resolution.overrides]
-numpy = ">=1.25"
+numpy = ">=1.25,<2.0"
 
 [tool.pdm.dev-dependencies]
 lint = [
