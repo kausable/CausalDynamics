@@ -60,6 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/coupled_causal_models';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Features" href="features.html" />
+    <link rel="prev" title="Benchmark" href="../benchmark.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -173,17 +173,22 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../challenge.html">Challenge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../benchmark.html">Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../benchmark.html">Benchmark</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Hierarchically coupled causal models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html">Features</a></li>
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="climate_causal_models.html">Climate Causal Models</a></li>
 
 
+<li class="toctree-l2"><a class="reference internal" href="eval_pipeline.html">Evaluation</a></li>
+
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="eval_pipeline.html">Evaluation</a></li>
-
 </ul>
 
     </div>
@@ -413,11 +418,10 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_rng_seed</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.initialization</span><span class="w"> </span><span class="kn">import</span> <span class="n">initialize_weights</span><span class="p">,</span> <span class="n">initialize_biases</span><span class="p">,</span> <span class="n">initialize_x</span><span class="p">,</span> <span class="n">initialize_system_and_driver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.initialization</span><span class="w"> </span><span class="kn">import</span> <span class="n">initialize_weights</span><span class="p">,</span> <span class="n">initialize_biases</span><span class="p">,</span> <span class="n">initialize_x</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.scm</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm_graph</span><span class="p">,</span> <span class="n">get_root_nodes_mask</span><span class="p">,</span> <span class="n">GrowingNetworkWithRedirection</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.mlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">propagate_mlp</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.systems</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_system</span>
@@ -480,8 +484,8 @@ INFO - Simulating Lorenz system for 200 timesteps...
 INFO - Generating visualizations
 </pre></div>
 </div>
-<img alt="../_images/c97e3af103b542f52d2b4a14f2b734a6df1b17f52631b0e8372b63b33c8d2799.png" src="../_images/c97e3af103b542f52d2b4a14f2b734a6df1b17f52631b0e8372b63b33c8d2799.png" />
-<img alt="../_images/064ddcd0cd83f0952ed6a8a79d262cbe10fbf65f06b1c5cd44b3ca84926efe76.png" src="../_images/064ddcd0cd83f0952ed6a8a79d262cbe10fbf65f06b1c5cd44b3ca84926efe76.png" />
+<img alt="../_images/9b3069cda42c391d8970232a97458e97e8429729deecbd01f57c7f2efc354794.png" src="../_images/9b3069cda42c391d8970232a97458e97e8429729deecbd01f57c7f2efc354794.png" />
+<img alt="../_images/a5e0c8f7a75ce5677e5bf7cc523859a799a0f91dbc64c6cacd60c217f67d15ae.png" src="../_images/a5e0c8f7a75ce5677e5bf7cc523859a799a0f91dbc64c6cacd60c217f67d15ae.png" />
 </div>
 </div>
 <p>We provide several features that can be used conveniently accessed through the <code class="docutils literal notranslate"><span class="pre">create_scm</span></code> and <code class="docutils literal notranslate"><span class="pre">simulate_system</span></code> functions:</p>
@@ -539,7 +543,7 @@ INFO - Simulating random system for 500 timesteps...
  &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 4&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../_images/af1a5dddce995435bbad4aa8cb90f0645935afe2ff92b6a012dff43555f7c4c1.png" src="../_images/af1a5dddce995435bbad4aa8cb90f0645935afe2ff92b6a012dff43555f7c4c1.png" />
+<img alt="../_images/ebc34315aa8e345946ebbbea32f89a0bd2ac37186efe9a21f09f96718708f66b.png" src="../_images/ebc34315aa8e345946ebbbea32f89a0bd2ac37186efe9a21f09f96718708f66b.png" />
 <img alt="../_images/8d81e5bad25795b4a4eee71bd556a6b347778610764ee43e8e08d533c543f9a2.png" src="../_images/8d81e5bad25795b4a4eee71bd556a6b347778610764ee43e8e08d533c543f9a2.png" />
 <img alt="../_images/1e5b5f6c57e113759603237bf3ff1d1d2e889aa7fcd63b2bf229e46eee29f328.png" src="../_images/1e5b5f6c57e113759603237bf3ff1d1d2e889aa7fcd63b2bf229e46eee29f328.png" />
 </div>
@@ -634,33 +638,20 @@ INFO - Simulating random system for 500 timesteps...
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">plot_trajectories</span><span class="p">(</span><span class="n">da</span><span class="p">,</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">13</span> <span class="n">plot_3d_state</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
-
-<span class="nn">File ~/kausable/causaldynamics/src/causaldynamics/plot.py:712,</span> in <span class="ni">plot_3d_state</span><span class="nt">(data_array, root_nodes, save_path, root_node_color, node_color, figsize, line_alpha, **plot_kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">709</span> <span class="n">final_state</span> <span class="o">=</span> <span class="n">data_array</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
-<span class="g g-Whitespace">    </span><span class="mi">711</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">712</span>     <span class="n">is_root</span> <span class="o">=</span> <span class="n">root_nodes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">root_nodes</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">713</span>     <span class="n">node_color_use</span> <span class="o">=</span> <span class="n">root_node_color</span> <span class="k">if</span> <span class="n">is_root</span> <span class="k">else</span> <span class="n">node_color</span>
-<span class="g g-Whitespace">    </span><span class="mi">714</span>     <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span> <span class="k">if</span> <span class="n">is_root</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span>
-
-<span class="ne">IndexError</span>: index 2 is out of bounds for dimension 0 with size 2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
+ &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../_images/95dc94d60525b7707c462ef91f4fa5d95f43ae6e78d38cb6229f496e352863b6.png" src="../_images/95dc94d60525b7707c462ef91f4fa5d95f43ae6e78d38cb6229f496e352863b6.png" />
-<img alt="../_images/633ff2f0e843758a232c72d3efc681fa52c9e401df141eb18923abf21c263f0e.png" src="../_images/633ff2f0e843758a232c72d3efc681fa52c9e401df141eb18923abf21c263f0e.png" />
-<img alt="../_images/6bb7f717659e78757c205c189878e7008e18ad8d392e9d0eb418c06a03009802.png" src="../_images/6bb7f717659e78757c205c189878e7008e18ad8d392e9d0eb418c06a03009802.png" />
+<img alt="../_images/9b3069cda42c391d8970232a97458e97e8429729deecbd01f57c7f2efc354794.png" src="../_images/9b3069cda42c391d8970232a97458e97e8429729deecbd01f57c7f2efc354794.png" />
+<img alt="../_images/b0403b2d97da14db78e236462723bca0079fe2921182f65d9159c24e62cdb052.png" src="../_images/b0403b2d97da14db78e236462723bca0079fe2921182f65d9159c24e62cdb052.png" />
+<img alt="../_images/3eeb2ea6ae410e7affddf3f110e4845551acefcba08fc15d885b3b8a79d306e7.png" src="../_images/3eeb2ea6ae410e7affddf3f110e4845551acefcba08fc15d885b3b8a79d306e7.png" />
 </div>
 </div>
 <p>We can even visualize the time unfolding of the system by creating animations. However, this may take a while to run.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an animation of the simple coupled Lorenz attractor. </span>
-<span class="n">da_sel</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+<span class="n">da_sel</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
 <span class="n">anim</span> <span class="o">=</span> <span class="n">animate_3d_trajectories</span><span class="p">(</span><span class="n">da_sel</span><span class="p">,</span> <span class="n">frame_skip</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">rotate</span><span class="o">=</span><span class="kc">True</span> <span class="p">,</span> <span class="n">show_history</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;subplots&#39;</span><span class="p">,</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
 </pre></div>
@@ -696,6 +687,16 @@ INFO - Simulating random system for 500 timesteps...
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
+ &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
+ &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
+</pre></div>
+</div>
+<img alt="../_images/e50da8295a1bd3f5d4c0c3bf2934383c912e81cf6a5f1fd78ade758232e6d431.png" src="../_images/e50da8295a1bd3f5d4c0c3bf2934383c912e81cf6a5f1fd78ade758232e6d431.png" />
+<img alt="../_images/641f84e77c29db7e3b8659046ee15f4825c37898bcd3f694e7c00c18e7fad638.png" src="../_images/641f84e77c29db7e3b8659046ee15f4825c37898bcd3f694e7c00c18e7fad638.png" />
+<img alt="../_images/cc705451ffbbf193542a4a7c49c22ba654ceff1e539565be2896c4f5790e35eb.png" src="../_images/cc705451ffbbf193542a4a7c49c22ba654ceff1e539565be2896c4f5790e35eb.png" />
+</div>
 </div>
 <p>Now, we look at a linear chain: 2-&gt;1-&gt;0</p>
 <div class="cell docutils container">
@@ -713,10 +714,20 @@ INFO - Simulating random system for 500 timesteps...
 <span class="n">data</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s2">&quot;dim&quot;</span><span class="p">])</span>
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
-<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">da</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plot_3d_state</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
+ &lt;Axes3D: title={&#39;center&#39;: &#39;Node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
+ &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
+</pre></div>
+</div>
+<img alt="../_images/7bc5a8a4fc33dc4a7d74976f112b4d554a2d27d970f522a654f1c612245cb68b.png" src="../_images/7bc5a8a4fc33dc4a7d74976f112b4d554a2d27d970f522a654f1c612245cb68b.png" />
+<img alt="../_images/ff90aebafc6b20d1c32503055d63863a7a1f61d6c37fbf50c5feeb0fa1678280.png" src="../_images/ff90aebafc6b20d1c32503055d63863a7a1f61d6c37fbf50c5feeb0fa1678280.png" />
+<img alt="../_images/27c53c48f1336e3259cfd89104ebc2d8e542728a5acdc49877f0cbbb7e40e6b7.png" src="../_images/27c53c48f1336e3259cfd89104ebc2d8e542728a5acdc49877f0cbbb7e40e6b7.png" />
 </div>
 </div>
 </section>
@@ -753,6 +764,24 @@ INFO - Simulating random system for 500 timesteps...
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../benchmark.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Benchmark</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="features.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Features</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
