@@ -661,7 +661,7 @@ def plot_3d_state(
     root_node_color="dimgrey",
     node_color="orange",
     figsize=(15, 5),
-    line_alpha=0.5,
+    line_alpha=1.0,
     **plot_kwargs,
 ) -> tuple[mpl.axes.Axes, ...]:
     """
@@ -682,7 +682,7 @@ def plot_3d_state(
         Color to use for regular nodes
     figsize : tuple, default=(15, 5)
         Figure size (width, height) in inches
-    line_alpha : float, default=0.5
+    line_alpha : float, default=1.0
         Alpha (transparency) value for trajectory lines
     **plot_kwargs : dict
         Additional keyword arguments passed to the plot functions
@@ -750,6 +750,9 @@ def plot_3d_state(
 
         # Set equal aspect ratio
         ax.set_box_aspect([1, 1, 1])
+
+        # Remove grid 
+        ax.grid(False)
 
         # Add legend only to the first subplot
         if node == 0:
