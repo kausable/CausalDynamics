@@ -403,7 +403,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="features">
 <h1>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h1>
-<p>Here, we showcase some key features of CausalDynamics using minimal examples.</p>
+<p>Here, we showcase some key features of CausalDynamics using small example graphs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
@@ -423,16 +423,9 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_rng_seed</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.initialization</span><span class="w"> </span><span class="kn">import</span> <span class="n">initialize_weights</span><span class="p">,</span> <span class="n">initialize_biases</span><span class="p">,</span> <span class="n">initialize_x</span><span class="p">,</span> <span class="n">initialize_system_and_driver</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.scm</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm_graph</span><span class="p">,</span> <span class="n">get_root_nodes_mask</span><span class="p">,</span> <span class="n">GrowingNetworkWithRedirection</span><span class="p">,</span> <span class="n">flatten_time_lag_adj_mat</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.mlp</span><span class="w"> </span><span class="kn">import</span> <span class="n">propagate_mlp</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.systems</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_system</span><span class="p">,</span> <span class="n">solve_random_systems</span><span class="p">,</span> <span class="n">drive_sin</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_trajectories</span><span class="p">,</span> <span class="n">animate_3d_trajectories</span><span class="p">,</span> <span class="n">plot_scm</span><span class="p">,</span> <span class="n">plot_3d_state</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.scm</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm_graph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_trajectories</span><span class="p">,</span> <span class="n">plot_scm</span><span class="p">,</span> <span class="n">plot_3d_state</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.creator</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm</span><span class="p">,</span> <span class="n">simulate_system</span>
 </pre></div>
 </div>
