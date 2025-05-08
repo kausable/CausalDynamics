@@ -8,8 +8,9 @@ chapters:
 - file: quickstart
 - file: benchmark
   sections:
-  - file: notebooks/coupled_causal_models.ipynb
   - file: notebooks/features.ipynb
+  - file: notebooks/coupled_causal_models.ipynb
   - file: notebooks/climate_causal_models.ipynb
-  - file: notebooks/eval_pipeline.ipynb
+- file: baseline
+- file: notebooks/eval_pipeline.ipynb
   
