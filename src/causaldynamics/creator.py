@@ -72,11 +72,11 @@ def setup_environment(
     logger.info(f"Created output directory: {out_dir}")
     return Path(out_dir)
 
-
 def create_scm(
     num_nodes: int,
     node_dim: int,
     confounders: bool,
+    adjacency_matrix: np.ndarray = None,
     graph: str = "scale-free",
     time_lag: int = None,
     time_lag_edge_probability: float = 0.1,
@@ -97,6 +97,8 @@ def create_scm(
         Dimensionality of each node's state vector.
     confounders : bool
         Whether to allow confounders (common causes) in the graph structure.
+    adjacency_matrix : numpy.ndarray, optional
+        Pre-defined adjacency matrix to use. If None, a new one will be generated.
     graph : str, default='scale-free'
         Type of graph to generate. Options:
         - 'scale-free': Generate a scale-free DAG
@@ -143,13 +145,16 @@ def create_scm(
     root_nodes_exist = False
     num_tries = 0
     while not root_nodes_exist and num_tries < max_tries:
-        if graph == "scale-free":
-            A = sample_scale_free_DAG(num_nodes, confounders=confounders)
-        elif graph == "all_uniform":
-            A_all = calculate_all_adjacency_matrices(
-                num_nodes=num_nodes, confounders=confounders
-            )
-            A = A_all[np.random.choice(len(A_all))]
+        if adjacency_matrix is None:
+            if graph == "scale-free":
+                A = sample_scale_free_DAG(num_nodes, confounders=confounders)
+            elif graph == "all_uniform":
+                A_all = calculate_all_adjacency_matrices(
+                    num_nodes=num_nodes, confounders=confounders
+                )
+                A = A_all[np.random.choice(len(A_all))]
+        else:
+            A = adjacency_matrix
 
         if time_lag and time_lag > 0 and time_lag_edge_probability > 0.0:
             A_lag = create_time_lag_adj_mat(A, time_lag_edge_probability)

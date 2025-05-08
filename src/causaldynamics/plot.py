@@ -652,3 +652,115 @@ def plot_scm(
     ax.axis("off")
 
     return ax, pos
+
+
+def plot_3d_state(
+    data_array,
+    root_nodes=None,
+    save_path=None,
+    root_node_color="dimgrey",
+    node_color="orange",
+    figsize=(15, 5),
+    line_alpha=1.0,
+    **plot_kwargs,
+) -> tuple[mpl.axes.Axes, ...]:
+    """
+    Create a faceted plot showing the 3D trajectory development over time, with each node
+    shown in a separate column.
+
+    Parameters
+    ----------
+    data_array : xarray.DataArray
+        Data with dimensions ['time', 'node', 'dim'] where dim=3 for x,y,z coordinates
+    root_nodes : array-like, optional
+        Boolean array indicating which nodes are root nodes
+    save_path : str, optional
+        If provided, save the plot to this path (e.g. 'plot.png' or 'plot.pdf')
+    root_node_color : str, default='dimgrey'
+        Color to use for root nodes
+    node_color : str, default='orange'
+        Color to use for regular nodes
+    figsize : tuple, default=(15, 5)
+        Figure size (width, height) in inches
+    line_alpha : float, default=1.0
+        Alpha (transparency) value for trajectory lines
+    **plot_kwargs : dict
+        Additional keyword arguments passed to the plot functions
+
+    Returns
+    -------
+    tuple of matplotlib.axes.Axes
+        The matplotlib axes objects for each subplot
+    """
+    # Verify data dimensions
+    if data_array.dims != ("time", "node", "dim") or data_array.sizes["dim"] != 3:
+        raise ValueError(
+            "Data array must have dimensions ('time', 'node', 'dim') with dim=3"
+        )
+
+    n_nodes = data_array.sizes["node"]
+
+    # Create figure with nodes as columns
+    fig, axes = plt.subplots(1, n_nodes, figsize=figsize, subplot_kw={'projection': '3d'})
+    if n_nodes == 1:
+        axes = np.array([axes])  # Ensure axes is always an array
+
+    # Get the final state
+    final_state = data_array.isel(time=-1).values
+
+    for node, ax in enumerate(axes):
+        is_root = root_nodes is not None and root_nodes[node]
+        node_color_use = root_node_color if is_root else node_color
+        linestyle = "--" if is_root else "-"
+        marker = "*" if is_root else "o"
+        marker_size = 200 if is_root else 100
+
+        trajectory = data_array.sel(node=node).values
+
+        # Plot trajectory
+        ax.plot(
+            trajectory[:, 0],
+            trajectory[:, 1],
+            trajectory[:, 2],
+            c=node_color_use,
+            alpha=line_alpha,
+            linestyle=linestyle,
+            **plot_kwargs,
+        )
+
+        # Plot final state point
+        ax.scatter(
+            [final_state[node, 0]],
+            [final_state[node, 1]],
+            [final_state[node, 2]],
+            c=node_color_use,
+            marker=marker,
+            s=marker_size,
+            **plot_kwargs,
+        )
+
+        # Set labels and title
+        ax.set_xlabel("X")
+        ax.set_ylabel("Y")
+        ax.set_zlabel("Z")
+        
+        # Set title based on node type
+        node_type = "Root node" if is_root else "Node"
+        ax.set_title(f"{node_type} {node}")
+
+        # Set equal aspect ratio
+        ax.set_box_aspect([1, 1, 1])
+
+        # Remove grid 
+        ax.grid(False)
+
+        # Add legend only to the first subplot
+        if node == 0:
+            ax.legend()
+
+    plt.tight_layout()
+
+    if save_path:
+        plt.savefig(save_path)
+
+    return tuple(axes)
