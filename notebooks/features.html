@@ -388,7 +388,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-systems">Stochastic systems</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-driver">Periodic driver</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-driver">Periodic driver</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internal-standardization">Internal standardization</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -662,6 +665,56 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 <img alt="../_images/d5f9c9b3b7d260f4dfa5ddf593be39078e7cc2a0427e2f8607d9b8c19d5f249b.png" src="../_images/d5f9c9b3b7d260f4dfa5ddf593be39078e7cc2a0427e2f8607d9b8c19d5f249b.png" />
 </div>
 </div>
+<section id="internal-standardization">
+<h2>Internal standardization<a class="headerlink" href="#internal-standardization" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_nodes</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">node_dim</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">num_timesteps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">standardize</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">confounders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="n">system_name</span><span class="o">=</span><span class="s1">&#39;Lorenz&#39;</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+
+<span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">create_scm</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span>
+                                    <span class="n">node_dim</span><span class="o">=</span><span class="n">node_dim</span><span class="p">,</span>
+                                    <span class="n">confounders</span><span class="o">=</span><span class="n">confounders</span><span class="p">,</span>
+                                    <span class="n">adjacency_matrix</span><span class="o">=</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">simulate_system</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> 
+                      <span class="n">num_timesteps</span><span class="o">=</span><span class="n">num_timesteps</span><span class="p">,</span> 
+                      <span class="n">standardize</span><span class="o">=</span><span class="n">standardize</span><span class="p">,</span>
+                      <span class="n">num_nodes</span><span class="o">=</span><span class="n">num_nodes</span><span class="p">,</span>
+                      <span class="n">system_name</span><span class="o">=</span><span class="n">system_name</span><span class="p">)</span> 
+
+
+<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
+<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plot_3d_state</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO - Creating SCM with 3 nodes and 3 dimensions each...
+INFO - Simulating Lorenz system for 1000 timesteps...
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
+ &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
+ &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
+</pre></div>
+</div>
+<img alt="../_images/beece509e42c9e1ba2b75bf977cc2abb7314da38ac1f2fe59b34793ba065b4a6.png" src="../_images/beece509e42c9e1ba2b75bf977cc2abb7314da38ac1f2fe59b34793ba065b4a6.png" />
+<img alt="../_images/b3d7775daa217b65e2e02acf295032d7160cf7ccc4531c422e51beef96edd18a.png" src="../_images/b3d7775daa217b65e2e02acf295032d7160cf7ccc4531c422e51beef96edd18a.png" />
+<img alt="../_images/298301cbc0372a860137039e1b1e02bcdca0543af61c9a014f84d1eb9fb10033.png" src="../_images/298301cbc0372a860137039e1b1e02bcdca0543af61c9a014f84d1eb9fb10033.png" />
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -719,7 +772,10 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-systems">Stochastic systems</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-driver">Periodic driver</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-driver">Periodic driver</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internal-standardization">Internal standardization</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
