@@ -385,16 +385,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">Scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pip">Using pip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pdm">Using pdm</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks">Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">Scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baselines">Baselines</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animations">Animations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baselines">Baselines</a></li>
 </ul>
             </nav>
         </div>
@@ -408,49 +412,56 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="causaldynamics-a-large-scale-benchmark-for-structural-discovery-of-dynamical-causal-models">
 <h1>CausalDynamics: A large-scale benchmark for structural discovery of dynamical causal models<a class="headerlink" href="#causaldynamics-a-large-scale-benchmark-for-structural-discovery-of-dynamical-causal-models" title="Link to this heading">#</a></h1>
-<p>CausalDynamics is a benchmark project designed to push the boundaries of causal discovery in complex dynamical systems.
-It introduces a challenging suite of high-dimensional, noisy, and confounded dynamical environments.
-These include thousands of coupled ordinary and stochastic differential equations, each grounded in known causal structures.
-The benchmark evaluates the performance of state-of-the-art causal discovery methods under realistic conditions such as lagged dependencies and stochasticity that better reflect the nature of real-world systems.
-Importantly, CausalDynamics supports a plug-and-play coupling workflow across component subsystems to construct a hierarchy of complexity.
-The benchmark serves as a timely foundation for advancing the next generation of causal inference tools in scientific domains where dynamics are rich and interventions are rare.</p>
+<div align="center">
+<a href="http://kausable.github.io/CausalDynamics"><img src="https://img.shields.io/badge/View-Documentation-blue?style=for-the-badge)" alt="Homepage"/></a>
+  <!-- <a href="<ADD_LINK>"><img src="https://img.shields.io/badge/ArXiV-2402.00712-b31b1b.svg" alt="arXiv"/></a> -->
+<a href="https://huggingface.co/datasets/kausable/CausalDynamics"><img src="https://img.shields.io/badge/Dataset-HuggingFace-ffd21e" alt="Huggingface Dataset"/></a>
+<a href="https://github.com/kausable/CausalDynamics/blob/main/LICENSE.txt"><img src="https://img.shields.io/badge/license-MIT-green" alt="License Badge"/></a>
+</div>
+</br>
+<p>Causal discovery for dynamical systems poses a major challenge in fields where active interventions are infeasible. However, most methods and their associated benchmarks are tailored to time-series data, which is often deterministic, low-dimensional, and weakly nonlinear. To address these limitations, we present <em>CausalDynamics</em>, a large-scale benchmark for advancing the structural discovery of dynamical causal models. The platform consists of true causal graphs with thousands of increasingly complex coupled ordinary and stochastic systems of differential equations. We perform comprehensive evaluation against state-of-the-art causal discovery algorithms on graph reconstruction in challenging yet realistic settings where the dynamics are noisy, confounded, and lagged. Finally, we extend our platform to include climate models derived from first principles. This enables a plug-and-play coupling workflow across component subsystems to construct a pseudo-realistic hierarchy of complexity. <em>CausalDynamics</em> will facilitate the development of robust causal discovery algorithms that are capable of handling diverse real-world chaotic systems. We provide a user-friendly platform, including a quickstart guide and documentation.</p>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
+<p>TODO: Short list of features and nice figures :)</p>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/challenge.html">Challenge</a></p></li>
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/quickstart.html">Quickstart</a></p></li>
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/benchmark.html">Benchmark</a></p></li>
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/notebooks/features.html">Visual Feature Overview</a></p></li>
+</ul>
+</section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pdm<span class="w"> </span>install<span class="w">             </span><span class="c1"># Install the package</span>
-<span class="k">$(</span>pdm<span class="w"> </span>venv<span class="w"> </span>activate<span class="k">)</span><span class="w">    </span><span class="c1"># Enter the virtual environment</span>
+<section id="using-pip">
+<h3>Using pip<a class="headerlink" href="#using-pip" title="Link to this heading">#</a></h3>
+<p>The easiest way to install the package is via pypi:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>causaldynamics
 </pre></div>
 </div>
 </section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
-<p>Simplest usage:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/causaldynamics/creator.py
+<section id="using-pdm">
+<h3>Using pdm<a class="headerlink" href="#using-pdm" title="Link to this heading">#</a></h3>
+<p>Alternatively, if you want to install the repository locally, clone the repository and install it using <a class="reference external" href="https://pdm-project.org/en/latest/">pdm</a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pdm<span class="w"> </span>install
 </pre></div>
 </div>
-<p>You find the output at <code class="docutils literal notranslate"><span class="pre">output/&lt;timestamp&gt;</span></code> as default location.</p>
-<p>There is a configuration file with all configurable parameters you can pass:</p>
+<p>You can test whether the installation succeded by creating some coupled causal model data:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/causaldynamics/creator.py<span class="w"> </span>--config<span class="w"> </span>config.yaml
 </pre></div>
 </div>
-<p>You can pass arguments directly through the CLI. Have a look at the options:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/causaldynamics/creator.py<span class="w"> </span>-h
-</pre></div>
-</div>
+<p>You find the output at <code class="docutils literal notranslate"><span class="pre">output/&lt;timestamp&gt;</span></code> as default location.</p>
+</section>
+</section>
+<section id="notebooks">
+<h2>Notebooks<a class="headerlink" href="#notebooks" title="Link to this heading">#</a></h2>
+<p>You can find several notebook that explain the functionality of the repository. Good starting points are the <code class="docutils literal notranslate"><span class="pre">coupled_causal_models.ipynb</span></code> for details on how to generate coupled chaotic model time-series data and the <code class="docutils literal notranslate"><span class="pre">eval_pipeline.ipynb</span></code> for information on how the evaluation pipeline is performed.</p>
+</section>
 <section id="scripts">
-<h3>Scripts<a class="headerlink" href="#scripts" title="Link to this heading">#</a></h3>
-<p>We provide several scripts to generate benchmark data, see <code class="docutils literal notranslate"><span class="pre">scripts/README.md</span></code> for more information.</p>
-</section>
-</section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
-<section id="animations">
-<h3>Animations<a class="headerlink" href="#animations" title="Link to this heading">#</a></h3>
-<p>To create animations as <code class="docutils literal notranslate"><span class="pre">.mp4</span></code> files, you need <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code> to be installed on your system:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>ffmpeg<span class="w"> </span><span class="c1"># for MacOS</span>
-apt<span class="w"> </span>install<span class="w"> </span>ffmpeg<span class="w"> </span><span class="c1"># for Linux</span>
-</pre></div>
-</div>
-</section>
+<h2>Scripts<a class="headerlink" href="#scripts" title="Link to this heading">#</a></h2>
+<p>We provide several scripts to generate benchmark data for simplex, coupled and climate models. have a look at <code class="docutils literal notranslate"><span class="pre">scripts/README.md</span></code> for more information.</p>
 </section>
 <section id="baselines">
 <h2>Baselines<a class="headerlink" href="#baselines" title="Link to this heading">#</a></h2>
@@ -463,8 +474,18 @@ apt<span class="w"> </span>install<span class="w"> </span>ffmpeg<span class="w">
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Neural GC: <a class="github reference external" href="https://github.com/iancovert/Neural-GC">iancovert/Neural-GC</a></p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> CUTS+: <a class="github reference external" href="https://github.com/jarrycyx/unn">jarrycyx/unn</a></p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> TSCI: <a class="github reference external" href="https://github.com/KurtButler/tangentspace">KurtButler/tangentspace</a></p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> …</p></li>
 </ul>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="animations">
+<h3>Animations<a class="headerlink" href="#animations" title="Link to this heading">#</a></h3>
+<p>To create animations as <code class="docutils literal notranslate"><span class="pre">.mp4</span></code> files, you need <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code> to be installed on your system:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>ffmpeg<span class="w"> </span><span class="c1"># for MacOS</span>
+apt<span class="w"> </span>install<span class="w"> </span>ffmpeg<span class="w"> </span><span class="c1"># for Linux</span>
+</pre></div>
+</div>
+</section>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -525,16 +546,20 @@ apt<span class="w"> </span>install<span class="w"> </span>ffmpeg<span class="w">
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">Scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pip">Using pip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pdm">Using pdm</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks">Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">Scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baselines">Baselines</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animations">Animations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baselines">Baselines</a></li>
 </ul>
   </nav></div>
 
