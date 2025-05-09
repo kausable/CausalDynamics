@@ -416,7 +416,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.scm</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm_graph</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.creator</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm</span><span class="p">,</span> <span class="n">simulate_system</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_scm</span><span class="p">,</span> <span class="n">plot_trajectories</span><span class="p">,</span> <span class="n">plot_3d_state</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_scm</span><span class="p">,</span> <span class="n">plot_trajectories</span><span class="p">,</span> <span class="n">plot_3d_trajectories</span>
 
 <span class="c1"># Define parameters</span>
 <span class="n">num_nodes</span> <span class="o">=</span> <span class="mi">2</span>
@@ -437,7 +437,7 @@ document.write(`
 
 <span class="c1"># Visualize the SCM and the system</span>
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
-<span class="n">plot_3d_state</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">)</span>
+<span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">)</span>
 <span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -461,7 +461,7 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.creator</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm</span><span class="p">,</span> <span class="n">simulate_system</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_scm</span><span class="p">,</span> <span class="n">plot_trajectories</span><span class="p">,</span> <span class="n">plot_3d_state</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_scm</span><span class="p">,</span> <span class="n">plot_trajectories</span><span class="p">,</span> <span class="n">plot_3d_trajectories</span>
 
 <span class="n">num_nodes</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">node_dim</span> <span class="o">=</span> <span class="mi">3</span>
@@ -494,7 +494,7 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
 <span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">plot_3d_state</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+<span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
