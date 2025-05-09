@@ -19,57 +19,15 @@ TODO: Short list of features and nice figures :)
 - [Challenge](https://kausable.github.io/CausalDynamics/challenge.html)
 - [Quickstart](https://kausable.github.io/CausalDynamics/quickstart.html)
 - [Benchmark](https://kausable.github.io/CausalDynamics/benchmark.html)
-- [Visual Feature Overview](https://kausable.github.io/CausalDynamics/notebooks/features.html)
+    - [Main Features](https://kausable.github.io/CausalDynamics/notebooks/features.html)
+    - [Coupled Dynamics](https://kausable.github.io/CausalDynamics/notebooks/coupled_causal_models.html)
+    - [Climate Dynamics](https://kausable.github.io/CausalDynamics/notebooks/climate_causal_models.html)
+- [Troubleshoot](https://kausable.github.io/CausalDynamics/troubleshoot.html)
 
+## Benchmarking
+- [Baseline](https://kausable.github.io/CausalDynamics/baseline.html)
+- [Evaluation](https://kausable.github.io/CausalDynamics/notebooks/eval_pipeline.html)
+- [Leaderboard](https://kausable.github.io/CausalDynamics/leaderboard.html)
 
-## Installation
-
-### Using pip
-The easiest way to install the package is via pypi:
-```bash
-pip install causaldynamics
-```
-
-### Using pdm
-Alternatively, if you want to install the repository locally, clone the repository and install it using [pdm](https://pdm-project.org/en/latest/):
-
-```shell
-pdm install
-```
-
-You can test whether the installation succeded by creating some coupled causal model data:
-
-```shell
-python src/causaldynamics/creator.py --config config.yaml
-```
-
-You find the output at `output/<timestamp>` as default location.
-
-## Notebooks
-You can find several notebook that explain the functionality of the repository. Good starting points are the `coupled_causal_models.ipynb` for details on how to generate coupled chaotic model time-series data and the `eval_pipeline.ipynb` for information on how the evaluation pipeline is performed.
-
-## Scripts
-
-We provide several scripts to generate benchmark data for simplex, coupled and climate models. have a look at `scripts/README.md` for more information.
-
-## Baselines
-Examples to run baselines can be found in `notebooks/eval_pipeline.ipynb`. Follow installation and (more) runtime instructions of each baseline in the provided github links.
-
-
-- [x] PCMCI+: https://github.com/jakobrunge/tigramite
-- [x] FPCMCI: https://github.com/lcastri/fpcmci
-- [x] VARLiNGAM: https://github.com/cdt15/lingam
-- [x] DYNOTEARS: https://github.com/mckinsey/causalnex
-- [x] Neural GC: https://github.com/iancovert/Neural-GC
-- [x] CUTS+: https://github.com/jarrycyx/unn
-- [x] TSCI: https://github.com/KurtButler/tangentspace
-
-
-## Troubleshooting
-### Animations
-To create animations as `.mp4` files, you need `ffmpeg` to be installed on your system:
-
-```shell
-brew install ffmpeg # for MacOS
-apt install ffmpeg # for Linux
-```
+## Citation
+If you find any of the code and dataset useful, feel free to acknowledge our work through:

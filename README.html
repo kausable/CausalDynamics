@@ -178,18 +178,21 @@
 <li class="toctree-l1"><a class="reference internal" href="challenge.html">Challenge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="benchmark.html">Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/coupled_causal_models.html">Hierarchically coupled causal models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/features.html">Features</a></li>
 
 
 
+<li class="toctree-l2"><a class="reference internal" href="notebooks/coupled_causal_models.html">Hierarchically coupled causal models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/climate_causal_models.html">Climate Causal Models</a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="notebooks/eval_pipeline.html">Evaluation</a></li>
-
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="baseline.html">Baseline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/eval_pipeline.html">Evaluation</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="leaderboard.html">Leaderboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshoot.html">Troubleshoot</a></li>
 </ul>
 
     </div>
@@ -387,18 +390,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pip">Using pip</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pdm">Using pdm</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks">Notebooks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">Scripts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baselines">Baselines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animations">Animations</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking">Benchmarking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
 </ul>
             </nav>
         </div>
@@ -429,63 +422,27 @@ document.write(`
 <ul class="simple">
 <li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/challenge.html">Challenge</a></p></li>
 <li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/quickstart.html">Quickstart</a></p></li>
-<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/benchmark.html">Benchmark</a></p></li>
-<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/notebooks/features.html">Visual Feature Overview</a></p></li>
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/benchmark.html">Benchmark</a></p>
+<ul>
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/notebooks/features.html">Main Features</a></p></li>
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/notebooks/coupled_causal_models.html">Coupled Dynamics</a></p></li>
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/notebooks/climate_causal_models.html">Climate Dynamics</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/troubleshoot.html">Troubleshoot</a></p></li>
 </ul>
 </section>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
-<section id="using-pip">
-<h3>Using pip<a class="headerlink" href="#using-pip" title="Link to this heading">#</a></h3>
-<p>The easiest way to install the package is via pypi:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>causaldynamics
-</pre></div>
-</div>
-</section>
-<section id="using-pdm">
-<h3>Using pdm<a class="headerlink" href="#using-pdm" title="Link to this heading">#</a></h3>
-<p>Alternatively, if you want to install the repository locally, clone the repository and install it using <a class="reference external" href="https://pdm-project.org/en/latest/">pdm</a>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pdm<span class="w"> </span>install
-</pre></div>
-</div>
-<p>You can test whether the installation succeded by creating some coupled causal model data:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/causaldynamics/creator.py<span class="w"> </span>--config<span class="w"> </span>config.yaml
-</pre></div>
-</div>
-<p>You find the output at <code class="docutils literal notranslate"><span class="pre">output/&lt;timestamp&gt;</span></code> as default location.</p>
-</section>
-</section>
-<section id="notebooks">
-<h2>Notebooks<a class="headerlink" href="#notebooks" title="Link to this heading">#</a></h2>
-<p>You can find several notebook that explain the functionality of the repository. Good starting points are the <code class="docutils literal notranslate"><span class="pre">coupled_causal_models.ipynb</span></code> for details on how to generate coupled chaotic model time-series data and the <code class="docutils literal notranslate"><span class="pre">eval_pipeline.ipynb</span></code> for information on how the evaluation pipeline is performed.</p>
-</section>
-<section id="scripts">
-<h2>Scripts<a class="headerlink" href="#scripts" title="Link to this heading">#</a></h2>
-<p>We provide several scripts to generate benchmark data for simplex, coupled and climate models. have a look at <code class="docutils literal notranslate"><span class="pre">scripts/README.md</span></code> for more information.</p>
-</section>
-<section id="baselines">
-<h2>Baselines<a class="headerlink" href="#baselines" title="Link to this heading">#</a></h2>
-<p>Examples to run baselines can be found in <code class="docutils literal notranslate"><span class="pre">notebooks/eval_pipeline.ipynb</span></code>. Follow installation and (more) runtime instructions of each baseline in the provided github links.</p>
-<ul class="contains-task-list simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> PCMCI+: <a class="github reference external" href="https://github.com/jakobrunge/tigramite">jakobrunge/tigramite</a></p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> FPCMCI: <a class="github reference external" href="https://github.com/lcastri/fpcmci">lcastri/fpcmci</a></p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> VARLiNGAM: <a class="github reference external" href="https://github.com/cdt15/lingam">cdt15/lingam</a></p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> DYNOTEARS: <a class="github reference external" href="https://github.com/mckinsey/causalnex">mckinsey/causalnex</a></p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Neural GC: <a class="github reference external" href="https://github.com/iancovert/Neural-GC">iancovert/Neural-GC</a></p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> CUTS+: <a class="github reference external" href="https://github.com/jarrycyx/unn">jarrycyx/unn</a></p></li>
-<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> TSCI: <a class="github reference external" href="https://github.com/KurtButler/tangentspace">KurtButler/tangentspace</a></p></li>
+<section id="benchmarking">
+<h2>Benchmarking<a class="headerlink" href="#benchmarking" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/baseline.html">Baseline</a></p></li>
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/notebooks/eval_pipeline.html">Evaluation</a></p></li>
+<li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/leaderboard.html">Leaderboard</a></p></li>
 </ul>
 </section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
-<section id="animations">
-<h3>Animations<a class="headerlink" href="#animations" title="Link to this heading">#</a></h3>
-<p>To create animations as <code class="docutils literal notranslate"><span class="pre">.mp4</span></code> files, you need <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code> to be installed on your system:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>ffmpeg<span class="w"> </span><span class="c1"># for MacOS</span>
-apt<span class="w"> </span>install<span class="w"> </span>ffmpeg<span class="w"> </span><span class="c1"># for Linux</span>
-</pre></div>
-</div>
-</section>
+<section id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Link to this heading">#</a></h2>
+<p>If you find any of the code and dataset useful, feel free to acknowledge our work through:</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -548,18 +505,8 @@ apt<span class="w"> </span>install<span class="w"> </span>ffmpeg<span class="w">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pip">Using pip</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pdm">Using pdm</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks">Notebooks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">Scripts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baselines">Baselines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animations">Animations</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking">Benchmarking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
 </ul>
   </nav></div>
 

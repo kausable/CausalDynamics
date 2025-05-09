@@ -177,18 +177,21 @@
 <li class="toctree-l1"><a class="reference internal" href="challenge.html">Challenge</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Quickstart</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="benchmark.html">Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/coupled_causal_models.html">Hierarchically coupled causal models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/features.html">Features</a></li>
 
 
 
+<li class="toctree-l2"><a class="reference internal" href="notebooks/coupled_causal_models.html">Hierarchically coupled causal models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/climate_causal_models.html">Climate Causal Models</a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="notebooks/eval_pipeline.html">Evaluation</a></li>
-
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="baseline.html">Baseline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/eval_pipeline.html">Evaluation</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="leaderboard.html">Leaderboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshoot.html">Troubleshoot</a></li>
 </ul>
 
     </div>
@@ -388,7 +391,25 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="quickstart">
 <h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">#</a></h1>
-<p>This page provides a quickstart…</p>
+<p><strong>Step 1</strong>: Installation</p>
+<ul class="simple">
+<li><p>The easiest way to install the package is via pypi:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>causaldynamics
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Alternatively, if you want to install the repository locally, clone the repository and install it using <a class="reference external" href="https://pdm-project.org/en/latest/">pdm</a>:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/kausable/CausalDynamics.git
+<span class="nb">cd</span><span class="w"> </span>CausalDynamics
+pdm<span class="w"> </span>install
+</pre></div>
+</div>
+<p><strong>NOTE</strong>: You can test whether the installation succeded by creating some coupled causal model data:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/causaldynamics/creator.py<span class="w"> </span>--config<span class="w"> </span>config.yaml
+</pre></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
