@@ -14,6 +14,31 @@ Causal discovery for dynamical systems poses a major challenge in fields where a
 ## Features
 TODO: Short list of features and nice figures :) 
 
+## Installation
+
+### Using pip
+The easiest way to install the package is via pypi:
+```bash
+pip install causaldynamics
+```
+
+### Using pdm
+Note: This is the recommended way if you want to run scripts to generate benchmark data (see #Scripts below).
+
+Alternatively, if you want to install the repository locally, clone the repository and install it using [pdm](https://pdm-project.org/en/latest/): 
+
+```shell
+pdm install
+```
+
+You can test whether the installation succeded by creating some coupled causal model data:
+
+```shell
+python src/causaldynamics/creator.py --config config.yaml
+```
+
+You find the output at `output/<timestamp>` as default location.
+
 ## Getting Started
 
 - [Challenge](https://kausable.github.io/CausalDynamics/challenge.html)
