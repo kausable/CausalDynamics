@@ -452,24 +452,20 @@ document.write(`
 <span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;animation.embed_limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># 50MB</span>
 
 <span class="c1"># Plot the SCM graph</span>
-<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># Plot the trajectories</span>
 <span class="n">plot_trajectories</span><span class="p">(</span><span class="n">da</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5</span><span class="p">)),</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plot_trajectories</span><span class="p">(</span><span class="n">da_s</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">5</span><span class="p">)),</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># # Animate the trajectories</span>
-<span class="c1"># anim = animate_3d_trajectories(da, frame_skip=5, rotation_speed=0.2, rotate=True , show_history=True, plot_type=&#39;subplots&#39;, root_nodes=root_nodes)</span>
-<span class="c1"># display(anim)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f92aa8cbb16fb7ad50efeb83ec365c76fa5aa23bfff6e2ee1d09f2baca85160c.png" src="../_images/f92aa8cbb16fb7ad50efeb83ec365c76fa5aa23bfff6e2ee1d09f2baca85160c.png" />
-<img alt="../_images/0d4b38176a653797aeda6d4e0899d339c0037c58b15f5cebfd0c7033c2a73190.png" src="../_images/0d4b38176a653797aeda6d4e0899d339c0037c58b15f5cebfd0c7033c2a73190.png" />
-<img alt="../_images/cf059b3b1106a4ce0853c6efc0618a131abb088f4c7d74f122ec951b9ef04bbe.png" src="../_images/cf059b3b1106a4ce0853c6efc0618a131abb088f4c7d74f122ec951b9ef04bbe.png" />
+<img alt="../_images/3ecd0508cf81df87ee3d00e3ed56222d622892b8cbd82f92826ed72535b1f2a7.png" src="../_images/3ecd0508cf81df87ee3d00e3ed56222d622892b8cbd82f92826ed72535b1f2a7.png" />
+<img alt="../_images/c1049a1131b8899960c80abdb2a71939f69d8fcab272337c865f4528ef2b8390.png" src="../_images/c1049a1131b8899960c80abdb2a71939f69d8fcab272337c865f4528ef2b8390.png" />
+<img alt="../_images/c9a4812ef4ae31d4b4ee9419808619fc689f03f404959d1afa8af42d08de35a2.png" src="../_images/c9a4812ef4ae31d4b4ee9419808619fc689f03f404959d1afa8af42d08de35a2.png" />
 </div>
 </div>
 <p>As we can see, the propagated sinal in the non-standardized version structurally resembles the driver. In contrast, in the standardized version, the signal propagated through the minimal graph does not resemble the original signal. However, we can observe that the signal remains in a similar y-axis limit range. This would be expected when standard normalizing the signal at each time step.</p>
@@ -523,9 +519,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dfa9450fabe7362451bc8d031fbc08a8bccce7d6910d119751c53095a7545352.png" src="../_images/dfa9450fabe7362451bc8d031fbc08a8bccce7d6910d119751c53095a7545352.png" />
-<img alt="../_images/46186fefccfd63b05fa01e37cf60677426ec95c93398f9ed96bd512117cf2147.png" src="../_images/46186fefccfd63b05fa01e37cf60677426ec95c93398f9ed96bd512117cf2147.png" />
-<img alt="../_images/f04abb9cbeced8d6098d114c39e581bcb387e5aa3a20e062d7744053112c5723.png" src="../_images/f04abb9cbeced8d6098d114c39e581bcb387e5aa3a20e062d7744053112c5723.png" />
+<img alt="../_images/d866770bc97f9d61d3bbc9373bc76e29365cb55198f219779ef8660115aed4ce.png" src="../_images/d866770bc97f9d61d3bbc9373bc76e29365cb55198f219779ef8660115aed4ce.png" />
+<img alt="../_images/545df010772a73d6897455b8788e6b7946336b9820ffa73c324f4ff3223987f3.png" src="../_images/545df010772a73d6897455b8788e6b7946336b9820ffa73c324f4ff3223987f3.png" />
+<img alt="../_images/bd15cc3b96b5817cf9773bb2fcf1ed8f5bd892b25497cb28337413f3ea33423a.png" src="../_images/bd15cc3b96b5817cf9773bb2fcf1ed8f5bd892b25497cb28337413f3ea33423a.png" />
 </div>
 </div>
 <p>Let us look at the variance of the signal</p>
@@ -541,7 +537,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ca319942efe34d1bba60360103b58b2e6ecfcae862c0dcd5c2ee30d127887fbf.png" src="../_images/ca319942efe34d1bba60360103b58b2e6ecfcae862c0dcd5c2ee30d127887fbf.png" />
+<img alt="../_images/5ee85c9470b2bc17399543bd1a1e48b54b0d5ab533984383b52fb9b866462168.png" src="../_images/5ee85c9470b2bc17399543bd1a1e48b54b0d5ab533984383b52fb9b866462168.png" />
 </div>
 </div>
 <p>Let’s look at larger systems.</p>
@@ -586,9 +582,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/cf01830455a19438b2c617ad155d7331ed558968f3bc2f1300b1441a4b0c0580.png" src="../_images/cf01830455a19438b2c617ad155d7331ed558968f3bc2f1300b1441a4b0c0580.png" />
-<img alt="../_images/f9fda83e85566a895f47c5c64924b09d3d52e9dba132539adc94e0bd5383f409.png" src="../_images/f9fda83e85566a895f47c5c64924b09d3d52e9dba132539adc94e0bd5383f409.png" />
-<img alt="../_images/f67668402bf8f101d66cc1da213cda2ca06c251339b0b9c259ae5958ce29daf4.png" src="../_images/f67668402bf8f101d66cc1da213cda2ca06c251339b0b9c259ae5958ce29daf4.png" />
+<img alt="../_images/13a9cb1c45aefb56dd2c38aaed3d24edbb39aeec93f00e1c3f500a99cc51bc7b.png" src="../_images/13a9cb1c45aefb56dd2c38aaed3d24edbb39aeec93f00e1c3f500a99cc51bc7b.png" />
+<img alt="../_images/8a47115591411b9b5f5cd94d29ef6085bb27f91f5c793bbb779cc1f7bcaef5a2.png" src="../_images/8a47115591411b9b5f5cd94d29ef6085bb27f91f5c793bbb779cc1f7bcaef5a2.png" />
+<img alt="../_images/0283bc8d6a5b7cff6e914ba853e78bd7ddaf1e4a5ba02aacbad068e5cf9c04c2.png" src="../_images/0283bc8d6a5b7cff6e914ba853e78bd7ddaf1e4a5ba02aacbad068e5cf9c04c2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -603,7 +599,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d10b793c7e8131ed238ddffdb7187ffc207c737c89bbbc94129415d4886ad792.png" src="../_images/d10b793c7e8131ed238ddffdb7187ffc207c737c89bbbc94129415d4886ad792.png" />
+<img alt="../_images/499b29d1bc8680dc0624ebb5ba54594c205b2cc7f4f3c290bfa9fc28950f0330.png" src="../_images/499b29d1bc8680dc0624ebb5ba54594c205b2cc7f4f3c290bfa9fc28950f0330.png" />
 </div>
 </div>
 </section>
