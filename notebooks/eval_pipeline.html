@@ -441,410 +441,18 @@ document.write(`
 <p>Otherwise, follow our instructions to download and process the pre-generated dataset from <a class="reference external" href="https://huggingface.co/datasets/kausable/CausalDynamics">https://huggingface.co/datasets/kausable/CausalDynamics</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Once you have the daatset (you can change this to your own path)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Once you have the dataset, either generated or downloaded</span>
 <span class="c1"># Notice that the dataset has `time_series` and `adjacency_matrix` variables.</span>
-
-<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/simplex/noise=0.00_confounder=False/data&quot;</span><span class="p">)</span>
-
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/simplex/noise=0.00_confounder=False/data&quot;</span><span class="p">)</span>  <span class="c1"># (you can change this to your own path)</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;Lorenz84_N10_T1000.nc&quot;</span><span class="p">)</span>
-<span class="n">ds</span> 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
-<defs>
-<symbol id="icon-database" viewBox="0 0 32 32">
-<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
-<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
-<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
-</symbol>
-<symbol id="icon-file-text2" viewBox="0 0 32 32">
-<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
-<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
-<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
-<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
-</symbol>
-</defs>
-</svg>
-<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
- *
- */
 
-:root {
-  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
-  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
-  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
-  --xr-border-color: var(--jp-border-color2, #e0e0e0);
-  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
-  --xr-background-color: var(--jp-layout-color0, white);
-  --xr-background-color-row-even: var(--jp-layout-color1, white);
-  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
-}
-
-html[theme="dark"],
-html[data-theme="dark"],
-body[data-theme="dark"],
-body.vscode-dark {
-  --xr-font-color0: rgba(255, 255, 255, 1);
-  --xr-font-color2: rgba(255, 255, 255, 0.54);
-  --xr-font-color3: rgba(255, 255, 255, 0.38);
-  --xr-border-color: #1f1f1f;
-  --xr-disabled-color: #515151;
-  --xr-background-color: #111111;
-  --xr-background-color-row-even: #111111;
-  --xr-background-color-row-odd: #313131;
-}
-
-.xr-wrap {
-  display: block !important;
-  min-width: 300px;
-  max-width: 700px;
-}
-
-.xr-text-repr-fallback {
-  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
-  display: none;
-}
-
-.xr-header {
-  padding-top: 6px;
-  padding-bottom: 6px;
-  margin-bottom: 4px;
-  border-bottom: solid 1px var(--xr-border-color);
-}
-
-.xr-header > div,
-.xr-header > ul {
-  display: inline;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.xr-obj-type,
-.xr-array-name {
-  margin-left: 2px;
-  margin-right: 10px;
-}
-
-.xr-obj-type {
-  color: var(--xr-font-color2);
-}
-
-.xr-sections {
-  padding-left: 0 !important;
-  display: grid;
-  grid-template-columns: 150px auto auto 1fr 0 20px 0 20px;
-}
-
-.xr-section-item {
-  display: contents;
-}
-
-.xr-section-item input {
-  display: inline-block;
-  opacity: 0;
-  height: 0;
-}
-
-.xr-section-item input + label {
-  color: var(--xr-disabled-color);
-}
-
-.xr-section-item input:enabled + label {
-  cursor: pointer;
-  color: var(--xr-font-color2);
-}
-
-.xr-section-item input:focus + label {
-  border: 2px solid var(--xr-font-color0);
-}
-
-.xr-section-item input:enabled + label:hover {
-  color: var(--xr-font-color0);
-}
-
-.xr-section-summary {
-  grid-column: 1;
-  color: var(--xr-font-color2);
-  font-weight: 500;
-}
-
-.xr-section-summary > span {
-  display: inline-block;
-  padding-left: 0.5em;
-}
-
-.xr-section-summary-in:disabled + label {
-  color: var(--xr-font-color2);
-}
-
-.xr-section-summary-in + label:before {
-  display: inline-block;
-  content: "►";
-  font-size: 11px;
-  width: 15px;
-  text-align: center;
-}
-
-.xr-section-summary-in:disabled + label:before {
-  color: var(--xr-disabled-color);
-}
-
-.xr-section-summary-in:checked + label:before {
-  content: "▼";
-}
-
-.xr-section-summary-in:checked + label > span {
-  display: none;
-}
-
-.xr-section-summary,
-.xr-section-inline-details {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.xr-section-inline-details {
-  grid-column: 2 / -1;
-}
-
-.xr-section-details {
-  display: none;
-  grid-column: 1 / -1;
-  margin-bottom: 5px;
-}
-
-.xr-section-summary-in:checked ~ .xr-section-details {
-  display: contents;
-}
-
-.xr-array-wrap {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 20px auto;
-}
-
-.xr-array-wrap > label {
-  grid-column: 1;
-  vertical-align: top;
-}
-
-.xr-preview {
-  color: var(--xr-font-color3);
-}
-
-.xr-array-preview,
-.xr-array-data {
-  padding: 0 5px !important;
-  grid-column: 2;
-}
-
-.xr-array-data,
-.xr-array-in:checked ~ .xr-array-preview {
-  display: none;
-}
-
-.xr-array-in:checked ~ .xr-array-data,
-.xr-array-preview {
-  display: inline-block;
-}
-
-.xr-dim-list {
-  display: inline-block !important;
-  list-style: none;
-  padding: 0 !important;
-  margin: 0;
-}
-
-.xr-dim-list li {
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-}
-
-.xr-dim-list:before {
-  content: "(";
-}
-
-.xr-dim-list:after {
-  content: ")";
-}
-
-.xr-dim-list li:not(:last-child):after {
-  content: ",";
-  padding-right: 5px;
-}
-
-.xr-has-index {
-  font-weight: bold;
-}
-
-.xr-var-list,
-.xr-var-item {
-  display: contents;
-}
-
-.xr-var-item > div,
-.xr-var-item label,
-.xr-var-item > .xr-var-name span {
-  background-color: var(--xr-background-color-row-even);
-  margin-bottom: 0;
-}
-
-.xr-var-item > .xr-var-name:hover span {
-  padding-right: 5px;
-}
-
-.xr-var-list > li:nth-child(odd) > div,
-.xr-var-list > li:nth-child(odd) > label,
-.xr-var-list > li:nth-child(odd) > .xr-var-name span {
-  background-color: var(--xr-background-color-row-odd);
-}
-
-.xr-var-name {
-  grid-column: 1;
-}
-
-.xr-var-dims {
-  grid-column: 2;
-}
-
-.xr-var-dtype {
-  grid-column: 3;
-  text-align: right;
-  color: var(--xr-font-color2);
-}
-
-.xr-var-preview {
-  grid-column: 4;
-}
-
-.xr-index-preview {
-  grid-column: 2 / 5;
-  color: var(--xr-font-color2);
-}
-
-.xr-var-name,
-.xr-var-dims,
-.xr-var-dtype,
-.xr-preview,
-.xr-attrs dt {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-right: 10px;
-}
-
-.xr-var-name:hover,
-.xr-var-dims:hover,
-.xr-var-dtype:hover,
-.xr-attrs dt:hover {
-  overflow: visible;
-  width: auto;
-  z-index: 1;
-}
-
-.xr-var-attrs,
-.xr-var-data,
-.xr-index-data {
-  display: none;
-  background-color: var(--xr-background-color) !important;
-  padding-bottom: 5px !important;
-}
-
-.xr-var-attrs-in:checked ~ .xr-var-attrs,
-.xr-var-data-in:checked ~ .xr-var-data,
-.xr-index-data-in:checked ~ .xr-index-data {
-  display: block;
-}
-
-.xr-var-data > table {
-  float: right;
-}
-
-.xr-var-name span,
-.xr-var-data,
-.xr-index-name div,
-.xr-index-data,
-.xr-attrs {
-  padding-left: 25px !important;
-}
-
-.xr-attrs,
-.xr-var-attrs,
-.xr-var-data,
-.xr-index-data {
-  grid-column: 1 / -1;
-}
-
-dl.xr-attrs {
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 125px auto;
-}
-
-.xr-attrs dt,
-.xr-attrs dd {
-  padding: 0;
-  margin: 0;
-  float: left;
-  padding-right: 10px;
-  width: auto;
-}
-
-.xr-attrs dt {
-  font-weight: normal;
-  grid-column: 1;
-}
-
-.xr-attrs dt:hover span {
-  display: inline-block;
-  background: var(--xr-background-color);
-  padding-right: 10px;
-}
-
-.xr-attrs dd {
-  grid-column: 2;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-
-.xr-icon-database,
-.xr-icon-file-text2,
-.xr-no-icon {
-  display: inline-block;
-  vertical-align: middle;
-  width: 1em;
-  height: 1.5em !important;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: currentColor;
-}
-</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt; Size: 128kB
-Dimensions:           (dim_in: 3, dim_out: 3, time: 1000, system: 10, dim: 3)
-Coordinates:
-  * dim_in            (dim_in) int64 24B 0 1 2
-  * dim_out           (dim_out) int64 24B 0 1 2
-  * time              (time) int64 8kB 0 1 2 3 4 5 6 ... 994 995 996 997 998 999
-  * system            (system) int64 80B 0 1 2 3 4 5 6 7 8 9
-  * dim               (dim) int64 24B 0 1 2
-Data variables:
-    adjacency_matrix  (dim_in, dim_out) int64 72B ...
-    time_series       (time, system, dim) float32 120kB ...</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-3e29e981-7baa-40f6-9a58-838f4b6bc23a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-3e29e981-7baa-40f6-9a58-838f4b6bc23a' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>dim_in</span>: 3</li><li><span class='xr-has-index'>dim_out</span>: 3</li><li><span class='xr-has-index'>time</span>: 1000</li><li><span class='xr-has-index'>system</span>: 10</li><li><span class='xr-has-index'>dim</span>: 3</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-0a4dbe40-96f5-4b98-91cc-3fc77efb554b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-0a4dbe40-96f5-4b98-91cc-3fc77efb554b' class='xr-section-summary' >Coordinates: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>dim_in</span></div><div class='xr-var-dims'>(dim_in)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-d1e89c5f-456b-4c62-a965-b653a2b34a04' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d1e89c5f-456b-4c62-a965-b653a2b34a04' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5efa6d16-81da-4fba-a802-9c210e56662b' class='xr-var-data-in' type='checkbox'><label for='data-5efa6d16-81da-4fba-a802-9c210e56662b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>dim_out</span></div><div class='xr-var-dims'>(dim_out)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-e35af610-918d-4565-ae17-5a80c653ae40' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e35af610-918d-4565-ae17-5a80c653ae40' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ae2df725-e4ee-43ff-87ec-8878c14c6133' class='xr-var-data-in' type='checkbox'><label for='data-ae2df725-e4ee-43ff-87ec-8878c14c6133' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3 4 5 ... 995 996 997 998 999</div><input id='attrs-cc7028da-cef8-441e-9149-bb10634b6b26' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-cc7028da-cef8-441e-9149-bb10634b6b26' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d42e62b6-cbbc-476a-b518-6b126b1509df' class='xr-var-data-in' type='checkbox'><label for='data-d42e62b6-cbbc-476a-b518-6b126b1509df' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([  0,   1,   2, ..., 997, 998, 999])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>system</span></div><div class='xr-var-dims'>(system)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3 4 5 6 7 8 9</div><input id='attrs-97f4bc4f-921b-4a9c-84bf-6f2862620799' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-97f4bc4f-921b-4a9c-84bf-6f2862620799' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ae3bb301-e593-4914-b6df-20a1838e317e' class='xr-var-data-in' type='checkbox'><label for='data-ae3bb301-e593-4914-b6df-20a1838e317e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>dim</span></div><div class='xr-var-dims'>(dim)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2</div><input id='attrs-e05262f0-8bc0-40f6-92d7-24840ce681ea' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e05262f0-8bc0-40f6-92d7-24840ce681ea' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0b22c87e-4eec-49b1-a2b5-67e2f4066d2c' class='xr-var-data-in' type='checkbox'><label for='data-0b22c87e-4eec-49b1-a2b5-67e2f4066d2c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-4ec30a2d-134f-4116-b2bc-855502234a32' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4ec30a2d-134f-4116-b2bc-855502234a32' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>adjacency_matrix</span></div><div class='xr-var-dims'>(dim_in, dim_out)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-5ef94b9c-89fa-4f5c-9cab-67e1b977c113' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5ef94b9c-89fa-4f5c-9cab-67e1b977c113' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-307075e9-65b9-4b4d-a3b2-74133a4216fb' class='xr-var-data-in' type='checkbox'><label for='data-307075e9-65b9-4b4d-a3b2-74133a4216fb' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[9 values with dtype=int64]</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>time_series</span></div><div class='xr-var-dims'>(time, system, dim)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-31594525-8dd6-4697-8290-01dca16ceac1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-31594525-8dd6-4697-8290-01dca16ceac1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b79fc22b-4202-4a69-a5f1-344830a97f64' class='xr-var-data-in' type='checkbox'><label for='data-b79fc22b-4202-4a69-a5f1-344830a97f64' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>[30000 values with dtype=float32]</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-0c681dbc-891d-4bca-b9ff-7b4423101a68' class='xr-section-summary-in' type='checkbox'  ><label for='section-0c681dbc-891d-4bca-b9ff-7b4423101a68' class='xr-section-summary' >Indexes: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>dim_in</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-09110b06-e08b-46c6-8f58-d71d33670a51' class='xr-index-data-in' type='checkbox'/><label for='index-09110b06-e08b-46c6-8f58-d71d33670a51' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([0, 1, 2], dtype=&#x27;int64&#x27;, name=&#x27;dim_in&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>dim_out</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-e0985020-e6f9-48fd-9ced-6f3a67c15b8b' class='xr-index-data-in' type='checkbox'/><label for='index-e0985020-e6f9-48fd-9ced-6f3a67c15b8b' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([0, 1, 2], dtype=&#x27;int64&#x27;, name=&#x27;dim_out&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-3263ec8f-2aab-40eb-8f07-3f7fe460e634' class='xr-index-data-in' type='checkbox'/><label for='index-3263ec8f-2aab-40eb-8f07-3f7fe460e634' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([  0,   1,   2,   3,   4,   5,   6,   7,   8,   9,
-       ...
-       990, 991, 992, 993, 994, 995, 996, 997, 998, 999],
-      dtype=&#x27;int64&#x27;, name=&#x27;time&#x27;, length=1000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>system</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-addd4ee2-ae08-4c3c-b1c2-29f1399021f6' class='xr-index-data-in' type='checkbox'/><label for='index-addd4ee2-ae08-4c3c-b1c2-29f1399021f6' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=&#x27;int64&#x27;, name=&#x27;system&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>dim</div></div><div class='xr-index-preview'>PandasIndex</div><input type='checkbox' disabled/><label></label><input id='index-fdeaa1a8-4d5f-41aa-a04d-4fa4ab3d4798' class='xr-index-data-in' type='checkbox'/><label for='index-fdeaa1a8-4d5f-41aa-a04d-4fa4ab3d4798' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([0, 1, 2], dtype=&#x27;int64&#x27;, name=&#x27;dim&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-69e641fc-f415-43d4-bc30-7474dd352104' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-69e641fc-f415-43d4-bc30-7474dd352104' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract timeseries and adjacency matrix as target</span>
-<span class="c1">## NOTE: similar to our current evaluation pipeline, for multidimension node</span>
-<span class="c1">## we extract the first variable to mimic partially-observed / under-resolved dynamics prevalent in real-world settings</span>
-
+<span class="c1"># Extract timeseries and adjacency matrix as target</span>
 <span class="n">timeseries</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;time_series&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># shape of (N, T, D)</span>
 <span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;adjacency_matrix&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="c1"># NOTE: If dataset is from coupled system e.g., &quot;../data/coupled/...&quot;, follow these changes to load the data:</span>
+<span class="c1">## timeseries = ds[&#39;time_series&#39;].to_numpy()[..., 0].transpose(1, 0, 2) ## select the first dimension of each multidimensional node</span>
+<span class="c1">## adj_matrix = ds[&#39;adjacency_matrix_summary&#39;].to_numpy() ## `adjacency_matrix_summary` is the true adjacency matrix for coupled system</span>
 </pre></div>
 </div>
 </div>
@@ -876,7 +484,7 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████| 10/10 [00:07&lt;00:00,  1.38it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:07&lt;00:00,  1.39it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
@@ -942,479 +550,12 @@ Data variables:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">create_scm_graph</span><span class="p">(</span><span class="n">cuts_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
-<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes: title={&#39;center&#39;: &#39;Structural Causal Model&#39;}&gt;,
- {0: array([-0.99811642, -0.26940975]),
-  1: array([ 0.77881683, -0.73059025]),
-  2: array([0.21929959, 1.        ])})
-</pre></div>
-</div>
-<img alt="../_images/1ac3c427b1c926ab2b90d410c780a4ee4c72b1be01ae3735196daae6a9fcfc59.png" src="../_images/1ac3c427b1c926ab2b90d410c780a4ee4c72b1be01ae3735196daae6a9fcfc59.png" />
-</div>
-</div>
-<p>Evaluate TSCI</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TSCI</span>
-<span class="n">tau_max</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">corr_thres</span> <span class="o">=</span> <span class="mf">0.8</span>
-
-<span class="c1">## Estimate adjacency matrix</span>
-<span class="n">tsci_adj_matrix</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">timeseries</span><span class="p">):</span>
-    <span class="n">tsci_model</span> <span class="o">=</span> <span class="n">TSCI</span><span class="p">(</span><span class="n">tau_max</span><span class="o">=</span><span class="n">tau_max</span><span class="p">,</span> <span class="n">corr_thres</span><span class="o">=</span><span class="n">corr_thres</span><span class="p">)</span>
-    <span class="n">tsci_model</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">tsci_adj_matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">tsci_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">))</span>
-
-<span class="c1">## Compute scores</span>
-<span class="n">score</span><span class="p">(</span>
-    <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tsci_adj_matrix</span><span class="p">),</span>
-    <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;TSCI&#39;</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                             | 0/10 [00:00&lt;?, ?it/s]
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
- 10%|██████▉                                                              | 1/10 [00:00&lt;00:03,  2.82it/s]
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
- 20%|█████████████▊                                                       | 2/10 [00:00&lt;00:02,  2.83it/s]
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
- 30%|████████████████████▋                                                | 3/10 [00:01&lt;00:02,  2.83it/s]
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
- 40%|███████████████████████████▌                                         | 4/10 [00:01&lt;00:02,  2.84it/s]
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
- 50%|██████████████████████████████████▌                                  | 5/10 [00:01&lt;00:01,  2.84it/s]
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
- 60%|█████████████████████████████████████████▍                           | 6/10 [00:02&lt;00:01,  2.83it/s]
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
- 70%|████████████████████████████████████████████████▎                    | 7/10 [00:02&lt;00:01,  2.83it/s]
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
- 80%|███████████████████████████████████████████████████████▏             | 8/10 [00:02&lt;00:00,  2.83it/s]
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
- 90%|██████████████████████████████████████████████████████████████       | 9/10 [00:03&lt;00:00,  2.83it/s]
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-                                                                                                         
-  0%|                                                                            | 0/200 [00:00&lt;?, ?it/s]
-100%|████████████████████████████████████████████████████████████████████| 10/10 [00:03&lt;00:00,  2.83it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>TSCI</th>
-    </tr>
-    <tr>
-      <th>Metric</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Joint AUROC</th>
-      <td>0.533333</td>
-    </tr>
-    <tr>
-      <th>Individual AUROC</th>
-      <td>0.533333</td>
-    </tr>
-    <tr>
-      <th>Null AUROC</th>
-      <td>0.500000</td>
-    </tr>
-    <tr>
-      <th>Joint AUPRC</th>
-      <td>0.682667</td>
-    </tr>
-    <tr>
-      <th>Individual AUPRC</th>
-      <td>0.695833</td>
-    </tr>
-    <tr>
-      <th>Null AUPRC</th>
-      <td>0.666667</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">create_scm_graph</span><span class="p">(</span><span class="n">tsci_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
-<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes: title={&#39;center&#39;: &#39;Structural Causal Model&#39;}&gt;,
- {0: array([ 0.76678274, -0.54818152]),
-  1: array([0.06956444, 1.        ]),
-  2: array([-0.83634718, -0.45181848])})
-</pre></div>
-</div>
-<img alt="../_images/0036843aa3c906c98adfaf64cee935a19a69e1fc9067978e896fe8477ca278b6.png" src="../_images/0036843aa3c906c98adfaf64cee935a19a69e1fc9067978e896fe8477ca278b6.png" />
+<img alt="../_images/e3527710e4be0826cfa1b6e1ef8876ae9048ae85aef51204c70ba5263f4fe5c6.png" src="../_images/e3527710e4be0826cfa1b6e1ef8876ae9048ae85aef51204c70ba5263f4fe5c6.png" />
 </div>
 </div>
 <p>Evaluate PCMCI+</p>
@@ -1422,7 +563,7 @@ Data variables:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># PCMCI+</span>
 <span class="n">tau_max</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">pc_alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">pc_alpha</span> <span class="o">=</span> <span class="mf">0.01</span>
 
 <span class="c1">## Estimate adjacency matrix</span>
 <span class="n">pcmci_plus_adj_matrix</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1441,13 +582,10 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 29.61it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 30.79it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1478,11 +616,11 @@ Data variables:
   <tbody>
     <tr>
       <th>Joint AUROC</th>
-      <td>0.433333</td>
+      <td>0.416667</td>
     </tr>
     <tr>
       <th>Individual AUROC</th>
-      <td>0.433333</td>
+      <td>0.416667</td>
     </tr>
     <tr>
       <th>Null AUROC</th>
@@ -1490,11 +628,11 @@ Data variables:
     </tr>
     <tr>
       <th>Joint AUPRC</th>
-      <td>0.638482</td>
+      <td>0.631944</td>
     </tr>
     <tr>
       <th>Individual AUPRC</th>
-      <td>0.638889</td>
+      <td>0.633135</td>
     </tr>
     <tr>
       <th>Null AUPRC</th>
@@ -1507,135 +645,12 @@ Data variables:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">create_scm_graph</span><span class="p">(</span><span class="n">pcmciplus_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
-<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes: title={&#39;center&#39;: &#39;Structural Causal Model&#39;}&gt;,
- {0: array([-0.2767556,  1.       ]),
-  1: array([ 0.90337046, -0.47463232]),
-  2: array([-0.62661486, -0.52536768])})
-</pre></div>
-</div>
-<img alt="../_images/67c2da3bbee684261f43f046d58db193b76c69ba464286c99e05c1c774e71bb6.png" src="../_images/67c2da3bbee684261f43f046d58db193b76c69ba464286c99e05c1c774e71bb6.png" />
-</div>
-</div>
-<p>Evaluate F-PCMCI</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># FPCMCI</span>
-<span class="n">tau_max</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">pc_alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
-
-<span class="c1">## Estimate adjacency matrix</span>
-<span class="n">fpcmci_adj_matrix</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">timeseries</span><span class="p">):</span>
-    <span class="n">fpcmci_model</span> <span class="o">=</span> <span class="n">FPCMCI</span><span class="p">(</span><span class="n">tau_max</span><span class="o">=</span><span class="n">tau_max</span><span class="p">,</span> <span class="n">pc_alpha</span><span class="o">=</span><span class="n">pc_alpha</span><span class="p">)</span>
-    <span class="n">fpcmci_model</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">fpcmci_adj_matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">fpcmci_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">))</span>
-
-<span class="c1">## Compute scores</span>
-<span class="n">score</span><span class="p">(</span>
-    <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fpcmci_adj_matrix</span><span class="p">),</span>
-    <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;F-PCMCI&#39;</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                             | 0/10 [00:00&lt;?, ?it/s]  File &quot;/burg/glab/users/jn2808/.conda/envs/kausal/lib/python3.10/site-packages/IDTxl/idtxl/estimators_opencl.py&quot;, line 9, in &lt;module&gt;
-    import pyopencl as cl
-  File &quot;/burg/glab/users/jn2808/.conda/envs/kausal/lib/python3.10/site-packages/IDTxl/idtxl/synergy_tartu.py&quot;, line 33, in &lt;module&gt;
-    import ecos
-  File &quot;/burg/glab/users/jn2808/.conda/envs/kausal/lib/python3.10/site-packages/IDTxl/idtxl/pid_goettingen.py&quot;, line 8, in &lt;module&gt;
-    from prettytable import PrettyTable
-  File &quot;/burg/glab/users/jn2808/.conda/envs/kausal/lib/python3.10/site-packages/IDTxl/idtxl/estimators_mpi.py&quot;, line 11, in &lt;module&gt;
-    from mpi4py.futures import MPIPoolExecutor
-
-    Error importing Cython fast embedding module for HDE estimator.
-    When running the HDE estimator, the slow Python implementation for optimizing the HDE embedding will be used,
-    this may take a long time. Other estimators are not affected.
-    
-100%|████████████████████████████████████████████████████████████████████| 10/10 [00:04&lt;00:00,  2.33it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>F-PCMCI</th>
-    </tr>
-    <tr>
-      <th>Metric</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Joint AUROC</th>
-      <td>0.550000</td>
-    </tr>
-    <tr>
-      <th>Individual AUROC</th>
-      <td>0.550000</td>
-    </tr>
-    <tr>
-      <th>Null AUROC</th>
-      <td>0.500000</td>
-    </tr>
-    <tr>
-      <th>Joint AUPRC</th>
-      <td>0.689655</td>
-    </tr>
-    <tr>
-      <th>Individual AUPRC</th>
-      <td>0.691667</td>
-    </tr>
-    <tr>
-      <th>Null AUPRC</th>
-      <td>0.666667</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">create_scm_graph</span><span class="p">(</span><span class="n">fpcmci_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
-<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes: title={&#39;center&#39;: &#39;Structural Causal Model&#39;}&gt;,
- {0: array([ 1.        , -0.18049081]),
-  1: array([-0.65630963, -0.77578   ]),
-  2: array([-0.34369037,  0.95627081])})
-</pre></div>
-</div>
-<img alt="../_images/87dd6e7f903fcb1e2ba14378a3a83f6cdd7820eedf57d64ad080f774ba58e567.png" src="../_images/87dd6e7f903fcb1e2ba14378a3a83f6cdd7820eedf57d64ad080f774ba58e567.png" />
+<img alt="../_images/2df2cad796006a30a9ed731f6e044ef95f258a6f816c40d0385b20948525c2bc.png" src="../_images/2df2cad796006a30a9ed731f6e044ef95f258a6f816c40d0385b20948525c2bc.png" />
 </div>
 </div>
 <p>Evaluate VARLiNGAM</p>
@@ -1661,7 +676,7 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 24.10it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 24.06it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
@@ -1727,18 +742,12 @@ Data variables:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">create_scm_graph</span><span class="p">(</span><span class="n">varlingam_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
-<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes: title={&#39;center&#39;: &#39;Structural Causal Model&#39;}&gt;,
- {0: array([-0.36390604, -0.94459929]),
-  1: array([1.        , 0.15714777]),
-  2: array([-0.63609396,  0.78745152])})
-</pre></div>
-</div>
-<img alt="../_images/0c41fdf1e32d367e3f7b7eaae9b488e988ea4f1a39f71e726024af180b00a96e.png" src="../_images/0c41fdf1e32d367e3f7b7eaae9b488e988ea4f1a39f71e726024af180b00a96e.png" />
+<img alt="../_images/68c645c249261683e3e6cb3ccfce7fcbe9f96395ff2a165dcd52bbf2cb5e8805.png" src="../_images/68c645c249261683e3e6cb3ccfce7fcbe9f96395ff2a165dcd52bbf2cb5e8805.png" />
 </div>
 </div>
 <p>Evaluate DYNOTEARS</p>
@@ -1764,7 +773,7 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 65.95it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 68.94it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
@@ -1830,18 +839,12 @@ Data variables:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">create_scm_graph</span><span class="p">(</span><span class="n">dynotears_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
-<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes: title={&#39;center&#39;: &#39;Structural Causal Model&#39;}&gt;,
- {0: array([ 0.73233556, -1.        ]),
-  1: array([-0.89454797,  0.68175438]),
-  2: array([0.16221241, 0.31824562])})
-</pre></div>
-</div>
-<img alt="../_images/50b30fc4f7facd3b11fd4ee16bc871be61eaa2b9fea4d798412e39a24ff19c0c.png" src="../_images/50b30fc4f7facd3b11fd4ee16bc871be61eaa2b9fea4d798412e39a24ff19c0c.png" />
+<img alt="../_images/81f1a00c66f06568594c5855e465974673428cf1a7496f8dfb385147df54e75e.png" src="../_images/81f1a00c66f06568594c5855e465974673428cf1a7496f8dfb385147df54e75e.png" />
 </div>
 </div>
 <p>Evaluate NeuralGC (cLSTM)</p>
@@ -1867,17 +870,78 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 60%|█████████████████████████████████████████▍                           | 6/10 [00:04&lt;00:02,  1.55it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:06&lt;00:00,  1.55it/s]
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
+</pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cLSTM</th>
+    </tr>
+    <tr>
+      <th>Metric</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Joint AUROC</th>
+      <td>0.475000</td>
+    </tr>
+    <tr>
+      <th>Individual AUROC</th>
+      <td>0.475000</td>
+    </tr>
+    <tr>
+      <th>Null AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Joint AUPRC</th>
+      <td>0.655747</td>
+    </tr>
+    <tr>
+      <th>Individual AUPRC</th>
+      <td>0.656845</td>
+    </tr>
+    <tr>
+      <th>Null AUPRC</th>
+      <td>0.666667</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">create_scm_graph</span><span class="p">(</span><span class="n">clstm_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
-<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ac5c5b0628aa42605a0244c8030a4aecc0aca6f56ee04d69626335deef8afdbb.png" src="../_images/ac5c5b0628aa42605a0244c8030a4aecc0aca6f56ee04d69626335deef8afdbb.png" />
 </div>
 </div>
 </section>
