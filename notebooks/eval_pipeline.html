@@ -444,7 +444,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Once you have the dataset, either generated or downloaded</span>
 <span class="c1"># Notice that the dataset has `time_series` and `adjacency_matrix` variables.</span>
-<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/simplex/noise=0.00_confounder=False/data&quot;</span><span class="p">)</span>  <span class="c1"># (you can change this to your own path)</span>
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/simple/noise=0.00_confounder=False/data&quot;</span><span class="p">)</span>  <span class="c1"># (you can change this to your own path)</span>
 <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;Lorenz84_N10_T1000.nc&quot;</span><span class="p">)</span>
 
 <span class="c1"># Extract timeseries and adjacency matrix as target</span>
