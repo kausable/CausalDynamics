@@ -421,7 +421,10 @@ document.write(`
 <p>Let’s generate the data and visualize the trajectory.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../src&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.systems</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_system</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_3d_trajectories</span>
 
@@ -435,7 +438,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,)
 </pre></div>
 </div>
-<img alt="../_images/878a64bb8a8e8e39945c9742f6cff592374bc0c95c22cdba3489a08b2d121d95.png" src="../_images/878a64bb8a8e8e39945c9742f6cff592374bc0c95c22cdba3489a08b2d121d95.png" />
+<img alt="../_images/54e2047c5a6b09e0b3a8b91990c8887d44542891edc2238ddc805515184c6b22.png" src="../_images/54e2047c5a6b09e0b3a8b91990c8887d44542891edc2238ddc805515184c6b22.png" />
 </div>
 </div>
 <p>You can also sovle a randomly selected system, pass <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> to the <code class="docutils literal notranslate"><span class="pre">make_trajectory</span></code> function that <code class="docutils literal notranslate"><span class="pre">dysts</span></code> uses to solve the respective ODE and solve multiple dynamical systems in parallel.</p>
@@ -481,12 +484,12 @@ document.write(`
 INFO - Simulating Lorenz system for 1000 timesteps...
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.plot.facetgrid.FacetGrid at 0x33388e830&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.plot.facetgrid.FacetGrid at 0x1554f4dc5840&gt;
 </pre></div>
 </div>
-<img alt="../_images/35d9ca5a89d05bc9bba5cd8a1b768d6460c1bae75055824eb639879f7d8362ef.png" src="../_images/35d9ca5a89d05bc9bba5cd8a1b768d6460c1bae75055824eb639879f7d8362ef.png" />
-<img alt="../_images/718f2807f448d43ba39beb2b2528caa9fc74512e6eab32b597acf9d6077d8eac.png" src="../_images/718f2807f448d43ba39beb2b2528caa9fc74512e6eab32b597acf9d6077d8eac.png" />
-<img alt="../_images/4b8fae74baf7bd11cf963fdda2a8f33ed47df9bd9f6a5275646ecedbc2cba4df.png" src="../_images/4b8fae74baf7bd11cf963fdda2a8f33ed47df9bd9f6a5275646ecedbc2cba4df.png" />
+<img alt="../_images/83ceb78c5f95dfcca02d4dbb56562651f3dff9281f682f95ee12b6451a6e7dc6.png" src="../_images/83ceb78c5f95dfcca02d4dbb56562651f3dff9281f682f95ee12b6451a6e7dc6.png" />
+<img alt="../_images/729e9d303201b11e8c62af52c1cca161acea8df050589fd0baaaf5a9c85a035c.png" src="../_images/729e9d303201b11e8c62af52c1cca161acea8df050589fd0baaaf5a9c85a035c.png" />
+<img alt="../_images/b54011c96b1706e5cd514b71cec02de22c4703af7e425032b20ee3cd2eadebc7.png" src="../_images/b54011c96b1706e5cd514b71cec02de22c4703af7e425032b20ee3cd2eadebc7.png" />
 </div>
 </div>
 <p>We provide several features that can be used conveniently accessed through the <code class="docutils literal notranslate"><span class="pre">create_scm</span></code> and <code class="docutils literal notranslate"><span class="pre">simulate_system</span></code> functions:</p>
@@ -542,9 +545,9 @@ INFO - Simulating random system for 500 timesteps...
  &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 4&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../_images/a7dcfd82a3b12e8d1f7160f9d6f9b8226e2e1c0fe11f3a18bf414baaedee4edc.png" src="../_images/a7dcfd82a3b12e8d1f7160f9d6f9b8226e2e1c0fe11f3a18bf414baaedee4edc.png" />
-<img alt="../_images/92ab5a9164f88cc514ea86a7217d0f1362a6b6febd6c423086d2ab190fa8eec2.png" src="../_images/92ab5a9164f88cc514ea86a7217d0f1362a6b6febd6c423086d2ab190fa8eec2.png" />
-<img alt="../_images/fc63d63565a5d9bc027e5bbc35cfa44218555f9ff2944aedb8e4e81afe01c073.png" src="../_images/fc63d63565a5d9bc027e5bbc35cfa44218555f9ff2944aedb8e4e81afe01c073.png" />
+<img alt="../_images/ade4f33e09604340a12db5ddc1ebf184f2e1024123ebd65ba51657943b0c7101.png" src="../_images/ade4f33e09604340a12db5ddc1ebf184f2e1024123ebd65ba51657943b0c7101.png" />
+<img alt="../_images/b1b6b96029984d041ed145ad3d0c6049fb8bd6637a8572f2ec47b9afaee82bdf.png" src="../_images/b1b6b96029984d041ed145ad3d0c6049fb8bd6637a8572f2ec47b9afaee82bdf.png" />
+<img alt="../_images/a9bca0ca92f8897e2d962ba5988d312cd3783ff87f9fccec017408e813e146f3.png" src="../_images/a9bca0ca92f8897e2d962ba5988d312cd3783ff87f9fccec017408e813e146f3.png" />
 </div>
 </div>
 <p>For an overview of the features, have a look at the <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/features.ipynb">features</a> and the <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/coupled_causal_models.ipynb">coupled causal models notebook</a>. If you want more information on specific features, look at their respective notebook, e.g., <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/driver.ipynb">driver</a> or <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/features.ipynb">time_lag</a>.</p>
@@ -552,7 +555,7 @@ INFO - Simulating random system for 500 timesteps...
 </section>
 <section id="scripts">
 <h2>2. Scripts<a class="headerlink" href="#scripts" title="Link to this heading">#</a></h2>
-<p>We provide several ready to use scripts to generate benchmark data for the simplex, coupled, and climate scenario respectively. Have a look at the scripts <a class="reference external" href="https://github.com/herdeanu/CausalDynamics/blob/main/scripts/README.md">README</a></p>
+<p>We provide several ready to use scripts to generate benchmark data for the simple, coupled, and climate scenario respectively. Have a look at the scripts <a class="reference external" href="https://github.com/herdeanu/CausalDynamics/blob/main/scripts/README.md">README</a></p>
 </section>
 </section>
 
@@ -565,16 +568,16 @@ INFO - Simulating random system for 500 timesteps...
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "kausal"
         },
         kernelOptions: {
-            name: "python3",
+            name: "kausal",
             path: "./notebooks"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'kausal'</script>
 
                 </article>
               
