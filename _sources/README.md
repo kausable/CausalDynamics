@@ -19,7 +19,7 @@ Causal discovery for dynamical systems poses a major challenge in fields where a
 
 1️⃣ **Large-Scale Benchmark**. Systematically evaluate state-of-the-art causal discovery algorithms on thousands of graph challenges with increasing difficulty. 
 
-2️⃣ **Scalable Data Generation**. Scalable generation of increasingly complex coupled ordinary and stochastic systems of differential equations
+2️⃣ **Customizable Data Generation**. Scalable, user-friendly generation of increasingly complex coupled ordinary and stochastic systems of differential equations
 
 3️⃣ **Diverse Challenges**. From simple chaotic systems to modular causal coupling of dynamical systems, including optional noise, confounding, time lags, and even climate model dynamics.
 
