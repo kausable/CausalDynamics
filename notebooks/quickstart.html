@@ -389,8 +389,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">0. Installation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">1. Generate data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-scripts">2. Run Scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">1. Generate data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncoupled-causal-models">1.1 Uncoupled causal models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-causal-models">1.1 Coupled causal models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">2. Scripts</a></li>
 </ul>
             </nav>
         </div>
@@ -410,6 +414,35 @@ document.write(`
 </section>
 <section id="generate-data">
 <h2>1. Generate data<a class="headerlink" href="#generate-data" title="Link to this heading">#</a></h2>
+<section id="uncoupled-causal-models">
+<h3>1.1 Uncoupled causal models<a class="headerlink" href="#uncoupled-causal-models" title="Link to this heading">#</a></h3>
+<p>Let’s first look at how to generate data for uncoupled single dynamical systems. The ODE systems are integrated using the <code class="docutils literal notranslate"><span class="pre">dysts</span></code> package.</p>
+<p>Let’s start by solving a single Lorenz system for 1000 time-steps. An uncoupled dynamical system is the equivalent to the solution for just one node in this framework, i.e., we set <code class="docutils literal notranslate"><span class="pre">num_nodes=1</span></code>.</p>
+<p>Let’s generate the data and visualize the trajectory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.systems</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_system</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_3d_trajectories</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">solve_system</span><span class="p">(</span><span class="n">num_timesteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">num_nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">system_name</span><span class="o">=</span><span class="s1">&#39;Lorenz&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s1">&#39;dim&#39;</span><span class="p">])</span>
+<span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,)
+</pre></div>
+</div>
+<img alt="../_images/878a64bb8a8e8e39945c9742f6cff592374bc0c95c22cdba3489a08b2d121d95.png" src="../_images/878a64bb8a8e8e39945c9742f6cff592374bc0c95c22cdba3489a08b2d121d95.png" />
+</div>
+</div>
+<p>You can also sovle a randomly selected system, pass <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> to the <code class="docutils literal notranslate"><span class="pre">make_trajectory</span></code> function that <code class="docutils literal notranslate"><span class="pre">dysts</span></code> uses to solve the respective ODE and solve multiple dynamical systems in parallel.</p>
+<p>For more information, please checkout the <a class="reference external" href="https://kausable.github.io/CausalDynamics/notebooks/uncoupled_causal_models.html">more detailed introduction</a>.</p>
+</section>
+<section id="coupled-causal-models">
+<h3>1.1 Coupled causal models<a class="headerlink" href="#coupled-causal-models" title="Link to this heading">#</a></h3>
 <p>Let’s look at how to generate data for the case of coupled causal models and visualize it.</p>
 <p>This code will first create a structural causal model. The <code class="docutils literal notranslate"><span class="pre">create_scm</span></code> function returns the adjacency matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> of the SCM, the weights <code class="docutils literal notranslate"><span class="pre">W</span></code> and biases <code class="docutils literal notranslate"><span class="pre">b</span></code> of all the MLPs located on the nodes and the <code class="docutils literal notranslate"><span class="pre">root_nodes</span></code> that act as temporal system driving functions.</p>
 <p>We use this SCM to simulate a system consisting of <code class="docutils literal notranslate"><span class="pre">num_nodes</span></code> for <code class="docutils literal notranslate"><span class="pre">num_timesteps</span></code> and driven by the dynamical systems <code class="docutils literal notranslate"><span class="pre">system_name</span></code> that are located on the root nodes.</p>
@@ -446,16 +479,14 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO - Creating SCM with 2 nodes and 3 dimensions each...
 INFO - Simulating Lorenz system for 1000 timesteps...
-/Users/herdeanu/kausable/causaldynamics/src/causaldynamics/plot.py:759: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
-  ax.legend()
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.plot.facetgrid.FacetGrid at 0x16fbe5840&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.plot.facetgrid.FacetGrid at 0x33388e830&gt;
 </pre></div>
 </div>
-<img alt="../_images/6061df6ff05a778239d6d75d1a019afc7968d8ab732456f0607702517b116726.png" src="../_images/6061df6ff05a778239d6d75d1a019afc7968d8ab732456f0607702517b116726.png" />
-<img alt="../_images/11f56f42efacbcf561937a0257c872bdc73cbb8712c3e39217cc39c22ffac9e5.png" src="../_images/11f56f42efacbcf561937a0257c872bdc73cbb8712c3e39217cc39c22ffac9e5.png" />
-<img alt="../_images/367549ad8949320a4f8e34280a71e33f01d3cc5d84f42d72ca5b8260da7acf8c.png" src="../_images/367549ad8949320a4f8e34280a71e33f01d3cc5d84f42d72ca5b8260da7acf8c.png" />
+<img alt="../_images/35d9ca5a89d05bc9bba5cd8a1b768d6460c1bae75055824eb639879f7d8362ef.png" src="../_images/35d9ca5a89d05bc9bba5cd8a1b768d6460c1bae75055824eb639879f7d8362ef.png" />
+<img alt="../_images/718f2807f448d43ba39beb2b2528caa9fc74512e6eab32b597acf9d6077d8eac.png" src="../_images/718f2807f448d43ba39beb2b2528caa9fc74512e6eab32b597acf9d6077d8eac.png" />
+<img alt="../_images/4b8fae74baf7bd11cf963fdda2a8f33ed47df9bd9f6a5275646ecedbc2cba4df.png" src="../_images/4b8fae74baf7bd11cf963fdda2a8f33ed47df9bd9f6a5275646ecedbc2cba4df.png" />
 </div>
 </div>
 <p>We provide several features that can be used conveniently accessed through the <code class="docutils literal notranslate"><span class="pre">create_scm</span></code> and <code class="docutils literal notranslate"><span class="pre">simulate_system</span></code> functions:</p>
@@ -502,28 +533,25 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO - Creating SCM with 5 nodes and 3 dimensions each...
 INFO - Simulating random system for 500 timesteps...
-/Users/herdeanu/kausable/causaldynamics/.venv/lib/python3.10/site-packages/dysts/base.py:353: UserWarning: This system has at least one unbounded variable, which has been mapped to a bounded domain. Pass argument postprocess=False in order to generate trajectories from the raw system.
-  warnings.warn(
-/Users/herdeanu/kausable/causaldynamics/src/causaldynamics/plot.py:759: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
-  ax.legend()
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
  &lt;Axes3D: title={&#39;center&#39;: &#39;Node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
+ &lt;Axes3D: title={&#39;center&#39;: &#39;Node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
  &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 3&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
  &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 4&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
 </pre></div>
 </div>
-<img alt="../_images/f8fb463a68a7ec51357bb466b61c8455f11fff2fff8aee69fbc769e853d1316c.png" src="../_images/f8fb463a68a7ec51357bb466b61c8455f11fff2fff8aee69fbc769e853d1316c.png" />
-<img alt="../_images/16c8b672702e40099fca34a2a195930807a13a43df5b4bf955fb85c94d804666.png" src="../_images/16c8b672702e40099fca34a2a195930807a13a43df5b4bf955fb85c94d804666.png" />
-<img alt="../_images/e2f3e13f2e0126024d435a8386e68f2e98f42aa55facc775a64c43280c1138b9.png" src="../_images/e2f3e13f2e0126024d435a8386e68f2e98f42aa55facc775a64c43280c1138b9.png" />
+<img alt="../_images/a7dcfd82a3b12e8d1f7160f9d6f9b8226e2e1c0fe11f3a18bf414baaedee4edc.png" src="../_images/a7dcfd82a3b12e8d1f7160f9d6f9b8226e2e1c0fe11f3a18bf414baaedee4edc.png" />
+<img alt="../_images/92ab5a9164f88cc514ea86a7217d0f1362a6b6febd6c423086d2ab190fa8eec2.png" src="../_images/92ab5a9164f88cc514ea86a7217d0f1362a6b6febd6c423086d2ab190fa8eec2.png" />
+<img alt="../_images/fc63d63565a5d9bc027e5bbc35cfa44218555f9ff2944aedb8e4e81afe01c073.png" src="../_images/fc63d63565a5d9bc027e5bbc35cfa44218555f9ff2944aedb8e4e81afe01c073.png" />
 </div>
 </div>
-<p>For an overview of the features, have a look at the <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/features.ipynb">features notebook</a> and the <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/coupled_causal_models.ipynb">coupled causal models notebook</a>. If you want more information on specific features, look at their respective notebook, e.g., <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/driver.ipynb">driver</a> or <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/features.ipynb">time_lag</a>.</p>
+<p>For an overview of the features, have a look at the <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/features.ipynb">features</a> and the <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/coupled_causal_models.ipynb">coupled causal models notebook</a>. If you want more information on specific features, look at their respective notebook, e.g., <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/driver.ipynb">driver</a> or <a class="reference external" href="https://github.com/kausable/CausalDynamics/blob/main/notebooks/features.ipynb">time_lag</a>.</p>
 </section>
-<section id="run-scripts">
-<h2>2. Run Scripts<a class="headerlink" href="#run-scripts" title="Link to this heading">#</a></h2>
+</section>
+<section id="scripts">
+<h2>2. Scripts<a class="headerlink" href="#scripts" title="Link to this heading">#</a></h2>
 <p>We provide several ready to use scripts to generate benchmark data for the simplex, coupled, and climate scenario respectively. Have a look at the scripts <a class="reference external" href="https://github.com/herdeanu/CausalDynamics/blob/main/scripts/README.md">README</a></p>
 </section>
 </section>
@@ -593,8 +621,12 @@ INFO - Simulating random system for 500 timesteps...
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">0. Installation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">1. Generate data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-scripts">2. Run Scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">1. Generate data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncoupled-causal-models">1.1 Uncoupled causal models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-causal-models">1.1 Coupled causal models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">2. Scripts</a></li>
 </ul>
   </nav></div>
 
