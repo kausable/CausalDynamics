@@ -183,7 +183,7 @@
 
 <li class="toctree-l2"><a class="reference internal" href="notebooks/uncoupled_causal_models.html">Uncoupled dynamical systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/coupled_causal_models.html">Hierarchically coupled causal models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/climate_causal_models.html">Climate Causal Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/climate_causal_models.html">Climate causal models</a></li>
 
 
 </ul>
@@ -365,7 +365,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -381,6 +383,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-summary">Dataset Summary</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -399,9 +409,14 @@ document.write(`
 <li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/notebooks/coupled_causal_models.html">Coupled Dynamics</a></p></li>
 <li><p><a class="reference external" href="https://kausable.github.io/CausalDynamics/notebooks/climate_causal_models.html">Climate Dynamics</a></p></li>
 </ul>
+<section id="dataset-summary">
+<h2>Dataset Summary<a class="headerlink" href="#dataset-summary" title="Link to this heading">#</a></h2>
+<p>Although we open-sourced our data generating script, we preprocess thousands of graphs with tens of million of samples with the following distribution.
+<img alt="Dataset Summary" src="_images/dataset_summary.png" /></p>
 <blockquote>
 <div><p><strong><em>NOTE:</em></strong> We provide several scripts to generate benchmark data for simple, coupled and climate models. Have a look at <code class="docutils literal notranslate"><span class="pre">scripts/README.md</span></code> for more information on how to run them.</p>
 </div></blockquote>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -460,6 +475,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-summary">Dataset Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

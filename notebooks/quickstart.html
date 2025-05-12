@@ -183,7 +183,7 @@
 
 <li class="toctree-l2"><a class="reference internal" href="uncoupled_causal_models.html">Uncoupled dynamical systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coupled_causal_models.html">Hierarchically coupled causal models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="climate_causal_models.html">Climate Causal Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="climate_causal_models.html">Climate causal models</a></li>
 
 
 </ul>
@@ -391,7 +391,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">0. Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">1. Generate data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncoupled-causal-models">1.1 Uncoupled causal models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-causal-models">1.1 Coupled causal models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-causal-models">1.2 Coupled causal models</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">2. Scripts</a></li>
@@ -445,7 +445,7 @@ document.write(`
 <p>For more information, please checkout the <a class="reference external" href="https://kausable.github.io/CausalDynamics/notebooks/uncoupled_causal_models.html">more detailed introduction</a>.</p>
 </section>
 <section id="coupled-causal-models">
-<h3>1.1 Coupled causal models<a class="headerlink" href="#coupled-causal-models" title="Link to this heading">#</a></h3>
+<h3>1.2 Coupled causal models<a class="headerlink" href="#coupled-causal-models" title="Link to this heading">#</a></h3>
 <p>Let’s look at how to generate data for the case of coupled causal models and visualize it.</p>
 <p>This code will first create a structural causal model. The <code class="docutils literal notranslate"><span class="pre">create_scm</span></code> function returns the adjacency matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> of the SCM, the weights <code class="docutils literal notranslate"><span class="pre">W</span></code> and biases <code class="docutils literal notranslate"><span class="pre">b</span></code> of all the MLPs located on the nodes and the <code class="docutils literal notranslate"><span class="pre">root_nodes</span></code> that act as temporal system driving functions.</p>
 <p>We use this SCM to simulate a system consisting of <code class="docutils literal notranslate"><span class="pre">num_nodes</span></code> for <code class="docutils literal notranslate"><span class="pre">num_timesteps</span></code> and driven by the dynamical systems <code class="docutils literal notranslate"><span class="pre">system_name</span></code> that are located on the root nodes.</p>
@@ -626,7 +626,7 @@ INFO - Simulating random system for 500 timesteps...
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">0. Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-data">1. Generate data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncoupled-causal-models">1.1 Uncoupled causal models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-causal-models">1.1 Coupled causal models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coupled-causal-models">1.2 Coupled causal models</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts">2. Scripts</a></li>
