@@ -9,9 +9,7 @@
 </div>
 </br>
 
-A comprehensive benchmark suite designed to rigorously evaluate state-of-the-art causal discovery algorithms.
-
-Causal discovery for dynamical systems poses a major challenge in fields where active interventions are infeasible. However, most methods and their associated benchmarks are tailored to time-series data, which is often deterministic, low-dimensional, and weakly nonlinear. To address these limitations, we present *CausalDynamics*, a large-scale benchmark for advancing the structural discovery of dynamical causal models. The platform consists of true causal graphs with thousands of increasingly complex coupled ordinary and stochastic systems of differential equations. We perform comprehensive evaluation against state-of-the-art causal discovery algorithms on graph reconstruction in challenging yet realistic settings where the dynamics are noisy, confounded, and lagged. Finally, we extend our platform to include climate models derived from first principles. This enables a plug-and-play coupling workflow across component subsystems to construct a pseudo-realistic hierarchy of complexity. *CausalDynamics* will facilitate the development of robust causal discovery algorithms that are capable of handling diverse real-world chaotic systems. We provide a user-friendly platform, including a quickstart guide and documentation.
+A comprehensive benchmark suite designed to rigorously evaluate state-of-the-art causal discovery algorithms for dynamical systems.
 
 ## Key Features
 ![Overview of CausalDynamics](docs/causaldynamics_overview.png)
@@ -23,30 +21,24 @@ Causal discovery for dynamical systems poses a major challenge in fields where a
 
 3️⃣ **Diverse Challenges**. From simple chaotic systems to modular causal coupling of dynamical systems, including optional noise, confounding, time lags, and even climate model dynamics.
 
+**Abstract**: Causal discovery for dynamical systems poses a major challenge in fields where active interventions are infeasible. However, most methods and their associated benchmarks are tailored to time-series data, which is often deterministic, low-dimensional, and weakly nonlinear. To address these limitations, we present *CausalDynamics*, a large-scale benchmark for advancing the structural discovery of dynamical causal models. The platform consists of true causal graphs with thousands of increasingly complex coupled ordinary and stochastic systems of differential equations. We perform comprehensive evaluation against state-of-the-art causal discovery algorithms on graph reconstruction in challenging yet realistic settings where the dynamics are noisy, confounded, and lagged. Finally, we extend our platform to include climate models derived from first principles. This enables a plug-and-play coupling workflow across component subsystems to construct a pseudo-realistic hierarchy of complexity. *CausalDynamics* will facilitate the development of robust causal discovery algorithms that are capable of handling diverse real-world chaotic systems. We provide a user-friendly platform, including a quickstart guide and documentation.
+
+
 ## Installation
 
-### Using pip
-The easiest way to install the package is via pypi:
+The easiest way to install the package is via PyPi:
 ```bash
 pip install causaldynamics
 ```
 
-### Using pdm
-Note: This is the recommended way if you want to run scripts to generate benchmark data (see #Scripts below).
-
-Alternatively, if you want to install the repository locally, clone the repository and install it using [pdm](https://pdm-project.org/en/latest/): 
-
-```shell
-pdm install
+Although users can generate your own dataset (see [getting started](#getting-started)), you can download our preprocessed ones from HuggingFace:
+```bash
+wget https://huggingface.co/datasets/kausable/CausalDynamics/resolve/main/process_causaldynamics.py
+python process_causaldynamics.py
 ```
 
-You can test whether the installation succeded by creating some coupled causal model data:
+See the [additional installation guide](#additional-installation-guide) for more options.
 
-```shell
-python src/causaldynamics/creator.py --config config.yaml
-```
-
-You find the output at `output/<timestamp>` as default location.
 
 ## Getting Started
 
@@ -62,6 +54,22 @@ You find the output at `output/<timestamp>` as default location.
 - [Baseline](https://kausable.github.io/CausalDynamics/baseline.html)
 - [Evaluation](https://kausable.github.io/CausalDynamics/notebooks/eval_pipeline.html)
 - [Leaderboard](https://kausable.github.io/CausalDynamics/leaderboard.html)
+
+## Additional Installation Guide
+Note: This is the recommended way if you want to run scripts to generate benchmark data. Clone the repository and install it using [pdm](https://pdm-project.org/en/latest/): 
+
+```shell
+git clone https://github.com/kausable/CausalDynamics.git
+pdm install
+```
+
+You can test whether the installation succeded by creating some coupled causal model data:
+
+```shell
+python src/causaldynamics/creator.py --config config.yaml
+```
+
+You find the output at `output/<timestamp>` as default location.
 
 ## Citation
 If you find any of the code and dataset useful, feel free to acknowledge our work through:
