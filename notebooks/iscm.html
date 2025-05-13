@@ -392,12 +392,18 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="internally-standardized-structural-causal-models">
 <h1>Internally-standardized structural causal models<a class="headerlink" href="#internally-standardized-structural-causal-models" title="Link to this heading">#</a></h1>
-<p>Here, we showcase how internally-standardized structural causal models (iSCM) following <a class="reference external" href="https://arxiv.org/abs/2406.11601">Ormaniec et al. (2025)</a> impact the time-series data.</p>
+<p>Here, we showcase how we standardize the structural causal models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Autoreload extension</span>
 <span class="o">%</span><span class="k">load_ext</span> autoreload
 <span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
 </pre></div>
 </div>
 </div>
@@ -419,7 +425,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Let’s create a minimal SCM with 2 nodes that has a Lorenz system located on the driving node. We then create two distinct time-series by propagating the Lorenz driver through this minimal SCM (i) without internalstandardization and (ii) with internal standardization.</p>
+<p>Let’s create a minimal SCM with 2 nodes that has a Lorenz system located on the driving node. We then create two distinct time-series by propagating the Lorenz driver through this minimal SCM (i) without standardization and (ii) with standardization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This takes a while to run...</span>
@@ -436,12 +442,12 @@ document.write(`
 <span class="n">b</span> <span class="o">=</span> <span class="n">initialize_biases</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">)</span>
 
 <span class="n">init</span> <span class="o">=</span> <span class="n">solve_system</span><span class="p">(</span><span class="n">num_timesteps</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="s2">&quot;Lorenz&quot;</span><span class="p">)</span>
-<span class="n">init_s</span> <span class="o">=</span> <span class="n">initialize_x</span><span class="p">(</span><span class="n">init</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">init</span> <span class="o">=</span> <span class="n">initialize_x</span><span class="p">(</span><span class="n">init</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">propagate_mlp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init</span><span class="p">)</span>
 <span class="n">da</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s2">&quot;dim&quot;</span><span class="p">])</span>
 
-<span class="n">x_s</span> <span class="o">=</span> <span class="n">propagate_mlp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init_s</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">x_s</span> <span class="o">=</span> <span class="n">propagate_mlp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">da_s</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">x_s</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s2">&quot;dim&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -464,9 +470,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3ecd0508cf81df87ee3d00e3ed56222d622892b8cbd82f92826ed72535b1f2a7.png" src="../_images/3ecd0508cf81df87ee3d00e3ed56222d622892b8cbd82f92826ed72535b1f2a7.png" />
-<img alt="../_images/c1049a1131b8899960c80abdb2a71939f69d8fcab272337c865f4528ef2b8390.png" src="../_images/c1049a1131b8899960c80abdb2a71939f69d8fcab272337c865f4528ef2b8390.png" />
-<img alt="../_images/c9a4812ef4ae31d4b4ee9419808619fc689f03f404959d1afa8af42d08de35a2.png" src="../_images/c9a4812ef4ae31d4b4ee9419808619fc689f03f404959d1afa8af42d08de35a2.png" />
+<img alt="../_images/693f05e1cc4b87bbda2843a5dcd7962da549507102880908ddfec1ffd022ef12.png" src="../_images/693f05e1cc4b87bbda2843a5dcd7962da549507102880908ddfec1ffd022ef12.png" />
+<img alt="../_images/33ff3e809a16347e8bace518ebc3697b5e6ff2e6d7c97f7b4dea4377273a1cac.png" src="../_images/33ff3e809a16347e8bace518ebc3697b5e6ff2e6d7c97f7b4dea4377273a1cac.png" />
+<img alt="../_images/af756ffcb1cf40616454df76a7e1f89282d5c9420ca159306f07efd2611b537a.png" src="../_images/af756ffcb1cf40616454df76a7e1f89282d5c9420ca159306f07efd2611b537a.png" />
 </div>
 </div>
 <p>As we can see, the propagated sinal in the non-standardized version structurally resembles the driver. In contrast, in the standardized version, the signal propagated through the minimal graph does not resemble the original signal. However, we can observe that the signal remains in a similar y-axis limit range. This would be expected when standard normalizing the signal at each time step.</p>
@@ -520,9 +526,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d866770bc97f9d61d3bbc9373bc76e29365cb55198f219779ef8660115aed4ce.png" src="../_images/d866770bc97f9d61d3bbc9373bc76e29365cb55198f219779ef8660115aed4ce.png" />
-<img alt="../_images/545df010772a73d6897455b8788e6b7946336b9820ffa73c324f4ff3223987f3.png" src="../_images/545df010772a73d6897455b8788e6b7946336b9820ffa73c324f4ff3223987f3.png" />
-<img alt="../_images/bd15cc3b96b5817cf9773bb2fcf1ed8f5bd892b25497cb28337413f3ea33423a.png" src="../_images/bd15cc3b96b5817cf9773bb2fcf1ed8f5bd892b25497cb28337413f3ea33423a.png" />
+<img alt="../_images/1a8c94f911b5a9c5e7a1c4c92e110b06deaab119b5429bc19681af2a0d270a1d.png" src="../_images/1a8c94f911b5a9c5e7a1c4c92e110b06deaab119b5429bc19681af2a0d270a1d.png" />
+<img alt="../_images/9dcc7ca86523f2420380e5452f234236f0f646a1c0223c5e3b22a3c914659047.png" src="../_images/9dcc7ca86523f2420380e5452f234236f0f646a1c0223c5e3b22a3c914659047.png" />
+<img alt="../_images/ca1d1dd5b44593950a5598c862cd615786dc6568399c3ba66c2fd26b54033eeb.png" src="../_images/ca1d1dd5b44593950a5598c862cd615786dc6568399c3ba66c2fd26b54033eeb.png" />
 </div>
 </div>
 <p>Let us look at the variance of the signal</p>
@@ -538,7 +544,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5ee85c9470b2bc17399543bd1a1e48b54b0d5ab533984383b52fb9b866462168.png" src="../_images/5ee85c9470b2bc17399543bd1a1e48b54b0d5ab533984383b52fb9b866462168.png" />
+<img alt="../_images/9da3aa6a07c25ecdb67dbb7bf268f34fc24c06c39e9d4321697575d5329e6aa6.png" src="../_images/9da3aa6a07c25ecdb67dbb7bf268f34fc24c06c39e9d4321697575d5329e6aa6.png" />
 </div>
 </div>
 <p>Let’s look at larger systems.</p>
@@ -583,9 +589,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/13a9cb1c45aefb56dd2c38aaed3d24edbb39aeec93f00e1c3f500a99cc51bc7b.png" src="../_images/13a9cb1c45aefb56dd2c38aaed3d24edbb39aeec93f00e1c3f500a99cc51bc7b.png" />
-<img alt="../_images/8a47115591411b9b5f5cd94d29ef6085bb27f91f5c793bbb779cc1f7bcaef5a2.png" src="../_images/8a47115591411b9b5f5cd94d29ef6085bb27f91f5c793bbb779cc1f7bcaef5a2.png" />
-<img alt="../_images/0283bc8d6a5b7cff6e914ba853e78bd7ddaf1e4a5ba02aacbad068e5cf9c04c2.png" src="../_images/0283bc8d6a5b7cff6e914ba853e78bd7ddaf1e4a5ba02aacbad068e5cf9c04c2.png" />
+<img alt="../_images/3bca11331ba46ce7326b144f5516342d5d22c50107d1f2f331328af50e4dfdaa.png" src="../_images/3bca11331ba46ce7326b144f5516342d5d22c50107d1f2f331328af50e4dfdaa.png" />
+<img alt="../_images/13c9ead52797ace0ef2d787f998c092a97d75e0d501a01afed1e9dce7ef461da.png" src="../_images/13c9ead52797ace0ef2d787f998c092a97d75e0d501a01afed1e9dce7ef461da.png" />
+<img alt="../_images/e8b760d4e866c3995a08a4bb9bfd817b9bcc7e564dd71de4f18a3a2a39025f66.png" src="../_images/e8b760d4e866c3995a08a4bb9bfd817b9bcc7e564dd71de4f18a3a2a39025f66.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -600,7 +606,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/499b29d1bc8680dc0624ebb5ba54594c205b2cc7f4f3c290bfa9fc28950f0330.png" src="../_images/499b29d1bc8680dc0624ebb5ba54594c205b2cc7f4f3c290bfa9fc28950f0330.png" />
+<img alt="../_images/94545581a8f9a76439de9b906a52f1f8072860a5724b8b27b2147b112632480d.png" src="../_images/94545581a8f9a76439de9b906a52f1f8072860a5724b8b27b2147b112632480d.png" />
 </div>
 </div>
 </section>

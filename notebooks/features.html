@@ -706,19 +706,21 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO - Creating SCM with 3 nodes and 3 dimensions each...
+INFO - Simulating Lorenz system for 1000 timesteps...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO - Simulating Lorenz system for 1000 timesteps...
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">27</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">27</span> <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;plot_3d_trajectories&#39; is not defined
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
-</pre></div>
-</div>
-<img alt="../_images/3e82dc14a445bc97e255cd124765b46994b38e31f78a93d752edeff1cda4d526.png" src="../_images/3e82dc14a445bc97e255cd124765b46994b38e31f78a93d752edeff1cda4d526.png" />
-<img alt="../_images/91f0180559b2096827485adf649318bf6a15e80aa739850f3f4fb831fac26055.png" src="../_images/91f0180559b2096827485adf649318bf6a15e80aa739850f3f4fb831fac26055.png" />
-<img alt="../_images/78c90cc25a367c1db95af3133a7c6e39c0a2df74817cc78c8a46dc2c444d97ad.png" src="../_images/78c90cc25a367c1db95af3133a7c6e39c0a2df74817cc78c8a46dc2c444d97ad.png" />
+<img alt="../_images/09bc6f376242444eb21df73a3753e920d4d5e17fca6e74f8481bdf78d192fb0b.png" src="../_images/09bc6f376242444eb21df73a3753e920d4d5e17fca6e74f8481bdf78d192fb0b.png" />
+<img alt="../_images/e387cf35431489cc877e9d716a6bb554872a75c921c51545cc4f41290ed755c5.png" src="../_images/e387cf35431489cc877e9d716a6bb554872a75c921c51545cc4f41290ed755c5.png" />
 </div>
 </div>
 </section>
