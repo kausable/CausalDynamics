@@ -6,7 +6,7 @@
   <!-- <a href="<ADD_LINK>"><img src="https://img.shields.io/badge/ArXiV-2402.00712-b31b1b.svg" alt="arXiv"/></a> -->
 <a href="https://huggingface.co/datasets/kausable/CausalDynamics"><img src="https://img.shields.io/badge/Dataset-HuggingFace-ffd21e" alt="Huggingface Dataset"/></a>
 <a href="https://github.com/kausable/CausalDynamics/blob/main/LICENSE.txt"><img src="https://img.shields.io/badge/license-MIT-green" alt="License Badge"/></a>
-<a href="https://github.com/kausable/CausalDynamics/actions/workflows/run-tests.yml"><img src="https://github.com/kausable/CausalDynamics/workflows/Run%20Tests/badge.svg" alt="Tests Status"/></a>
+<a href="https://github.com/kausable/CausalDynamics/actions/workflows/run-tests.yml"><img src="https://github.com/kausable/CausalDynamics/workflows/Run%20Tests/badge.svg" alt="Tests"/></a>
 </div>
 </br>
 
