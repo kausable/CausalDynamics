@@ -1,7 +1,6 @@
 # Challenge
-
-![Causal Challenges](docs/coupled-systems.png)
 CausalDynamics are constructed to solve the following dynamical causal challenges.
+![Causal Challenges](docs/coupled-systems.png)
 
 1️⃣ **Large Complex Graph**. Our algorithm allows users to generate arbitrarily large and complex graphs.
 
