@@ -5,12 +5,12 @@
 <a href="http://kausable.github.io/CausalDynamics"><img src="https://img.shields.io/badge/View-Documentation-blue?style=for-the-badge)" alt="Homepage"/></a>
   <!-- <a href="<ADD_LINK>"><img src="https://img.shields.io/badge/ArXiV-2402.00712-b31b1b.svg" alt="arXiv"/></a> -->
 <a href="https://huggingface.co/datasets/kausable/CausalDynamics"><img src="https://img.shields.io/badge/Dataset-HuggingFace-ffd21e" alt="Huggingface Dataset"/></a>
-<a href="https://github.com/kausable/CausalDynamics/blob/main/LICENSE.txt"><img src="https://img.shields.io/badge/license-MIT-green" alt="License Badge"/></a>
+<a href="https://github.com/kausable/CausalDynamics/blob/main/LICENSE.txt"><img src="https://img.shields.io/badge/License-MIT-green" alt="License Badge"/></a>
 <a href="https://github.com/kausable/CausalDynamics/actions/workflows/run-tests.yml"><img src="https://github.com/kausable/CausalDynamics/workflows/Run%20Tests/badge.svg" alt="Tests"/></a>
 </div>
 </br>
 
-A comprehensive benchmark suite designed to rigorously evaluate state-of-the-art causal discovery algorithms.
+A comprehensive benchmark suite designed to rigorously evaluate state-of-the-art causal discovery algorithms for dynamical systems.
 
 ## Key Features
 ![Overview of CausalDynamics](docs/causaldynamics_overview.png)
