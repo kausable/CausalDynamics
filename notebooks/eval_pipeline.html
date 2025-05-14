@@ -181,7 +181,7 @@
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="uncoupled_causal_models.html">Uncoupled dynamical systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simple_causal_models.html">Simple dynamical systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coupled_causal_models.html">Hierarchically coupled causal models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="climate_causal_models.html">Climate causal models</a></li>
 
@@ -423,12 +423,10 @@ document.write(`
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.causaldynamics.scm</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm_graph</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">animate_3d_trajectories</span><span class="p">,</span> <span class="n">plot_trajectories</span><span class="p">,</span> <span class="n">plot_scm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_scm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.causaldynamics.score</span><span class="w"> </span><span class="kn">import</span> <span class="n">score</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.causaldynamics.baselines</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCMCIPlus</span><span class="p">,</span> <span class="n">FPCMCI</span><span class="p">,</span> <span class="n">VARLiNGAM</span><span class="p">,</span> <span class="n">DYNOTEARS</span><span class="p">,</span> <span class="n">NGC_LSTM</span><span class="p">,</span> <span class="n">TSCI</span><span class="p">,</span> <span class="n">CUTSPlus</span>
 

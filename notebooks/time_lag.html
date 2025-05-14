@@ -181,7 +181,7 @@
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="uncoupled_causal_models.html">Uncoupled dynamical systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simple_causal_models.html">Simple dynamical systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coupled_causal_models.html">Hierarchically coupled causal models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="climate_causal_models.html">Climate causal models</a></li>
 
@@ -406,12 +406,10 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.scm</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm_graph</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span>  <span class="n">plot_trajectories</span><span class="p">,</span> <span class="n">plot_scm</span>
-
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.creator</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm</span><span class="p">,</span> <span class="n">simulate_system</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span>  <span class="n">plot_trajectories</span><span class="p">,</span> <span class="n">plot_scm</span><span class="p">,</span> <span class="n">plot_3d_trajectories</span>
 </pre></div>
 </div>
 </div>
@@ -447,13 +445,13 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A has the shape torch.Size([2, 4, 4]) representing (lag, num_nodes, node_dim&#39;)
 tensor([[[0., 0., 0., 0.],
          [1., 0., 0., 0.],
-         [1., 0., 0., 0.],
-         [1., 0., 0., 0.]],
+         [0., 1., 0., 0.],
+         [0., 1., 0., 0.]],
 
-        [[0., 1., 0., 0.],
-         [1., 0., 0., 0.],
-         [1., 0., 0., 0.],
-         [0., 0., 0., 0.]]])
+        [[0., 0., 0., 0.],
+         [0., 0., 0., 0.],
+         [0., 0., 0., 0.],
+         [1., 0., 0., 0.]]])
 </pre></div>
 </div>
 </div>
@@ -468,8 +466,8 @@ tensor([[[0., 0., 0., 0.],
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0., 0., 0., 0.],
         [1., 0., 0., 0.],
-        [1., 0., 0., 0.],
-        [1., 0., 0., 0.]])
+        [0., 1., 0., 0.],
+        [0., 1., 0., 0.]])
 </pre></div>
 </div>
 </div>
@@ -482,10 +480,10 @@ tensor([[[0., 0., 0., 0.],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0., 1., 0., 0.],
-        [1., 0., 0., 0.],
-        [1., 0., 0., 0.],
-        [0., 0., 0., 0.]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [1., 0., 0., 0.]])
 </pre></div>
 </div>
 </div>
@@ -517,22 +515,26 @@ tensor([[[0., 0., 0., 0.],
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># Plot the trajectories</span>
+<span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">da</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">)</span>
 <span class="n">plot_trajectories</span><span class="p">(</span><span class="n">da</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># # Animate the trajectories (takes a while to run...)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/48a47c13b56695a8df33f726b8387c65d2df5111743839baef0e48439d26d247.png" src="../_images/48a47c13b56695a8df33f726b8387c65d2df5111743839baef0e48439d26d247.png" />
+<img alt="../_images/1ffb4bff3121344391f42b86c0862ae5ffa4c2fb3001a0249fdefa4cc439c144.png" src="../_images/1ffb4bff3121344391f42b86c0862ae5ffa4c2fb3001a0249fdefa4cc439c144.png" />
+<img alt="../_images/5e707b681311de87b4cb360497a7e6658c31c79d86edf4bb6fd57df8a980a5b7.png" src="../_images/5e707b681311de87b4cb360497a7e6658c31c79d86edf4bb6fd57df8a980a5b7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Animate the trajectories (takes a while to run...)</span>
 <span class="c1"># mpl.rcParams[&#39;animation.embed_limit&#39;] = 50 * 1024**2  # Increase the memory limit to 50MB</span>
 <span class="c1"># anim = animate_3d_trajectories(da, frame_skip=5, rotation_speed=0.2, rotate=True , show_history=True, plot_type=&#39;subplots&#39;, root_nodes=root_nodes)</span>
 <span class="c1"># display(anim)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/18cd034baa53d583f795527299b382d1862ba096cb8503881c31ec90f200402c.png" src="../_images/18cd034baa53d583f795527299b382d1862ba096cb8503881c31ec90f200402c.png" />
-<img alt="../_images/77a4326a9e1d8056eaba75025a87c14e1daeb4a86862fa0eb09893fe57e71dee.png" src="../_images/77a4326a9e1d8056eaba75025a87c14e1daeb4a86862fa0eb09893fe57e71dee.png" />
 </div>
 </div>
 </section>
