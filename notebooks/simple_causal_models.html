@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Simple dynamical systems &#8212; CausalDynamics</title>
+    <title>Simple causal models &#8212; CausalDynamics</title>
   
   
   
@@ -178,7 +178,7 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../benchmark.html">Benchmark</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="features.html">Features</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Simple dynamical systems</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Simple causal models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coupled_causal_models.html">Hierarchically coupled causal models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="climate_causal_models.html">Climate causal models</a></li>
 
@@ -373,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Simple dynamical systems</h1>
+    <h1>Simple causal models</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -387,8 +387,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="simple-dynamical-systems">
-<h1>Simple dynamical systems<a class="headerlink" href="#simple-dynamical-systems" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="simple-causal-models">
+<h1>Simple causal models<a class="headerlink" href="#simple-causal-models" title="Link to this heading">#</a></h1>
 <p>Here, we showcase how to generate data for the simple case, in which we solve single separate dynamical systems such as the <code class="docutils literal notranslate"><span class="pre">Lorenz</span></code> system. The ODE systems are integrated using the <code class="docutils literal notranslate"><span class="pre">dysts</span></code> package.</p>
 <p>Let’s start by solving a single Lorenz system for 1000 time-steps.</p>
 <div class="cell docutils container">
@@ -410,19 +410,18 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_3d_trajectories</span>
 
 <span class="n">da</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s1">&#39;dim&#39;</span><span class="p">])</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,)
-</pre></div>
-</div>
-<img alt="../_images/2a6a40fc8dac36c7c771336d03241e5b2c87d481122fc00adc8796e4c5ab310a.png" src="../_images/2a6a40fc8dac36c7c771336d03241e5b2c87d481122fc00adc8796e4c5ab310a.png" />
+<img alt="../_images/c3d17d56b5ef432a28919da4cd798152a054854e0de4a0f00a053254e8c2ab21.png" src="../_images/c3d17d56b5ef432a28919da4cd798152a054854e0de4a0f00a053254e8c2ab21.png" />
 </div>
 </div>
 <p>We can also solve a randomly selected dynamical system.</p>
@@ -433,14 +432,12 @@ document.write(`
 <span class="n">data</span> <span class="o">=</span> <span class="n">solve_random_systems</span><span class="p">(</span><span class="n">num_timesteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">num_systems</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">da</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s1">&#39;dim&#39;</span><span class="p">])</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,)
-</pre></div>
-</div>
-<img alt="../_images/4974b3a5f8f8ca168afc3d885570e70d6906f7148f64d076ee7e0cdea70c44b2.png" src="../_images/4974b3a5f8f8ca168afc3d885570e70d6906f7148f64d076ee7e0cdea70c44b2.png" />
+<img alt="../_images/1f4e7e2df979e8049c07550e6e02c31b4c9335fc4f831f378ef726aec66c24b2.png" src="../_images/1f4e7e2df979e8049c07550e6e02c31b4c9335fc4f831f378ef726aec66c24b2.png" />
 </div>
 </div>
 <p>We can also provide kwargs to the underlying <code class="docutils literal notranslate"><span class="pre">dysts.make_trajectory</span></code> function, e.g. add noise.</p>
@@ -451,14 +448,12 @@ document.write(`
 <span class="n">data</span> <span class="o">=</span> <span class="n">solve_random_systems</span><span class="p">(</span><span class="n">num_timesteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">num_systems</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">make_trajectory_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;noise&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">})</span>
 <span class="n">da</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s1">&#39;dim&#39;</span><span class="p">])</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,)
-</pre></div>
-</div>
-<img alt="../_images/f6871a7790cb668f110f0a7ae9601fbef358a75681d383bec08e259cc155f020.png" src="../_images/f6871a7790cb668f110f0a7ae9601fbef358a75681d383bec08e259cc155f020.png" />
+<img alt="../_images/885d4029e8af8d97366bf339c9cce6e55c3cb6f4ebf6461cde9a9cbd8d5de75c.png" src="../_images/885d4029e8af8d97366bf339c9cce6e55c3cb6f4ebf6461cde9a9cbd8d5de75c.png" />
 </div>
 </div>
 <p>Also, by increasing <code class="docutils literal notranslate"><span class="pre">num_systems</span></code> we can compute multiple uncoupled dynamical system trajectories in parallel using the same command.</p>
@@ -469,18 +464,12 @@ document.write(`
 <span class="n">data</span> <span class="o">=</span> <span class="n">solve_random_systems</span><span class="p">(</span><span class="n">num_timesteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">num_systems</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">da</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s1">&#39;dim&#39;</span><span class="p">])</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Node 3&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Node 4&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
-</pre></div>
-</div>
-<img alt="../_images/1854a7ab79c99bd309cd8431d3ac19b5faf765047fd4da47e48f8ea91595f950.png" src="../_images/1854a7ab79c99bd309cd8431d3ac19b5faf765047fd4da47e48f8ea91595f950.png" />
+<img alt="../_images/32ce9b6a1f020493a86d9fe486cf89d8ef741e1819b666c4fdffd1c33566aad3.png" src="../_images/32ce9b6a1f020493a86d9fe486cf89d8ef741e1819b666c4fdffd1c33566aad3.png" />
 </div>
 </div>
 </section>
