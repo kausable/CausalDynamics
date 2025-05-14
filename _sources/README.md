@@ -6,11 +6,11 @@
   <!-- <a href="<ADD_LINK>"><img src="https://img.shields.io/badge/ArXiV-2402.00712-b31b1b.svg" alt="arXiv"/></a> -->
 <a href="https://huggingface.co/datasets/kausable/CausalDynamics"><img src="https://img.shields.io/badge/Dataset-HuggingFace-ffd21e" alt="Huggingface Dataset"/></a>
 <a href="https://github.com/kausable/CausalDynamics/blob/main/LICENSE.txt"><img src="https://img.shields.io/badge/license-MIT-green" alt="License Badge"/></a>
-<a href="https://github.com/kausable/CausalDynamics/actions/workflows/run-tests.yml"><img src="https://github.com/kausable/CausalDynamics/workflows/Run%20Tests/badge.svg" alt="Tests"/></a>
+<a href="https://github.com/kausable/CausalDynamics/actions/workflows/run-tests.yml"><img src="https://img.shields.io/github/actions/workflow/status/kausable/CausalDynamics/run-tests.yml?branch=main" alt="Tests"/></a>
 </div>
 </br>
 
-A comprehensive benchmark suite designed to rigorously evaluate state-of-the-art causal discovery algorithms for dynamical systems.
+A comprehensive benchmark suite designed to rigorously evaluate state-of-the-art causal discovery algorithms.
 
 ## Key Features
 ![Overview of CausalDynamics](docs/causaldynamics_overview.png)
@@ -32,7 +32,7 @@ The easiest way to install the package is via PyPi:
 pip install causaldynamics
 ```
 
-Although users can generate your own dataset (see [getting started](#getting-started)), you can download our preprocessed ones from HuggingFace:
+Although you can generate your own dataset (see [getting started](#getting-started)), you can download our preprocessed ones directly from HuggingFace:
 ```bash
 wget https://huggingface.co/datasets/kausable/CausalDynamics/resolve/main/process_causaldynamics.py
 python process_causaldynamics.py
