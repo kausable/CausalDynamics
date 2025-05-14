@@ -178,9 +178,6 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../benchmark.html">Benchmark</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Features</a></li>
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="simple_causal_models.html">Simple dynamical systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coupled_causal_models.html">Hierarchically coupled causal models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="climate_causal_models.html">Climate causal models</a></li>
@@ -388,21 +385,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Features</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-coupled-model">Basic coupled model</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#confounders">Confounders</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#time-lagged">Time-lagged</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confounders">Confounders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-lag-edges">Time-lag edges</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-systems">Stochastic systems</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-driver">Periodic driver</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-drivers">Periodic drivers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internal-standardization">Internal standardization</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -418,17 +407,8 @@ document.write(`
 <p>Here, we showcase some key features of CausalDynamics using small example graphs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
-<span class="o">%</span><span class="k">autoreload</span> 2
-
-<span class="o">%</span><span class="k">matplotlib</span> inline
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.scm</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm_graph</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_trajectories</span><span class="p">,</span> <span class="n">plot_scm</span><span class="p">,</span> <span class="n">plot_3d_trajectories</span>
@@ -464,8 +444,9 @@ document.write(`
 
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
-<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -474,20 +455,14 @@ document.write(`
 INFO - Simulating Lorenz system for 1000 timesteps...
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
-</pre></div>
-</div>
-<img alt="../_images/26ee2eca5ee0bfc0a22f156c3f1e0baf9750fcc366d25013c60173b99baed135.png" src="../_images/26ee2eca5ee0bfc0a22f156c3f1e0baf9750fcc366d25013c60173b99baed135.png" />
-<img alt="../_images/d46dbdaf491fd284d462f2a3d1cfd65e2c7754b04573e33764ef8dd7494e226f.png" src="../_images/d46dbdaf491fd284d462f2a3d1cfd65e2c7754b04573e33764ef8dd7494e226f.png" />
-<img alt="../_images/b65b3c941211b927d8c26810b663bd37568cc82be54cd5a23d81e8a917e6a1c2.png" src="../_images/b65b3c941211b927d8c26810b663bd37568cc82be54cd5a23d81e8a917e6a1c2.png" />
+<img alt="../_images/0fc90f7bc000008eee08c08e86fa7190bc8c2029ffd056a987db41314d59d423.png" src="../_images/0fc90f7bc000008eee08c08e86fa7190bc8c2029ffd056a987db41314d59d423.png" />
+<img alt="../_images/d1b91080096c785ae9f2f298d24f45d294e866a431228d8b189153bb31273690.png" src="../_images/d1b91080096c785ae9f2f298d24f45d294e866a431228d8b189153bb31273690.png" />
+<img alt="../_images/196443e3bbb5114421dcbb88ede66da492c781c32636deb2a8a4b4e756fa0f11.png" src="../_images/196443e3bbb5114421dcbb88ede66da492c781c32636deb2a8a4b4e756fa0f11.png" />
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="confounders">
-<h1>Confounders<a class="headerlink" href="#confounders" title="Link to this heading">#</a></h1>
+<section id="confounders">
+<h2>Confounders<a class="headerlink" href="#confounders" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
@@ -505,8 +480,9 @@ INFO - Simulating Lorenz system for 1000 timesteps...
                       <span class="n">system_name</span><span class="o">=</span><span class="n">system_name</span><span class="p">)</span> 
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
-<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -515,19 +491,14 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 INFO - Simulating Lorenz system for 1000 timesteps...
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
-</pre></div>
-</div>
-<img alt="../_images/0aaf74af9b0d1f7ea963db7effc576407aca615e477d7786873882b88d9f3af0.png" src="../_images/0aaf74af9b0d1f7ea963db7effc576407aca615e477d7786873882b88d9f3af0.png" />
-<img alt="../_images/3a580170f42c005c6ce62e60a030f7f9aba08b9fdf16410176ddf29a0d05d9b5.png" src="../_images/3a580170f42c005c6ce62e60a030f7f9aba08b9fdf16410176ddf29a0d05d9b5.png" />
-<img alt="../_images/7b0a924e3cd66b71ff184b857ade97c2bd41b088c2b939e420e0cffef3f9342b.png" src="../_images/7b0a924e3cd66b71ff184b857ade97c2bd41b088c2b939e420e0cffef3f9342b.png" />
+<img alt="../_images/bc616d067ab7acc51e07a081026b57693316901d8b36b3379f6f729013bf4b76.png" src="../_images/bc616d067ab7acc51e07a081026b57693316901d8b36b3379f6f729013bf4b76.png" />
+<img alt="../_images/666eece7520bb6302613ad7e65cee76fbc69bdcac2d75fca6ae9278cfc9f6dba.png" src="../_images/666eece7520bb6302613ad7e65cee76fbc69bdcac2d75fca6ae9278cfc9f6dba.png" />
+<img alt="../_images/a6a5a6432b2664570277d571559ce63344e504e3a776d72093936a2133037b43.png" src="../_images/a6a5a6432b2664570277d571559ce63344e504e3a776d72093936a2133037b43.png" />
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="time-lagged">
-<h1>Time-lagged<a class="headerlink" href="#time-lagged" title="Link to this heading">#</a></h1>
+<section id="time-lag-edges">
+<h2>Time-lag edges<a class="headerlink" href="#time-lag-edges" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_lag</span> <span class="o">=</span> <span class="mi">10</span>
@@ -549,8 +520,9 @@ INFO - Simulating Lorenz system for 1000 timesteps...
                       <span class="n">time_lag</span><span class="o">=</span><span class="n">time_lag</span><span class="p">,)</span> 
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
-<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -559,16 +531,12 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 INFO - Simulating Lorenz system for 1000 timesteps...
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
-</pre></div>
-</div>
-<img alt="../_images/bf36399973e429567bc62853c6b1ac1e13b22e8b03676b0e73ae14976f6c9315.png" src="../_images/bf36399973e429567bc62853c6b1ac1e13b22e8b03676b0e73ae14976f6c9315.png" />
-<img alt="../_images/bc21dcf940a4bc3b5ca751de691eb15ebf7d8dcf20d1e65ae972dc28b639a114.png" src="../_images/bc21dcf940a4bc3b5ca751de691eb15ebf7d8dcf20d1e65ae972dc28b639a114.png" />
-<img alt="../_images/39396d911e953d47b7c13c660898eb333776425d89372cb9983b6b65a32f21a0.png" src="../_images/39396d911e953d47b7c13c660898eb333776425d89372cb9983b6b65a32f21a0.png" />
+<img alt="../_images/b90fde05127d3e41be16cfb2987ad7815f28ce130d69294be792c1ad5a66f52f.png" src="../_images/b90fde05127d3e41be16cfb2987ad7815f28ce130d69294be792c1ad5a66f52f.png" />
+<img alt="../_images/57a1cf5082611a1eb93045e6c4d6843f0a56a71e235fa50989c9940e541d0e77.png" src="../_images/57a1cf5082611a1eb93045e6c4d6843f0a56a71e235fa50989c9940e541d0e77.png" />
+<img alt="../_images/1bc6b45470fb1ee0f70cf44fd806b9a2cad6f291105e2d8a36d81dcef51f99a0.png" src="../_images/1bc6b45470fb1ee0f70cf44fd806b9a2cad6f291105e2d8a36d81dcef51f99a0.png" />
 </div>
 </div>
+</section>
 <section id="stochastic-systems">
 <h2>Stochastic systems<a class="headerlink" href="#stochastic-systems" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -598,8 +566,9 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
-<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -608,20 +577,14 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 INFO - Simulating Lorenz system for 1000 timesteps...
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
-</pre></div>
-</div>
-<img alt="../_images/e3f17673323a0154d172732a79ce6761bdd1556384be7e6028c29b27177f21e8.png" src="../_images/e3f17673323a0154d172732a79ce6761bdd1556384be7e6028c29b27177f21e8.png" />
-<img alt="../_images/f995440d6f34bbfb24b73806aa0d7308dcfc8e03e0775293116a8759ae085939.png" src="../_images/f995440d6f34bbfb24b73806aa0d7308dcfc8e03e0775293116a8759ae085939.png" />
-<img alt="../_images/00ca9957689688df22f5a422469d5a8c7d8fab67f950c1246aff937a49dd93a4.png" src="../_images/00ca9957689688df22f5a422469d5a8c7d8fab67f950c1246aff937a49dd93a4.png" />
+<img alt="../_images/d4fd9e54186c626fedb18c3b409d573f1c4d79dc05f6e202a57f5f43bc0db4d0.png" src="../_images/d4fd9e54186c626fedb18c3b409d573f1c4d79dc05f6e202a57f5f43bc0db4d0.png" />
+<img alt="../_images/743017cf46b247ac8d3d74607a876df0e5d8116ae48048ced99729f27b0a80fe.png" src="../_images/743017cf46b247ac8d3d74607a876df0e5d8116ae48048ced99729f27b0a80fe.png" />
+<img alt="../_images/d9824dd9c3be01d0168aa3a1d63df0639ad8aa728170de18564f74ac650352aa.png" src="../_images/d9824dd9c3be01d0168aa3a1d63df0639ad8aa728170de18564f74ac650352aa.png" />
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="periodic-driver">
-<h1>Periodic driver<a class="headerlink" href="#periodic-driver" title="Link to this heading">#</a></h1>
+<section id="periodic-drivers">
+<h2>Periodic drivers<a class="headerlink" href="#periodic-drivers" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_nodes</span> <span class="o">=</span> <span class="mi">3</span>
@@ -646,10 +609,10 @@ INFO - Simulating Lorenz system for 1000 timesteps...
                       <span class="n">system_name</span><span class="o">=</span><span class="n">system_name</span><span class="p">,</span>
                       <span class="n">init_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> 
 
-
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
-<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -658,16 +621,12 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 INFO - Simulating Lorenz system for 1000 timesteps...
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
-</pre></div>
-</div>
-<img alt="../_images/0e56fe2e3fe9b5858d0c3cf48eb35ca112eddc555369b729c73e5a167d62924e.png" src="../_images/0e56fe2e3fe9b5858d0c3cf48eb35ca112eddc555369b729c73e5a167d62924e.png" />
-<img alt="../_images/851aa2608fe801803eb3e0e873c3787599c66b44ee0e822ce22cb8b5d9af3081.png" src="../_images/851aa2608fe801803eb3e0e873c3787599c66b44ee0e822ce22cb8b5d9af3081.png" />
-<img alt="../_images/b15eec10727d4dfaeb1488f0564155a9ede76ecf1b8ec07b6c0ded5cdf2d9f9f.png" src="../_images/b15eec10727d4dfaeb1488f0564155a9ede76ecf1b8ec07b6c0ded5cdf2d9f9f.png" />
+<img alt="../_images/f141a86fdb87a192e8a0177f39d8ac974e8fb6b6c5555748ae0902d5fd8acfcb.png" src="../_images/f141a86fdb87a192e8a0177f39d8ac974e8fb6b6c5555748ae0902d5fd8acfcb.png" />
+<img alt="../_images/c4ae70769bf3d0a199728b92894e875431bf4212799817afabbdc18f5d8b684f.png" src="../_images/c4ae70769bf3d0a199728b92894e875431bf4212799817afabbdc18f5d8b684f.png" />
+<img alt="../_images/121fed8c1edb9ce592a065c7442a053967e778c774c3085330fa3289cc730a14.png" src="../_images/121fed8c1edb9ce592a065c7442a053967e778c774c3085330fa3289cc730a14.png" />
 </div>
 </div>
+</section>
 <section id="internal-standardization">
 <h2>Internal standardization<a class="headerlink" href="#internal-standardization" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -697,8 +656,9 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
-<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -707,14 +667,9 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 INFO - Simulating Lorenz system for 1000 timesteps...
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
-</pre></div>
-</div>
-<img alt="../_images/4f37a6844f00d737c81fac667bfb89703fcd7a5199500b1d6ca81da6782a26b1.png" src="../_images/4f37a6844f00d737c81fac667bfb89703fcd7a5199500b1d6ca81da6782a26b1.png" />
-<img alt="../_images/b5b8dae0d6db0973400402696a02d83a8b0c1aa09cdf3a93452ce72a31d68de5.png" src="../_images/b5b8dae0d6db0973400402696a02d83a8b0c1aa09cdf3a93452ce72a31d68de5.png" />
-<img alt="../_images/57c9f22d5c242c171f26668e56445dc0911c1f5a812ab380902660fa2b4c07ce.png" src="../_images/57c9f22d5c242c171f26668e56445dc0911c1f5a812ab380902660fa2b4c07ce.png" />
+<img alt="../_images/f104222c585cd60be8c5c1fe6c00748af36b53562940f623a4faf786413555b4.png" src="../_images/f104222c585cd60be8c5c1fe6c00748af36b53562940f623a4faf786413555b4.png" />
+<img alt="../_images/6e239e5386a24dbe4dbeb725725772a5da9cd23772a385184322f7ce9e39ec5d.png" src="../_images/6e239e5386a24dbe4dbeb725725772a5da9cd23772a385184322f7ce9e39ec5d.png" />
+<img alt="../_images/1b72b0a2a5455d6ee8cafe14098f6f2bb86f04cb6d6307191e9076e4444c39f4.png" src="../_images/1b72b0a2a5455d6ee8cafe14098f6f2bb86f04cb6d6307191e9076e4444c39f4.png" />
 </div>
 </div>
 </section>
@@ -784,21 +739,13 @@ INFO - Simulating Lorenz system for 1000 timesteps...
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Features</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-coupled-model">Basic coupled model</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#confounders">Confounders</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#time-lagged">Time-lagged</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confounders">Confounders</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-lag-edges">Time-lag edges</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-systems">Stochastic systems</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-driver">Periodic driver</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-drivers">Periodic drivers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#internal-standardization">Internal standardization</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
