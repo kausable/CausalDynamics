@@ -6,9 +6,9 @@ root: README
 chapters:
 - file: challenge
 - file: notebooks/quickstart.ipynb
+- file: notebooks/causaldynamics.ipynb
 - file: benchmark
   sections:
-  - file: notebooks/features.ipynb
   - file: notebooks/simple_causal_models.ipynb
   - file: notebooks/coupled_causal_models.ipynb
   - file: notebooks/climate_causal_models.ipynb
