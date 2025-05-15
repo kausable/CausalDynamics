@@ -34,7 +34,7 @@ python process_causaldynamics.py
 ## Installation
 ### Using pip
 
-`causaldynamics` is available on [PyPi](https://pypi.org/project/causaldynamics/), so you can use pip to install `causaldynamcis`, which currently requires Python version `3.10`.
+*CausalDynamics* is available on [PyPi](https://pypi.org/project/causaldynamics/), so you can use pip to install `causaldynamics`, which currently requires Python version `3.10`.
 
 ```bash
 pip install causaldynamics
