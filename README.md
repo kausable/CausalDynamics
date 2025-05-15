@@ -24,7 +24,7 @@ A comprehensive benchmark framework designed to rigorously evaluate state-of-the
 
 **Abstract**: Causal discovery for dynamical systems poses a major challenge in fields where active interventions are infeasible. Most methods used to investigate these systems and their associated benchmarks are tailored to deterministic, low-dimensional and weakly nonlinear time-series data. To address these limitations, we present *CausalDynamics*, a large-scale benchmark and extensible data generation framework to advance the structural discovery of dynamical causal models. Our benchmark consists of true causal graphs derived from thousands of coupled ordinary and stochastic differential equations as well as two idealized climate models. We perform a comprehensive evaluation of state-of-the-art causal discovery algorithms for graph reconstruction on systems with noisy, confounded, and lagged dynamics. *CausalDynamics* consists of a plug-and-play, build-your-own coupling workflow that enables the construction of a hierarchy of physical systems. We anticipate that our framework will facilitate the development of robust causal discovery algorithms that are broadly applicable across domains while addressing their unique challenges. 
 
-## Preprocessed Datasets
+## Datasets
 You can generate your own dataset (see [getting started](#getting-started)), but you can also download our preprocessed ones directly from HuggingFace:
 ```bash
 wget https://huggingface.co/datasets/kausable/CausalDynamics/resolve/main/process_causaldynamics.py
