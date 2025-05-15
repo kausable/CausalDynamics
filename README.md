@@ -44,7 +44,7 @@ See the [additional installation guide](#additional-installation-guide) for more
 ## Getting Started
 
 - [Challenge](https://kausable.github.io/CausalDynamics/challenge.html)
-- [Quickstart](https://kausable.github.io/CausalDynamics/quickstart.html)
+- [Quickstart](https://kausable.github.io/CausalDynamics/notebooks/quickstart.html)
 - [CausalDynamics](https://kausable.github.io/CausalDynamics/notebooks/causaldynamics.html)
 - [Benchmark](https://kausable.github.io/CausalDynamics/benchmark.html)
     - [Simple Dynamics](https://kausable.github.io/CausalDynamics/notebooks/simple_causal_models.html)
