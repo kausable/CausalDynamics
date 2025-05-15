@@ -1,0 +1,18 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: README
+chapters:
+- file: challenge
+- file: notebooks/quickstart.ipynb
+- file: benchmark
+  sections:
+  - file: notebooks/features.ipynb
+  - file: notebooks/simple_causal_models.ipynb
+  - file: notebooks/coupled_causal_models.ipynb
+  - file: notebooks/climate_causal_models.ipynb
+- file: baseline
+- file: notebooks/eval_pipeline.ipynb
+- file: leaderboard
+- file: troubleshoot

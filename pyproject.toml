@@ -1,0 +1,93 @@
+[project]
+name = "CausalDynamics"
+version = "0.1.0"
+description = "CausalDynamics: A large-scale benchmark for structural discovery of dynamical causal models"
+authors = [
+    {name = "Benjamin Herdeanu", email = "benjamin@kausable.ai"},
+    {name = "Juan Nathaniel", email = "jn2808@columbia.edu"},
+]
+dependencies = [
+    "numpy<2.0",
+    "dysts>=0.95",
+    "numba<=0.61.0",
+    "matplotlib>=3.10.1",
+    "seaborn>=0.13.2",
+    "jupyter>=1.1.1",
+    "ipywidgets>=8.1.5",
+    "jsonargparse>=4.38.0",
+    "jax>=0.5.3",
+    "black>=25.1.0",
+    "xarray>=2023.10.0",
+    "torch>=2.6.0",
+    "joblib>=1.4.2",
+    "scikit-learn>=1.6.1",
+    "jaxtyping>=0.3.1",
+    "statsmodels>=0.14.4",
+    "einops>=0.8.1",
+    "omegaconf>=2.3.0",
+    "sdeint>=0.3.0",
+    "zarr>=2.18.3",
+    "qgs>=1.0.0",
+    "sparse<=0.15.5",
+]
+requires-python = ">=3.10, <3.11"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.resolution.overrides]
+numpy = ">=1.25,<2.0"
+
+[tool.pdm.dev-dependencies]
+lint = [
+    "isort>=5.13.2",
+    "black>=24.10.0",
+    "flake8-pyproject>=1.2.3",
+]
+
+[tool.pdm.optional-dependencies]
+tigramite = ["tigramite>=5.2.7.0"]
+fpcmci = ["fpcmci>=4.4.1"]
+lingam = ["lingam>=1.9.1"]
+idtxl = ["idtxl @ git+https://github.com/pwollstadt/IDTxl.git"]
+causalnex = ["causalnex @ git+https://github.com/mckinsey/causalnex.git@develop"]
+
+[tool.flake8]
+ignore = ['E203']
+max-line-length = 88
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[dependency-groups]
+dev = ["pre-commit>=4.0.1", "pytest>=8.3.3"]
