@@ -45,8 +45,8 @@ See the [additional installation guide](#additional-installation-guide) for more
 
 - [Challenge](https://kausable.github.io/CausalDynamics/challenge.html)
 - [Quickstart](https://kausable.github.io/CausalDynamics/quickstart.html)
+- [CausalDynamics](https://kausable.github.io/CausalDynamics/notebooks/causaldynamics.html)
 - [Benchmark](https://kausable.github.io/CausalDynamics/benchmark.html)
-    - [Main Features](https://kausable.github.io/CausalDynamics/notebooks/features.html)
     - [Simple Dynamics](https://kausable.github.io/CausalDynamics/notebooks/simple_causal_models.html)
     - [Coupled Dynamics](https://kausable.github.io/CausalDynamics/notebooks/coupled_causal_models.html)
     - [Climate Dynamics](https://kausable.github.io/CausalDynamics/notebooks/climate_causal_models.html)
