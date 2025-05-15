@@ -22,7 +22,7 @@ init_ratios: [1., 0.2] # Assign root node driver systems ratios: system, periodi
 plot: True
 save_plot: True
 show_plot: False
-create_animation: True
+create_animation: False
 return_html_anim: False # only used in notebooks
 
 # Data output
