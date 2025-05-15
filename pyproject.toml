@@ -1,6 +1,6 @@
 [project]
 name = "causaldynamics"
-version = "0.1.0"
+version = "0.1.1"
 description = "CausalDynamics: A large-scale benchmark for structural discovery of dynamical causal models"
 authors = [
     {name = "Benjamin Herdeanu", email = "benjamin@kausable.ai"},

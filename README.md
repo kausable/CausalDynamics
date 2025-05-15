@@ -37,6 +37,7 @@ Clone the repository and install it using [pdm](https://pdm-project.org/en/lates
 
 ```shell
 git clone https://github.com/kausable/CausalDynamics.git
+cd CausalDynamics
 pdm install
 ```
 
@@ -56,6 +57,11 @@ Alternatively, `causaldynamics` is available on [PyPi](https://pypi.org/project/
 ```bash
 pip install causaldynamics
 ```
+
+
+conda create --name venv python=3.10
+conda activate venv
+pip install causaldynamics
 
 ## Getting Started
 
