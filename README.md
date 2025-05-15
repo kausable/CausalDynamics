@@ -32,6 +32,21 @@ python process_causaldynamics.py
 ```
 
 ## Installation
+### Using pip
+
+`causaldynamics` is available on [PyPi](https://pypi.org/project/causaldynamics/), so you can use pip to install `causaldynamcis`, which currently requires Python version `3.10`.
+
+```bash
+pip install causaldynamics
+```
+
+If you use conda, please use the following commands: 
+```shell
+conda create --name venv python=3.10
+conda activate venv
+pip install causaldynamics
+```
+
 ### Using pdm
 Clone the repository and install it using [pdm](https://pdm-project.org/en/latest/): 
 
@@ -50,20 +65,6 @@ python src/causaldynamics/creator.py --config config.yaml
 
 You find the output at `output/<timestamp>` as default location.
 
-### Using pip
-
-Alternatively, `causaldynamics` is available on [PyPi](https://pypi.org/project/causaldynamics/), so you can use pip to install `causaldynamcis`, which currently requires Python version `3.10`.
-
-```bash
-pip install causaldynamics
-```
-
-If you use conda, please use the following commands: 
-```shell
-conda create --name venv python=3.10
-conda activate venv
-pip install causaldynamics
-```
 
 ## Getting Started
 
