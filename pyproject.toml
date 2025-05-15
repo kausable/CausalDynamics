@@ -35,15 +35,14 @@ requires-python = ">=3.10, <3.11"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
-
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
-
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
 [project.urls]
 Homepage = "https://kausable.github.io/CausalDynamics"
