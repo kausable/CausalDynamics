@@ -58,10 +58,12 @@ Alternatively, `causaldynamics` is available on [PyPi](https://pypi.org/project/
 pip install causaldynamics
 ```
 
-
+If you use conda, please use the following commands: 
+```shell
 conda create --name venv python=3.10
 conda activate venv
 pip install causaldynamics
+```
 
 ## Getting Started
 
