@@ -391,8 +391,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pdm">Using pdm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pip">Using pip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pdm">Using pdm</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
@@ -438,6 +438,19 @@ python<span class="w"> </span>process_causaldynamics.py
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<section id="using-pip">
+<h3>Using pip<a class="headerlink" href="#using-pip" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">causaldynamics</span></code> is available on <a class="reference external" href="https://pypi.org/project/causaldynamics/">PyPi</a>, so you can use pip to install <code class="docutils literal notranslate"><span class="pre">causaldynamcis</span></code>, which currently requires Python version <code class="docutils literal notranslate"><span class="pre">3.10</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>causaldynamics
+</pre></div>
+</div>
+<p>If you use conda, please use the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>venv<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
+conda<span class="w"> </span>activate<span class="w"> </span>venv
+pip<span class="w"> </span>install<span class="w"> </span>causaldynamics
+</pre></div>
+</div>
+</section>
 <section id="using-pdm">
 <h3>Using pdm<a class="headerlink" href="#using-pdm" title="Link to this heading">#</a></h3>
 <p>Clone the repository and install it using <a class="reference external" href="https://pdm-project.org/en/latest/">pdm</a>:</p>
@@ -452,19 +465,6 @@ python<span class="w"> </span>src/causaldynamics/creator.py<span class="w"> </sp
 </pre></div>
 </div>
 <p>You find the output at <code class="docutils literal notranslate"><span class="pre">output/&lt;timestamp&gt;</span></code> as default location.</p>
-</section>
-<section id="using-pip">
-<h3>Using pip<a class="headerlink" href="#using-pip" title="Link to this heading">#</a></h3>
-<p>Alternatively, <code class="docutils literal notranslate"><span class="pre">causaldynamics</span></code> is available on <a class="reference external" href="https://pypi.org/project/causaldynamics/">PyPi</a>, so you can use pip to install <code class="docutils literal notranslate"><span class="pre">causaldynamcis</span></code>, which currently requires Python version <code class="docutils literal notranslate"><span class="pre">3.10</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>causaldynamics
-</pre></div>
-</div>
-<p>If you use conda, please use the following commands:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>venv<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
-conda<span class="w"> </span>activate<span class="w"> </span>venv
-pip<span class="w"> </span>install<span class="w"> </span>causaldynamics
-</pre></div>
-</div>
 </section>
 </section>
 <section id="getting-started">
@@ -557,8 +557,8 @@ pip<span class="w"> </span>install<span class="w"> </span>causaldynamics
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pdm">Using pdm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pip">Using pip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pdm">Using pdm</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
