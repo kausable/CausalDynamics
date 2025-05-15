@@ -5,6 +5,7 @@ description = "CausalDynamics: A large-scale benchmark for structural discovery 
 authors = [
     {name = "Benjamin Herdeanu", email = "benjamin@kausable.ai"},
     {name = "Juan Nathaniel", email = "jn2808@columbia.edu"},
+    {name = "Johannes Haux", email = "johannes@kausable.ai"},
 ]
 dependencies = [
     "numpy<2.0",
@@ -38,6 +39,15 @@ license-files = ["LICEN[CS]E*"]
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://kausable.github.io/CausalDynamics"
+Issues = "https://github.com/kausable/CausalDynamics/issues"
 
 [tool.pdm]
 distribution = true
