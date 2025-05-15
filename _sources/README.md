@@ -26,8 +26,27 @@ A comprehensive benchmark framework designed to rigorously evaluate state-of-the
 
 
 ## Installation
+### Using pdm
+Clone the repository and install it using [pdm](https://pdm-project.org/en/latest/): 
 
-The easiest way to install the package is via PyPi:
+```shell
+git clone https://github.com/kausable/CausalDynamics.git
+pdm install
+```
+
+You can test whether the installation succeded by creating some coupled causal model data:
+
+```shell
+$(pdm venv activate)
+python src/causaldynamics/creator.py --config config.yaml
+```
+
+You find the output at `output/<timestamp>` as default location.
+
+### Using pip
+
+Alternatively, `causaldynamics` is available on [PyPi](https://pypi.org/project/causaldynamics/), so you can use pip to install `causaldynamcis`, which currently requires Python version `3.10`.
+
 ```bash
 pip install causaldynamics
 ```
@@ -37,9 +56,6 @@ Although you can generate your own dataset (see [getting started](#getting-start
 wget https://huggingface.co/datasets/kausable/CausalDynamics/resolve/main/process_causaldynamics.py
 python process_causaldynamics.py
 ```
-
-See the [additional installation guide](#additional-installation-guide) for more options.
-
 
 ## Getting Started
 
@@ -56,22 +72,6 @@ See the [additional installation guide](#additional-installation-guide) for more
 - [Baseline](https://kausable.github.io/CausalDynamics/baseline.html)
 - [Evaluation](https://kausable.github.io/CausalDynamics/notebooks/eval_pipeline.html)
 - [Leaderboard](https://kausable.github.io/CausalDynamics/leaderboard.html)
-
-## Additional Installation Guide
-Note: This is the recommended way if you want to run scripts to generate benchmark data. Clone the repository and install it using [pdm](https://pdm-project.org/en/latest/): 
-
-```shell
-git clone https://github.com/kausable/CausalDynamics.git
-pdm install
-```
-
-You can test whether the installation succeded by creating some coupled causal model data:
-
-```shell
-python src/causaldynamics/creator.py --config config.yaml
-```
-
-You find the output at `output/<timestamp>` as default location.
 
 ## Citation
 If you find any of the code and dataset useful, feel free to acknowledge our work through:
