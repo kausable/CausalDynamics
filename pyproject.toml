@@ -1,5 +1,5 @@
 [project]
-name = "CausalDynamics"
+name = "causaldynamics"
 version = "0.1.0"
 description = "CausalDynamics: A large-scale benchmark for structural discovery of dynamical causal models"
 authors = [
