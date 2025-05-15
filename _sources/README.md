@@ -10,7 +10,7 @@
 </div>
 </br>
 
-A comprehensive benchmark suite designed to rigorously evaluate state-of-the-art causal discovery algorithms for dynamical systems.
+A comprehensive benchmark framework designed to rigorously evaluate state-of-the-art causal discovery algorithms for dynamical systems.
 
 ## Key Features
 ![Overview of CausalDynamics](docs/causaldynamics_overview.png)
