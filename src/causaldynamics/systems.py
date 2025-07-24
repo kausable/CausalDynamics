@@ -416,7 +416,12 @@ def get_adjacency_matrix_from_jac(dyn_sys: Union[str, flows.DynSys]):
 
 
 def drive_sin(
-    num_timesteps, num_nodes, node_dim, max_num_periods=10, device=None
+    num_timesteps,
+    num_nodes,
+    node_dim,
+    max_num_periods=10,
+    amplitude_range=(-1, 1),
+    device=None,
 ):
     """
     Generate time series data with sinusoidal dynamics.
@@ -440,6 +445,8 @@ def drive_sin(
     max_num_periods : int, optional
         Maximum number of periods to include in the time series, default is 10.
         This controls the maximum frequency of the sinusoidal patterns.
+    amplitude_range : tuple, optional
+        Range of magnitudes for the sinusoidal patterns, default is (-1, 1).
     device : torch.device, optional
         Device to place the generated tensors on. If None, uses the default device.
 
@@ -457,9 +464,11 @@ def drive_sin(
       in different frequencies for different node-dimensions
     """
     with torch.no_grad():
-        amplitude = (
-            2 * torch.rand((num_nodes, node_dim), device=device) - 1
-        )  # random uniform in [-1, 1]
+        amplitude = (amplitude_range[1] - amplitude_range[0]) * torch.rand(
+            (num_nodes, node_dim), device=device
+        ) + amplitude_range[
+            0
+        ]  # random uniform in [amplitude_range[0], amplitude_range[1]]
         phase_shift = (
             2 * np.pi * torch.rand((num_nodes, node_dim), device=device)
         )  # random uniform in [0, 2π]
@@ -480,7 +489,14 @@ def drive_sin(
         return data
 
 
-def drive_linear(num_timesteps, num_nodes, node_dim, device=None):
+def drive_linear(
+    num_timesteps,
+    num_nodes,
+    node_dim,
+    m_range=(-1, 1),
+    b_range=(-1, 1),
+    device=None,
+):
     """
     Generate time series data with linear dynamics.
 
@@ -500,6 +516,10 @@ def drive_linear(num_timesteps, num_nodes, node_dim, device=None):
         Number of nodes in the system.
     node_dim : int
         Dimension of each node. Each dimension will have its own linear pattern.
+    m_range : tuple, optional
+        Range of slopes for the linear patterns, default is (-1, 1).
+    b_range : tuple, optional
+        Range of intercepts for the linear patterns, default is (-1, 1).
     device : torch.device, optional
         Device to place the generated tensors on. If None, uses the default device.
 
@@ -517,12 +537,16 @@ def drive_linear(num_timesteps, num_nodes, node_dim, device=None):
       resulting in different rates of change for different node-dimensions
     """
     with torch.no_grad():
-        m = (
-            2 * torch.rand((num_nodes, node_dim), device=device) - 1
-        )  # random uniform in [-1, 1]
-        b = (
-            2 * torch.rand((num_nodes, node_dim), device=device) - 1
-        )  # random uniform in [-1, 1]
+        m = (m_range[1] - m_range[0]) * torch.rand(
+            (num_nodes, node_dim), device=device
+        ) + m_range[
+            0
+        ]  # random uniform in [m_range[0], m_range[1]]
+        b = (b_range[1] - b_range[0]) * torch.rand(
+            (num_nodes, node_dim), device=device
+        ) + b_range[
+            0
+        ]  # random uniform in [b_range[0], b_range[1]]
         data = torch.zeros((num_timesteps, num_nodes, node_dim), device=device)
 
         if num_nodes > 0:
