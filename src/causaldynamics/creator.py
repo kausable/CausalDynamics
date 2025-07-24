@@ -16,7 +16,12 @@ from causaldynamics.initialization import (
     initialize_x,
 )
 from causaldynamics.mlp import calculate_magnitudes, propagate_mlp
-from causaldynamics.plot import animate_3d_trajectories, plot_scm, plot_trajectories, plot_3d_trajectories
+from causaldynamics.plot import (
+    animate_3d_trajectories,
+    plot_scm,
+    plot_trajectories,
+    plot_3d_trajectories,
+)
 from causaldynamics.scm import (
     calculate_all_adjacency_matrices,
     create_scm_graph,
@@ -71,6 +76,7 @@ def setup_environment(
     Path(out_dir).mkdir(parents=True, exist_ok=True)
     logger.info(f"Created output directory: {out_dir}")
     return Path(out_dir)
+
 
 def create_scm(
     num_nodes: int,
@@ -238,7 +244,9 @@ def simulate_system(
         A data array containing the simulated trajectories with dimensions ["time", "node", "dim"].
 
     """
-    logger.info(f"Simulating {system_name} system for {num_timesteps} timesteps...")
+    logger.info(
+        f"Simulating {system_name} system for {num_timesteps} timesteps..."
+    )
 
     if A.ndim == 3:
         A = flatten_time_lag_adj_mat(A)
@@ -406,7 +414,7 @@ def create(
     graph: str = "scale-free",
     system_name: str = "Lorenz",
     make_trajectory_kwargs: dict = {},
-    init_ratios: list = [1.0, 0.0],
+    init_ratios: list = [1.0, 0.0, 0.0],
     init: torch.Tensor = None,
     time_lag: int = None,
     time_lag_edge_probability: float = 0.1,
@@ -449,7 +457,7 @@ def create(
     make_trajectory_kwargs : dict, optional
         Additional arguments for trajectory generation. Default is {}.
     init_ratios : list, optional
-        Ratios for different types of node initializations [system, periodic]. Default is [1., 0.].
+        Ratios for different types of node initializations [system, periodic, linear]. Default is [1., 0., 0.].
     init : torch.Tensor, optional
         Initial values for the system. If None, generated based on init_ratios. Default is None.
     time_lag : int, optional
