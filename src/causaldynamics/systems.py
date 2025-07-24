@@ -233,7 +233,9 @@ def solve_system(
 
     # Use joblib to parallelize the computation
     data = Parallel(n_jobs=-1)(
-        delayed(solve_single_system)(model, num_timesteps, make_trajectory_kwargs)
+        delayed(solve_single_system)(
+            model, num_timesteps, make_trajectory_kwargs
+        )
         for _ in range(num_systems)
     )
 
@@ -321,7 +323,9 @@ def solve_random_systems(
     """
     systems_dim3 = get_3d_chaotic_system_names()
     # Randomly select N different attractors from systems_dim3
-    selected_systems = random.sample(systems_dim3, min(num_systems, len(systems_dim3)))
+    selected_systems = random.sample(
+        systems_dim3, min(num_systems, len(systems_dim3))
+    )
 
     # Create model instances for each selected system
     models = [getattr(flows, system)() for system in selected_systems]
@@ -356,6 +360,7 @@ def solve_random_systems(
     data = data.permute(1, 0, 2)
 
     return data
+
 
 def get_adjacency_matrix_from_jac(dyn_sys: Union[str, flows.DynSys]):
     """
@@ -410,7 +415,9 @@ def get_adjacency_matrix_from_jac(dyn_sys: Union[str, flows.DynSys]):
     return adj_mat
 
 
-def drive_sin(num_timesteps, num_nodes, node_dim, max_num_periods=10, device=None):
+def drive_sin(
+    num_timesteps, num_nodes, node_dim, max_num_periods=10, device=None
+):
     """
     Generate time series data with sinusoidal dynamics.
 
@@ -460,12 +467,70 @@ def drive_sin(num_timesteps, num_nodes, node_dim, max_num_periods=10, device=Non
 
         if num_nodes > 0:
             max_time = (
-                max_num_periods * 2 * torch.rand((num_nodes, node_dim), device=device)
+                max_num_periods
+                * 2
+                * torch.rand((num_nodes, node_dim), device=device)
             )  # random uniform in [0, 10*2π]
             time_points = torch.from_numpy(
                 np.linspace(0, max_time.numpy(), num_timesteps)
             )
             for i, t in enumerate(time_points):
                 data[i, :, :] = amplitude * torch.sin(t + phase_shift)
+
+        return data
+
+
+def drive_linear(num_timesteps, num_nodes, node_dim, device=None):
+    """
+    Generate time series data with linear dynamics.
+
+    This function creates synthetic time series data where each node follows a linear
+    pattern with randomly generated parameters. Each node can have multiple dimensions,
+    and each dimension will have its own unique linear pattern with different
+    slope (m) and intercept (b).
+
+    The linear pattern follows the formula: y = m*t + b, where t varies from 0 to a
+    randomly chosen maximum time value for each node and dimension.
+
+    Parameters
+    ----------
+    num_timesteps : int
+        Number of time steps to generate.
+    num_nodes : int
+        Number of nodes in the system.
+    node_dim : int
+        Dimension of each node. Each dimension will have its own linear pattern.
+    device : torch.device, optional
+        Device to place the generated tensors on. If None, uses the default device.
+
+    Returns
+    -------
+    torch.Tensor
+        Generated time series data with shape (time, num_nodes, node_dim).
+        Each node-dimension combination follows a unique linear pattern.
+
+    Notes
+    -----
+    - Slopes (m) are randomly sampled from a uniform distribution in [-1, 1]
+    - Intercepts (b) are randomly sampled from a uniform distribution in [-1, 1]
+    - The maximum time value for each node-dimension is randomly sampled from [0, 1],
+      resulting in different rates of change for different node-dimensions
+    """
+    with torch.no_grad():
+        m = (
+            2 * torch.rand((num_nodes, node_dim), device=device) - 1
+        )  # random uniform in [-1, 1]
+        b = (
+            2 * torch.rand((num_nodes, node_dim), device=device) - 1
+        )  # random uniform in [-1, 1]
+        data = torch.zeros((num_timesteps, num_nodes, node_dim), device=device)
+
+        if num_nodes > 0:
+            max_time = torch.rand(
+                (num_nodes, node_dim), device=device
+            )  # random uniform in [0, 1]
+            time_points = np.linspace(0, max_time.numpy(), num_timesteps)
+            for i, t in enumerate(time_points):
+                data[i, :, :] = m * t + b
 
         return data

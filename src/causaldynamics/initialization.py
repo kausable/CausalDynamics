@@ -1,7 +1,12 @@
 import torch
 
 from causaldynamics.scm import get_root_nodes_mask
-from causaldynamics.systems import drive_sin, solve_random_systems, solve_system
+from causaldynamics.systems import (
+    drive_sin,
+    drive_linear,
+    solve_random_systems,
+    solve_system,
+)
 from causaldynamics.utils import allocate_elements_based_on_ratios
 
 
@@ -61,7 +66,9 @@ def initialize_system_and_driver(
         N = num_nodes
         D = node_dim
 
-        n_sys, n_sin = allocate_elements_based_on_ratios(N, init_ratios)
+        n_sys, n_sin, n_linear = allocate_elements_based_on_ratios(
+            N, init_ratios
+        )
 
         if system_name == "random":
             d_sys = solve_random_systems(
@@ -69,12 +76,16 @@ def initialize_system_and_driver(
             )
         else:
             d_sys = solve_system(
-                T, n_sys, system_name, make_trajectory_kwargs=make_trajectory_kwargs
+                T,
+                n_sys,
+                system_name,
+                make_trajectory_kwargs=make_trajectory_kwargs,
             )
 
         d_sin = drive_sin(T, n_sin, D, device=device)
+        d_linear = drive_linear(T, n_linear, D, device=device)
 
-        init = torch.cat((d_sys, d_sin), dim=1)
+        init = torch.cat((d_sys, d_sin, d_linear), dim=1)
         idx = torch.randperm(init.shape[1], device=device)
         init = init[:, idx].contiguous()
 
@@ -143,7 +154,7 @@ def initialize_x(
         x_mean = x.mean(dim=0)
         x_var = x.var(dim=0)
         x = (x - x_mean) / torch.sqrt(x_var)
-        
+
     return x
 
 
@@ -172,7 +183,10 @@ def initialize_biases(
 
 
 def initialize_weights(
-    num_nodes: int, node_dim: int, p_zero: float = 0.0, device: torch.device = None
+    num_nodes: int,
+    node_dim: int,
+    p_zero: float = 0.0,
+    device: torch.device = None,
 ) -> torch.Tensor:
     """
     Initialize weights for neural network nodes using standard normal distribution.

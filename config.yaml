@@ -16,7 +16,7 @@ time_lag: 5
 time_lag_edge_probability: 0.1
 make_trajectory_kwargs:
   noise: 0.1
-init_ratios: [1., 0.2] # Assign root node driver systems ratios: system, periodic
+init_ratios: [1., 0., 0.] # Assign root node driver systems ratios: system, periodic, linear
 
 # Plotting
 plot: True
