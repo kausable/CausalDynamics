@@ -3,7 +3,7 @@ import torch
 from causaldynamics.initialization import initialize_x
 
 
-def propagate_mlp_at_node(x, idx, A, W, b):
+def propagate_mlp_at_node(x, idx, A, W, b, activation=None):
     """
     Perform a single propagation step for a node in the MLP.
 
@@ -20,7 +20,8 @@ def propagate_mlp_at_node(x, idx, A, W, b):
         Weight tensor of shape (num_nodes, node_dim, node_dim).
     b : torch.Tensor
         Bias tensor of shape (num_nodes, node_dim).
-
+    activation : callable, optional
+        Activation function to apply to the result. Default is None.
     Returns
     -------
     torch.Tensor or None
@@ -37,12 +38,17 @@ def propagate_mlp_at_node(x, idx, A, W, b):
         x_sel = x[:, W_idx]
         result = torch.matmul(W_sel, x_sel.unsqueeze(-1)).squeeze(-1) + b_sel
 
+        if activation:
+            result = activation(result)
+
         return result.sum(dim=1).detach()
     else:
         return None
 
 
-def propagate_mlp(A, W, b, init, standardize=False, device=None):
+def propagate_mlp(
+    A, W, b, init, standardize=False, activations=None, device=None
+):
     """
     Propagate initial values through a directed acyclic graph using multi-layer perceptron (MLP).
 
@@ -58,6 +64,10 @@ def propagate_mlp(A, W, b, init, standardize=False, device=None):
         Bias tensor of shape (num_nodes, node_dim) containing bias terms for each node in the MLP.
     init : torch.Tensor
         Initial values tensor of shape (num_timesteps, num_nodes, node_dim).
+    activations : tuple, optional
+        A tuple (act_idx, act_list) where act_idx is a tensor of shape (n,)
+        specifying which activation function to use for each node, and act_list
+        is a list of activation functions.
     standardize : bool, optional
         Whether to standardize the output of the MLP after each node propagation.
         using the internally standardized SCM (iSCM) approach. Default is False.
@@ -80,9 +90,23 @@ def propagate_mlp(A, W, b, init, standardize=False, device=None):
     x = initialize_x(init, A, device=device)
     A = A.T
 
+    if activations is not None:
+        act_idx, act_list = activations
+
+        if act_idx.shape != (n,):
+            raise ValueError(
+                f"act_idx should have shape ({n},), but got {act_idx.shape}."
+            )
+    else:
+        act_idx = None
+        act_list = None
+
     with torch.no_grad():
         for idx in reversed(range(n)):
-            res = propagate_mlp_at_node(x, idx, A, W, b)
+            activation = (
+                act_list[act_idx[idx]] if act_list is not None else None
+            )
+            res = propagate_mlp_at_node(x, idx, A, W, b, activation=activation)
 
             if res is not None:
                 if standardize:

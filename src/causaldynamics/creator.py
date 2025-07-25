@@ -14,6 +14,7 @@ from causaldynamics.initialization import (
     initialize_system_and_driver,
     initialize_weights,
     initialize_x,
+    initialize_activations,
 )
 from causaldynamics.mlp import calculate_magnitudes, propagate_mlp
 from causaldynamics.plot import (
@@ -204,6 +205,8 @@ def simulate_system(
     init: torch.Tensor = None,
     time_lag: int = None,
     standardize: bool = False,
+    activations_names: list = None,
+    activations_p: float = 0.0,
 ) -> xr.DataArray:
     """
     Run the system simulation.
@@ -237,6 +240,10 @@ def simulate_system(
         Time lag for the system. If None, no time lag is used.
     standardize : bool, optional
         Whether to standardize the trajectories creating an iSCM.
+    activations_names : list, optional
+        List of activation function names to sample from uniformly.
+        Names must be keys in ACTIVATION_FUNCTION_MAP.
+        If None, no mlp activation functions are used.
 
     Returns
     -------
@@ -263,7 +270,25 @@ def simulate_system(
 
         init = initialize_x(init, A, standardize=standardize)
 
-    x = propagate_mlp(A=A, W=W, b=b, init=init, standardize=standardize)
+    if activations_names is not None:
+        if time_lag is None:
+            activations = initialize_activations(
+                num_nodes, activation_names=activations_names
+            )
+        else:
+            activations = initialize_activations(
+                num_nodes * 2, activation_names=activations_names
+            )
+    else:
+        activations = None
+    x = propagate_mlp(
+        A=A,
+        W=W,
+        b=b,
+        init=init,
+        standardize=standardize,
+        activations=activations,
+    )
     da = xr.DataArray(x, dims=["time", "node", "dim"])
 
     # if time lag, only return the first node values. The others are just shifted
@@ -411,6 +436,7 @@ def create(
     node_dim: int = 3,
     scm_confounders: bool = False,
     standardize: bool = False,
+    activations_names: list = None,
     graph: str = "scale-free",
     system_name: str = "Lorenz",
     make_trajectory_kwargs: dict = {},
@@ -450,6 +476,10 @@ def create(
         Whether to include confounders in the SCM. Default is False.
     standardize : bool, optional
         Whether to standardize the trajectories. Default is False.
+    activations_names : list, optional
+        List of activation function names to sample from uniformly.
+        Names must be keys in ACTIVATION_FUNCTION_MAP.
+        If None, no mlp activation functions are used.
     graph : str, optional
         Type of graph to generate ('scale-free' or 'all_uniform'). Default is 'scale-free'.
     system_name : str, optional
@@ -531,6 +561,7 @@ def create(
         time_lag=time_lag,
         make_trajectory_kwargs=make_trajectory_kwargs,
         standardize=standardize,
+        activations_names=activations_names,
     )
 
     # Generate plots only if plot is True

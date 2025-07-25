@@ -5,7 +5,8 @@ seed: 0
 num_nodes: 5
 num_timesteps: 100
 node_dim: 3
-standardize: True
+standardize: False
+activations_names: ["identity", "sin", "sigmoid", "tanh", "relu"]
 scm_confounders: True
 graph: "scale-free" # "scale-free" or "all_uniform"
 # Specify a name such as 'Lorenz' corresponding to a dystr dynamical system class
