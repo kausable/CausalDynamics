@@ -1,4 +1,7 @@
 import torch
+from typing import List, Callable
+import torch.nn.functional as F
+import numpy as np
 
 from causaldynamics.scm import get_root_nodes_mask
 from causaldynamics.systems import (
@@ -8,6 +11,16 @@ from causaldynamics.systems import (
     solve_system,
 )
 from causaldynamics.utils import allocate_elements_based_on_ratios
+
+
+# Dictionary mapping function names to actual functions
+ACTIVATION_FUNCTION_MAP = {
+    "identity": lambda x: x,
+    "sin": torch.sin,
+    "sigmoid": torch.sigmoid,
+    "tanh": torch.tanh,
+    "relu": F.relu,
+}
 
 
 def initialize_system_and_driver(
@@ -217,3 +230,102 @@ def initialize_weights(
             weights = weights * mask
 
         return weights
+
+
+def get_activation_functions(function_names: List[str]) -> List[callable]:
+    """
+    Get activation functions by name from the ACTIVATION_FUNCTION_MAP.
+
+    Parameters
+    ----------
+    function_names : List[str]
+        List of function names to look up in the ACTIVATION_FUNCTION_MAP.
+        Valid names are: 'identity', 'sin', 'sigmoid', 'tanh', 'relu'.
+
+    Returns
+    -------
+    List[callable]
+        List of activation functions corresponding to the provided names.
+        If a name is not found in ACTIVATION_FUNCTION_MAP, a warning is printed
+        and the identity function is used as a fallback.
+
+    Examples
+    --------
+    >>> funcs = get_activation_functions(['relu', 'tanh'])
+    >>> len(funcs)
+    2
+    >>> funcs[0] == F.relu
+    True
+    >>> funcs[1] == torch.tanh
+    True
+
+    >>> funcs = get_activation_functions(['invalid'])
+    Warning: Activation function 'invalid' not found. Using identity function instead.
+    >>> funcs[0] == ACTIVATION_FUNCTION_MAP['identity']
+    True
+    """
+    functions = []
+    for name in function_names:
+        if name in ACTIVATION_FUNCTION_MAP:
+            functions.append(ACTIVATION_FUNCTION_MAP[name])
+        else:
+            print(
+                f"Warning: Activation function '{name}' not found. Using identity function instead."
+            )
+            functions.append(ACTIVATION_FUNCTION_MAP["identity"])
+
+    return functions
+
+
+def initialize_activations(
+    n: int, activation_names: List[str] = None, device=None
+):
+    """Initialize activation functions for neural network nodes.
+
+    This function assigns activation functions to each node in a neural network by sampling
+    from a list of activation functions using a geometric distribution. The geometric
+    distribution favors functions that appear earlier in the list.
+
+    Parameters
+    ----------
+    n : int
+        Number of nodes in the network.
+    activation_names : List[str], optional
+        List of activation function names to sample from uniformly.
+        Names must be keys in ACTIVATION_FUNCTION_MAP.
+        If None, returns (None, None). Default is None.
+    device : torch.device or str, optional
+        Device to place the tensors on. Default is None.
+
+    Returns
+    -------
+    tuple
+        A 2-tuple containing:
+        - act_idx : torch.Tensor of shape (n,)
+            Indices into act_funcs array for each node's activation function
+        - act_funcs : numpy.ndarray
+            Array of callable activation functions corresponding to the indices
+
+    Examples
+    --------
+    >>> idx, funcs = initialize_activations(3, ['relu', 'tanh'])
+    >>> idx.shape
+    torch.Size([3])
+    >>> isinstance(funcs, np.ndarray)
+    True
+    >>> len(funcs) == 2
+    True
+    """
+    with torch.no_grad():
+        if activation_names is None:
+            return None, None
+
+        act_funcs = get_activation_functions(activation_names)
+
+        if not isinstance(act_funcs, np.ndarray):
+            act_funcs = np.array(act_funcs)
+
+        # Sample activation indices uniformly using randint
+        act_idx = torch.randint(0, len(act_funcs), (n,), device=device)
+
+        return (act_idx, act_funcs)
