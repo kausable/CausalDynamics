@@ -296,6 +296,7 @@ def solve_random_systems(
     num_systems: int,
     make_trajectory_kwargs: dict = {},
     max_retry: int = 10,
+    return_system_names: bool = False,
 ) -> torch.Tensor:
     """
     Solve multiple random chaotic systems for the given number of timesteps and nodes.
@@ -314,6 +315,9 @@ def solve_random_systems(
         kwargs passed on the dysys.make_trajectory. Default is an empty dict.
     max_retry : int
         Maximum number of retries for a system to integrate before raising an exception
+    return_system_names : bool
+        If True, return the names of the systems that were used to generate the trajectories
+        instead of the trajectories themselves.
 
     Returns
     -------
@@ -359,7 +363,10 @@ def solve_random_systems(
     data = torch.from_numpy(np.array(data)).float()
     data = data.permute(1, 0, 2)
 
-    return data
+    if return_system_names:
+        return data, selected_systems
+    else:
+        return data
 
 
 def get_adjacency_matrix_from_jac(dyn_sys: Union[str, flows.DynSys]):

@@ -5,6 +5,7 @@ import xarray as xr
 
 from causaldynamics.scm import add_root_self_edges
 
+
 def create_output_dataset(
     *,
     adjacency_matrix: np.ndarray = None,
@@ -46,9 +47,13 @@ def create_output_dataset(
             adjacency_matrix.shape if adjacency_matrix is not None else None,
         )
         print(
-            "Saving weights of shape:", weights.shape if weights is not None else None
+            "Saving weights of shape:",
+            weights.shape if weights is not None else None,
         )
-        print("Saving biases of shape:", biases.shape if biases is not None else None)
+        print(
+            "Saving biases of shape:",
+            biases.shape if biases is not None else None,
+        )
         print("Saving time lag:", time_lag)
         print(
             "Saving magnitudes of shape:",
@@ -72,8 +77,14 @@ def create_output_dataset(
         if adjacency_matrix.ndim == 2:
             coords["node_in"] = np.arange(adjacency_matrix.shape[0])
             coords["node_out"] = np.arange(adjacency_matrix.shape[1])
-            data_vars["adjacency_matrix"] = (["node_in", "node_out"], adjacency_matrix)
-            data_vars["adjacency_matrix_summary"] = (["node_in", "node_out"], add_root_self_edges(adjacency_matrix))
+            data_vars["adjacency_matrix"] = (
+                ["node_in", "node_out"],
+                adjacency_matrix,
+            )
+            data_vars["adjacency_matrix_summary"] = (
+                ["node_in", "node_out"],
+                add_root_self_edges(adjacency_matrix),
+            )
         elif adjacency_matrix.ndim == 3:
             A = adjacency_matrix.sum(axis=0)
             # Replace any double edges with single ones in the adjacency matrix
@@ -81,7 +92,10 @@ def create_output_dataset(
             coords["node_in"] = np.arange(A.shape[0])
             coords["node_out"] = np.arange(A.shape[1])
             data_vars["adjacency_matrix"] = (["node_in", "node_out"], A)
-            data_vars["adjacency_matrix_summary"] = (["node_in", "node_out"], add_root_self_edges(A))
+            data_vars["adjacency_matrix_summary"] = (
+                ["node_in", "node_out"],
+                add_root_self_edges(A),
+            )
             data_vars["adjacency_matrix_regular_edges"] = (
                 ["node_in", "node_out"],
                 adjacency_matrix[0],
@@ -105,7 +119,10 @@ def create_output_dataset(
             coords["node"] = np.arange(weights.shape[1])
             coords["dim_in"] = np.arange(weights.shape[2])
             coords["dim_out"] = np.arange(weights.shape[3])
-            data_vars["weights"] = (["lag", "node", "dim_in", "dim_out"], weights)
+            data_vars["weights"] = (
+                ["lag", "node", "dim_in", "dim_out"],
+                weights,
+            )
 
     if biases is not None:
         if time_lag == 0:
@@ -193,7 +210,10 @@ def create_dynsys_dataset(
     if adjacency_matrix is not None:
         coords["dim_in"] = np.arange(adjacency_matrix.shape[0])
         coords["dim_out"] = np.arange(adjacency_matrix.shape[1])
-        data_vars["adjacency_matrix"] = (["dim_in", "dim_out"], adjacency_matrix)
+        data_vars["adjacency_matrix"] = (
+            ["dim_in", "dim_out"],
+            adjacency_matrix,
+        )
 
     if time_series is not None:
         coords["time"] = np.arange(time_series.shape[0])
@@ -239,7 +259,9 @@ def save_xr_dataset(dataset: xr.Dataset, path: str) -> None:
     elif path.suffix == ".zarr":
         dataset.to_zarr(path)
     else:
-        raise ValueError(f"Unsupported file extension: {path}. Options are .nc, .zarr")
+        raise ValueError(
+            f"Unsupported file extension: {path}. Options are .nc, .zarr"
+        )
 
 
 def load_xr_dataset(path: str) -> xr.Dataset:
@@ -263,4 +285,6 @@ def load_xr_dataset(path: str) -> xr.Dataset:
     elif path.suffix == ".zarr":
         return xr.open_zarr(path)
     else:
-        raise ValueError(f"Unsupported file extension: {path}. Options are .nc, .zarr")
+        raise ValueError(
+            f"Unsupported file extension: {path}. Options are .nc, .zarr"
+        )
