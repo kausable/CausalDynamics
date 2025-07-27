@@ -18,7 +18,11 @@ class PCMCIPlus:
         [1] https://github.com/jakobrunge/tigramite/blob/master/tutorials/causal_discovery/tigramite_tutorial_pcmciplus.ipynb
     """
 
-    def __init__(self, tau_max: int = 1, pc_alpha: float = 0.05):
+    def __init__(
+        self, 
+        tau_max: int = 1, 
+        pc_alpha: float = 0.05
+    ):
         """Initialize regressor"""
         super(PCMCIPlus, self).__init__()
         self.tau_max = tau_max
@@ -46,17 +50,23 @@ class FPCMCI:
         [1] https://github.com/lcastri/fpcmci/blob/main/tutorials/02_FPCMCI.ipynb
     """
 
-    def __init__(self, tau_max: int = 1, pc_alpha: float = 0.05):
+    def __init__(
+        self, 
+        tau_max: int = 1, 
+        f_alpha: float = 0.01,
+        pc_alpha: float = 0.01
+    ):
         """Initialize regressor"""
         super(FPCMCI, self).__init__()
         self.tau_max = tau_max
+        self.f_alpha = f_alpha
         self.pc_alpha = pc_alpha
 
     def run(self, X, verbosity: int = 0):
         """Estimate lagged adjacency graph"""
         self.estimator = fpcmci.FPCMCI.FPCMCI(
             Data(X),
-            f_alpha=self.pc_alpha,
+            f_alpha=self.f_alpha,
             pcmci_alpha=self.pc_alpha,
             min_lag=self.tau_max,
             max_lag=self.tau_max,

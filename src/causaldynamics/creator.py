@@ -271,7 +271,7 @@ def simulate_system(
         init = initialize_x(init, A, standardize=standardize)
 
     if activations_names is not None:
-        if time_lag is None:
+        if time_lag is None or time_lag == 0:
             activations = initialize_activations(
                 num_nodes, activation_names=activations_names
             )

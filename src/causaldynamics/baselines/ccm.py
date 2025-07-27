@@ -17,10 +17,16 @@ class TSCI:
         [1] https://github.com/KurtButler/tangentspace
     """
 
-    def __init__(self, tau_max: int = 1, corr_thres: float = 0.8):
+    def __init__(
+        self, 
+        tau_max: int = 1, 
+        embed_dim: int = 2,
+        corr_thres: float = 0.8
+    ):
         """Initialize regressor"""
         super(TSCI, self).__init__()
         self.tau_max = tau_max
+        self.embed_dim = embed_dim
         self.corr_thres = corr_thres
 
     def run(self, X, verbosity: int = 0):
@@ -47,8 +53,8 @@ class TSCI:
         # Get embedding hyperparameters and create delay embeddings
         tau_x = self.tau_max
         tau_y = self.tau_max
-        Q_x = 2  # X embedding dim
-        Q_y = 2  # Y embedding dim
+        Q_x = self.embed_dim  # X embedding dim
+        Q_y = self.embed_dim  # Y embedding dim
 
         x_state = delay_embed(x_signal, tau_x, Q_x)
         y_state = delay_embed(y_signal, tau_y, Q_y)

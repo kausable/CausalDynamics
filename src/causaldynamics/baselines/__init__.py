@@ -3,4 +3,7 @@ from .cuts import CUTSPlus
 from .dynotears import DYNOTEARS
 from .neuralgc import NGC_LSTM
 from .pcmci import FPCMCI, PCMCIPlus
-from .varlingam import VARLiNGAM
+from .varlingam import VARLiNGAM, RCD
+from .gin import GIN
+from .perm import GRASP
+from .tcdf import TCDF

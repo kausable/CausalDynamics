@@ -12,15 +12,21 @@ from causaldynamics.utils import process_confounders
 
 # Edge features
 _init_ratios = {
-    "nonlinear": [1.0, 0.0],
-    "periodic": [1.0, 1.0],
+    "nonlinear": [1.0, 0.0, 0.0],
+    "periodic": [1.0, 1.0, 0.0],
+    "linear": [1.0, 0.0, 1.0],
 }
 
+_mlp_activations = {
+    "none": ["identity"],
+    "mixed": ["identity", "sin", "sigmoid", "tanh", "relu"]
+}
 
 def generate(
     *,
     data_dir: str,
     coupling_n: str,
+    activation_n: str,
     noise: float,
     num_nodes: int,
     confounder: bool,
@@ -40,7 +46,10 @@ def generate(
         Directory containing the time series data and adjacency matrices in a netCDF file.
 
     coupling_n : str
-        The type of coupling between nodes, along edges; e.g., nonlinear, periodic.
+        The type of coupling between nodes, along edges; e.g., nonlinear, periodic, linear.
+
+    activation_n : str
+        The type of edge-level activation function applied to MLP; e.g., none, mixed.
 
     noise : float
         Amplitude of Langevin noise; >0 is an SDE.
@@ -74,6 +83,7 @@ def generate(
         python scripts/generate_coupled.py \
                                             --data_dir data \
                                             --coupling_n nonlinear \
+                                            --activation_n none \
                                             --noise 0.5 \
                                             --num_nodes 3 \
                                             --confounder \
@@ -92,66 +102,68 @@ def generate(
     experiment_dir = (
         Path(data_dir)
         / "coupled"
-        / f"coupling={coupling_n}_noise={noise:.2f}_systems={num_nodes}_confounder={confounder}_standardize={standardize}_timelag={time_lag}"
+        / f"coupling={coupling_n}_noise={noise:.2f}_systems={num_nodes}_confounder={confounder}_standardize={standardize}_timelag={time_lag}_activation={activation_n}"
     )
     experiment_dir.mkdir(parents=True, exist_ok=True)
-
-    # Build the SCM
-    A, W, b, root_nodes, magnitudes = create_scm(
-        num_nodes=num_nodes,
-        node_dim=3,
-        confounders=confounder,
-        graph="scale-free" if num_nodes > 3 else "all_uniform",
-        time_lag=time_lag,
-        time_lag_edge_probability=0.1,
-    )
-
-    # Simulate
-    runs = []
-    for _ in range(num_trajectories):
-        da = simulate_system(
-            A,
-            W,
-            b,
-            num_timesteps=num_timesteps,
+    
+    for seed_id in range(seed):
+        # Build the SCM
+        A, W, b, root_nodes, magnitudes = create_scm(
             num_nodes=num_nodes,
-            init_ratios=_init_ratios[coupling_n],
-            init=None,
-            standardize=standardize,
-            system_name=system_name,
+            node_dim=3,
+            confounders=confounder,
+            graph="scale-free" if num_nodes > 3 else "all_uniform",
             time_lag=time_lag,
-            make_trajectory_kwargs={"resample": True, "noise": noise},
+            time_lag_edge_probability=0.1,
         )
 
-        runs.append(
-            create_output_dataset(
-                adjacency_matrix=A,
-                weights=W,
-                biases=b,
-                magnitudes=magnitudes,
+        # Simulate
+        runs = []
+        for _ in range(num_trajectories):
+            da = simulate_system(
+                A,
+                W,
+                b,
+                num_timesteps=num_timesteps,
+                num_nodes=num_nodes,
+                init_ratios=_init_ratios[coupling_n],
+                init=None,
+                standardize=standardize,
+                system_name=system_name,
                 time_lag=time_lag,
-                time_series=da,
-                root_nodes=root_nodes,
-                verbose=False,
+                activations_names=_mlp_activations[activation_n],
+                make_trajectory_kwargs={"resample": True, "noise": noise},
             )
+
+            runs.append(
+                create_output_dataset(
+                    adjacency_matrix=A,
+                    weights=W,
+                    biases=b,
+                    magnitudes=magnitudes,
+                    time_lag=time_lag,
+                    time_series=da,
+                    root_nodes=root_nodes,
+                    verbose=False,
+                )
+            )
+
+        # Post-processing: data ordering and construction
+        dataset = xr.concat(runs, dim="system", data_vars=["time_series"])
+        dataset["time_series"] = dataset["time_series"].transpose(
+            "time", "system", "node", "dim"
         )
 
-    # Post-processing: data ordering and construction
-    dataset = xr.concat(runs, dim="system", data_vars=["time_series"])
-    dataset["time_series"] = dataset["time_series"].transpose(
-        "time", "system", "node", "dim"
-    )
+        # Post-processing if confounder==True
+        if confounder:
+            dataset = process_confounders(dataset)
 
-    # Post-processing if confounder==True
-    if confounder:
-        dataset = process_confounders(dataset)
-
-    # Save
-    data_path = (
-        experiment_dir
-        / f"data/S{system_name.upper()}_N{num_trajectories}_T{num_timesteps}_seed{seed}.nc"
-    )
-    save_xr_dataset(dataset, data_path)
+        # Save
+        data_path = (
+            experiment_dir
+            / f"data/S{system_name.upper()}_N{num_trajectories}_T{num_timesteps}_seed{seed_id}.nc"
+        )
+        save_xr_dataset(dataset, data_path)
 
 
 if __name__ == "__main__":
@@ -164,6 +176,7 @@ if __name__ == "__main__":
         help="If passed, standardize the trajectories following the iSCM algorithm",
     )
     parser.add_argument("--coupling_n", required=True, choices=list(_init_ratios))
+    parser.add_argument("--activation_n", required=True, choices=list(_mlp_activations))
     parser.add_argument("--noise", type=float, required=True)
     parser.add_argument("--num_nodes", type=int, required=True)
     parser.add_argument(

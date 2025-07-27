@@ -13,10 +13,17 @@ class NGC_LSTM:
         [1] https://github.com/iancovert/Neural-GC/blob/master/clstm_lorenz_demo.ipynb
     """
 
-    def __init__(self, tau_max: int = 1):
+    def __init__(
+        self, 
+        tau_max: int = 1,
+        lam_ridge: float = 1e-2,
+        lr: float = 1e-3
+    ):
         """Initialize regressor"""
         super(NGC_LSTM, self).__init__()
         self.tau_max = tau_max
+        self.lam_ridge = lam_ridge
+        self.lr = lr
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     def run(self, X, verbosity: int = 0, hidden_dim: int = 16):
@@ -30,8 +37,8 @@ class NGC_LSTM:
             context=1,
             tau=self.tau_max,
             lam=10.0,
-            lam_ridge=1e-2,
-            lr=1e-3,
+            lam_ridge=self.lam_ridge,
+            lr=self.lr,
             max_iter=100,
             check_every=1,
             verbose=0,

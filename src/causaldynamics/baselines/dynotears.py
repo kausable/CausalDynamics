@@ -11,14 +11,27 @@ class DYNOTEARS:
         [1] https://github.com/mckinsey/causalnex/blob/develop/causalnex/structure/dynotears.py
     """
 
-    def __init__(self, tau_max: int = 1):
+    def __init__(
+        self, 
+        tau_max: int = 1,
+        lambda_w: float = 0.2,
+        lambda_a: float = 0.1,
+        
+    ):
         """Initialize regressor"""
         super(DYNOTEARS, self).__init__()
         self.tau_max = tau_max
+        self.lambda_w = lambda_w
+        self.lambda_a = lambda_a
 
     def run(self, X, verbosity: int = 0):
         """Estimate lagged adjacency graph"""
-        self.estimator = dynotears.from_pandas_dynamic(pd.DataFrame(X), self.tau_max)
+        self.estimator = dynotears.from_pandas_dynamic(
+            pd.DataFrame(X), 
+            self.tau_max,
+            lambda_w=self.lambda_w,
+            lambda_a=self.lambda_a
+        )
         self.adj_matrix = self._postprocess()
 
     def _postprocess(self):
