@@ -15,7 +15,11 @@ class CUTSPlus:
         [1] https://github.com/jarrycyx/UNN/blob/main/CUTS_Plus/cuts_plus_example.ipynb
     """
 
-    def __init__(self, tau_max: int = 1, corr_thres: float = 0.8):
+    def __init__(
+        self, 
+        tau_max: int = 1, 
+        corr_thres: float = 0.7
+    ):
         """Initialize regressor"""
         super(CUTSPlus, self).__init__()
         self.tau_max = tau_max

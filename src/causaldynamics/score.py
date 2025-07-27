@@ -59,6 +59,9 @@ def score(preds, labs, name="Result"):
     null_model_auroc = roc_auc_score(labs, np.zeros_like(preds))
     null_model_auprc = average_precision_score(labs, np.zeros_like(preds))
 
+    #  Joint SHD: total mismatches over the entire flattened batch
+    joint_shd = np.sum(np.abs((preds >= 0.5).astype(int) - labs.astype(int)))
+
     out = pd.DataFrame(
         [
             joint_auroc,
@@ -67,6 +70,7 @@ def score(preds, labs, name="Result"):
             joint_auprc,
             auprc_ind,
             null_model_auprc,
+            joint_shd
         ],
         columns=[name],
         index=[
@@ -76,6 +80,7 @@ def score(preds, labs, name="Result"):
             "Joint AUPRC",
             "Individual AUPRC",
             "Null AUPRC",
+            "Joint SHD"
         ],
     )
     out.index.name = "Metric"
