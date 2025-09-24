@@ -369,7 +369,9 @@ def solve_random_systems(
         return data
 
 
-def get_adjacency_matrix_from_jac(dyn_sys: Union[str, flows.DynSys]):
+def get_adjacency_matrix_from_jac(
+    dyn_sys: Union[str, flows.DynSys], add_diagonal: bool = True
+):
     """
     Extract the adjacency matrix from the Jacobian of a dynamical system.
 
@@ -382,6 +384,8 @@ def get_adjacency_matrix_from_jac(dyn_sys: Union[str, flows.DynSys]):
     dyn_sys : str or dysts.flows.DynSys
         The dynamical system class name (as string) or instance with a _jac method.
         If _jac is None or not present, the function returns None.
+    add_diagonal : bool, optional
+        Whether to set diagonal elements to 1 (self-loops), by default True.
 
     Returns
     -------
@@ -391,8 +395,8 @@ def get_adjacency_matrix_from_jac(dyn_sys: Union[str, flows.DynSys]):
 
     Notes
     -----
-    The function evaluates the Jacobian at a default point (1,1,1,t=0) with all
-    system parameters set to 1. This is sufficient to determine the structural
+    The function evaluates the Jacobian at a default point (1.1, 1.2, 1.3, t=0) with
+    all system parameters set to 1. This is sufficient to determine the structural
     connectivity of the system.
     """
     if isinstance(dyn_sys, str):
@@ -402,22 +406,19 @@ def get_adjacency_matrix_from_jac(dyn_sys: Union[str, flows.DynSys]):
     if not hasattr(dyn_sys, "_jac") or dyn_sys._jac is None:
         return None
 
-    # Check if the system is 3D by examining the signature of _jac
-    sig = inspect.signature(dyn_sys._jac)
-    params = list(sig.parameters.keys())
-
-    # First 4 parameters are x, y, z, t with values 1, 1, 1, 0
+    # First 4 parameters are x, y, z, t with values 1.1, 1.2, 1.3, 0
     # All remaining parameters are set to 1
-    num_params = len(sig.parameters)
-    args = [1, 1, 1, 0] + [1] * (num_params - 4)
-    jac = dyn_sys._jac(*args)
-
-    # Convert to numpy array
-    jac_array = np.array(jac)
+    args = [1.1, 1.2, 1.3, 0] + [1] * (
+        len(inspect.signature(dyn_sys._jac).parameters) - 4
+    )
+    jac = np.array(dyn_sys._jac(*args))
 
     # Create binary adjacency matrix (1 where Jacobian is non-zero)
-    adj_mat = np.zeros_like(jac_array, dtype=int)
-    adj_mat[jac_array != 0] = 1
+    adj_mat = np.zeros_like(jac, dtype=int)
+    adj_mat[jac != 0] = 1
+
+    if add_diagonal and adj_mat.ndim == 2:
+        np.fill_diagonal(adj_mat, 1)
 
     return adj_mat
 
