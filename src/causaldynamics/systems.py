@@ -369,9 +369,7 @@ def solve_random_systems(
         return data
 
 
-def get_adjacency_matrix_from_jac(
-    dyn_sys: Union[str, flows.DynSys], add_diagonal: bool = True
-):
+def get_adjacency_matrix_from_jac(dyn_sys: Union[str, flows.DynSys]):
     """
     Extract the adjacency matrix from the Jacobian of a dynamical system.
 
@@ -384,8 +382,6 @@ def get_adjacency_matrix_from_jac(
     dyn_sys : str or dysts.flows.DynSys
         The dynamical system class name (as string) or instance with a _jac method.
         If _jac is None or not present, the function returns None.
-    add_diagonal : bool, optional
-        Whether to set diagonal elements to 1 (self-loops), by default True.
 
     Returns
     -------
@@ -416,9 +412,6 @@ def get_adjacency_matrix_from_jac(
     # Create binary adjacency matrix (1 where Jacobian is non-zero)
     adj_mat = np.zeros_like(jac, dtype=int)
     adj_mat[jac != 0] = 1
-
-    if add_diagonal and adj_mat.ndim == 2:
-        np.fill_diagonal(adj_mat, 1)
 
     return adj_mat
 
