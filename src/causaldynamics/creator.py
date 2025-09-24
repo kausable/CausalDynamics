@@ -199,7 +199,7 @@ def simulate_system(
     b,
     num_timesteps: int = None,
     num_nodes: int = None,
-    init_ratios: list = [1.0, 0.0],
+    init_ratios: list = [1.0, 0.0, 0.0],
     system_name: str = None,
     make_trajectory_kwargs: dict = {},
     init: torch.Tensor = None,
@@ -227,7 +227,8 @@ def simulate_system(
         Number of nodes in the system.
     init_ratios: list
         List of root node driver system ratios for chaotic, sin, and linear driver systems.
-        [2, 1] means that twice as many chaotic driver as sin drivers are initialized randomly.
+        [2, 1, 0] means that twice as many chaotic driver as sin drivers 
+        and no linear drivers are initialized randomly.
         Not used if init is provided!
     system_name : str, optional
         Name of the dynamical system to simulate. Use "random" for random systems.
