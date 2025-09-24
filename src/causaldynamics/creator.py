@@ -206,7 +206,6 @@ def simulate_system(
     time_lag: int = None,
     standardize: bool = False,
     activations_names: list = None,
-    activations_p: float = 0.0,
 ) -> xr.DataArray:
     """
     Run the system simulation.
