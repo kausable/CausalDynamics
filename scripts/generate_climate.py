@@ -216,23 +216,33 @@ def generate(*, data_dir: str):
     for decoupled_k, decoupled_v in decoupled_exps.items():
 
         ## Get nonlinear terms
-        nonlinear_modes = ["IOD"]
+        nonlinear_modes = []
 
-        ## Get decoupling indices (except for IOD with nonlinear terms)
+        ## Get decoupling indices
         decoupled_idx = [
             coupled_vars.index(v) for v in decoupled_v if v not in nonlinear_modes
         ]
 
         ## Compute adjacency matrix
         adjacency_matrix = np.ones((len(coupled_vars), len(coupled_vars)))
-        adjacency_matrix[:, decoupled_idx] = 0  # Set child dependency to 0
 
         ## Fit data and simulate
         enso_model = XRO(ncycle=12, ac_order=2)
         enso_fits = enso_model.fit_matrix(
-            train_ds, maskb=nonlinear_modes, maskNT=["T2", "TH"]
+            train_ds, maskb=nonlinear_modes, maskNT=[]
         )
-        enso_fits["Lac"].loc[{"rankx": decoupled_idx}] = 0  ## Decoupling
+
+        ## Decoupling
+        enso_fits["Lac"].loc[{"rankx": decoupled_idx}] = 0 
+        enso_fits["Lac"].loc[{"ranky": decoupled_idx}] = 0 
+        enso_fits["Lcomp"].loc[{"rankx": decoupled_idx}] = 0 
+        enso_fits["Lcomp"].loc[{"ranky": decoupled_idx}] = 0 
+        enso_fits["Lcoef"].loc[{"rankx": decoupled_idx}] = 0 
+        enso_fits["Lcoef"].loc[{"ranky": decoupled_idx}] = 0 
+        adjacency_matrix[:, decoupled_idx] = 0
+        adjacency_matrix[decoupled_idx, :] = 0
+
+        ## Simulate given fitted and modified coefficients
         traj = enso_model.simulate(
             fit_ds=enso_fits,
             X0_ds=train_ds.isel(time=0),
