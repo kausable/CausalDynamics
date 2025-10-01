@@ -1,7 +1,12 @@
 # CausalDynamics: A large-scale benchmark for structural discovery of dynamical causal models
 
+<div align="center">
+  <h3>NeurIPS 2025</h3>
+</div>
+
 
 <div align="center">
+<a href="https://arxiv.org/abs/2505.16620"><img src="https://img.shields.io/badge/ArXiV-2505.16620-b31b1b.svg" alt="arXiv"/></a>
 <a href="http://kausable.github.io/CausalDynamics"><img src="https://img.shields.io/badge/View-Documentation-blue?style=for-the-badge)" alt="Homepage"/></a>
   <!-- <a href="<ADD_LINK>"><img src="https://img.shields.io/badge/ArXiV-2402.00712-b31b1b.svg" alt="arXiv"/></a> -->
 <a href="https://huggingface.co/datasets/kausable/CausalDynamics"><img src="https://img.shields.io/badge/Dataset-HuggingFace-ffd21e" alt="Huggingface Dataset"/></a>
