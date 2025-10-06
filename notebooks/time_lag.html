@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -443,12 +443,12 @@ document.write(`
 tensor([[[0., 0., 0., 0.],
          [1., 0., 0., 0.],
          [0., 1., 0., 0.],
-         [0., 1., 0., 0.]],
+         [1., 0., 0., 0.]],
 
-        [[0., 0., 0., 0.],
+        [[0., 1., 0., 0.],
          [0., 0., 0., 0.],
          [0., 0., 0., 0.],
-         [1., 0., 0., 0.]]])
+         [0., 1., 0., 1.]]])
 </pre></div>
 </div>
 </div>
@@ -464,7 +464,7 @@ tensor([[[0., 0., 0., 0.],
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0., 0., 0., 0.],
         [1., 0., 0., 0.],
         [0., 1., 0., 0.],
-        [0., 1., 0., 0.]])
+        [1., 0., 0., 0.]])
 </pre></div>
 </div>
 </div>
@@ -477,10 +477,10 @@ tensor([[[0., 0., 0., 0.],
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0., 0., 0., 0.],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0., 1., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
-        [1., 0., 0., 0.]])
+        [0., 1., 0., 1.]])
 </pre></div>
 </div>
 </div>
@@ -492,7 +492,7 @@ tensor([[[0., 0., 0., 0.],
             <span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span>
             <span class="n">num_timesteps</span><span class="o">=</span><span class="n">num_timesteps</span><span class="p">,</span>
             <span class="n">num_nodes</span><span class="o">=</span><span class="n">num_nodes</span><span class="p">,</span>
-            <span class="n">init_ratios</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="n">init_ratios</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
             <span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">standardize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">system_name</span><span class="o">=</span><span class="s2">&quot;random&quot;</span><span class="p">,</span>
@@ -519,9 +519,9 @@ tensor([[[0., 0., 0., 0.],
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/48a47c13b56695a8df33f726b8387c65d2df5111743839baef0e48439d26d247.png" src="../_images/48a47c13b56695a8df33f726b8387c65d2df5111743839baef0e48439d26d247.png" />
-<img alt="../_images/1ffb4bff3121344391f42b86c0862ae5ffa4c2fb3001a0249fdefa4cc439c144.png" src="../_images/1ffb4bff3121344391f42b86c0862ae5ffa4c2fb3001a0249fdefa4cc439c144.png" />
-<img alt="../_images/5e707b681311de87b4cb360497a7e6658c31c79d86edf4bb6fd57df8a980a5b7.png" src="../_images/5e707b681311de87b4cb360497a7e6658c31c79d86edf4bb6fd57df8a980a5b7.png" />
+<img alt="../_images/af99d25bbbd4c1a978b866f32bf3bf75dccd454e7fedbe704570b27727afb44a.png" src="../_images/af99d25bbbd4c1a978b866f32bf3bf75dccd454e7fedbe704570b27727afb44a.png" />
+<img alt="../_images/3ff3d1df8041035a7ff43a54312064e167e1e2f85b2a0ea8daaf44a2c2b22b2d.png" src="../_images/3ff3d1df8041035a7ff43a54312064e167e1e2f85b2a0ea8daaf44a2c2b22b2d.png" />
+<img alt="../_images/0e8bd3dbac76a7fbf89da7a48803d4055601c7fd76d6572420db8b0e7ce72027.png" src="../_images/0e8bd3dbac76a7fbf89da7a48803d4055601c7fd76d6572420db8b0e7ce72027.png" />
 </div>
 </div>
 <div class="cell docutils container">

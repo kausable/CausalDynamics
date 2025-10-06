@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -439,7 +439,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 1, 0],
-       [0, 1, 1],
+       [1, 1, 1],
        [1, 1, 1]])
 </pre></div>
 </div>
@@ -458,15 +458,15 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Lorenz&#39;: array([[1, 1, 0],
-        [0, 1, 1],
+        [1, 1, 1],
         [1, 1, 1]]),
  &#39;LorenzBounded&#39;: array(1),
  &#39;Lorenz84&#39;: array([[1, 1, 1],
-        [0, 0, 1],
-        [1, 1, 0]]),
+        [1, 1, 1],
+        [1, 1, 1]]),
  &#39;Rossler&#39;: array([[0, 1, 1],
         [1, 1, 0],
-        [1, 0, 0]]),
+        [1, 0, 1]]),
  &#39;Thomas&#39;: array([[1, 1, 0],
         [0, 1, 1],
         [1, 0, 1]]),
@@ -500,9 +500,9 @@ document.write(`
  &#39;WindmiReduced&#39;: array(1),
  &#39;MooreSpiegel&#39;: array([[0, 1, 0],
         [0, 0, 1],
-        [1, 0, 1]]),
+        [1, 1, 1]]),
  &#39;CoevolvingPredatorPrey&#39;: array(1),
- &#39;KawczynskiStrizhak&#39;: array([[0, 1, 0],
+ &#39;KawczynskiStrizhak&#39;: array([[1, 1, 0],
         [1, 1, 1],
         [1, 0, 1]]),
  &#39;BelousovZhabotinsky&#39;: array(1),
@@ -512,9 +512,9 @@ document.write(`
  &#39;NoseHoover&#39;: array(1),
  &#39;Dadras&#39;: array(1),
  &#39;RikitakeDynamo&#39;: array([[1, 1, 1],
-        [0, 1, 1],
+        [1, 1, 1],
         [1, 1, 0]]),
- &#39;PehlivanWei&#39;: array([[0, 0, 1],
+ &#39;PehlivanWei&#39;: array([[0, 1, 1],
         [1, 1, 1],
         [1, 1, 0]]),
  &#39;SprottTorus&#39;: array([[1, 1, 1],
@@ -587,14 +587,14 @@ document.write(`
  &#39;Coullet&#39;: array([[0, 1, 0],
         [0, 0, 1],
         [1, 1, 1]]),
- &#39;Rucklidge&#39;: array([[1, 0, 1],
+ &#39;Rucklidge&#39;: array([[1, 1, 1],
         [1, 0, 0],
         [0, 1, 1]]),
  &#39;Sakarya&#39;: array([[1, 1, 1],
-        [0, 1, 1],
+        [1, 1, 1],
         [1, 1, 1]]),
  &#39;LiuChen&#39;: array([[1, 1, 1],
-        [0, 1, 1],
+        [1, 1, 1],
         [1, 1, 1]]),
  &#39;RayleighBenard&#39;: array([[1, 1, 0],
         [1, 1, 1],
@@ -611,10 +611,10 @@ document.write(`
         [1, 1, 1],
         [1, 1, 1]]),
  &#39;QiChen&#39;: array([[1, 1, 1],
-        [0, 1, 1],
+        [1, 1, 1],
         [1, 1, 1]]),
  &#39;ZhouChen&#39;: array([[1, 1, 1],
-        [1, 1, 0],
+        [1, 1, 1],
         [1, 1, 1]]),
  &#39;BurkeShaw&#39;: array([[1, 1, 0],
         [1, 1, 1],
@@ -626,25 +626,25 @@ document.write(`
         [1, 1, 1],
         [1, 1, 1]]),
  &#39;WangSun&#39;: array([[1, 1, 1],
-        [0, 1, 1],
+        [1, 1, 1],
         [1, 1, 1]]),
  &#39;YuWang&#39;: array([[1, 1, 0],
-        [0, 0, 1],
+        [1, 0, 1],
         [1, 1, 1]]),
  &#39;YuWang2&#39;: array([[1, 1, 0],
-        [0, 0, 1],
+        [1, 0, 1],
         [1, 1, 1]]),
  &#39;SanUmSrisuchinwong&#39;: array([[1, 1, 0],
         [1, 0, 1],
         [1, 1, 0]]),
- &#39;DequanLi&#39;: array([[0, 1, 1],
-        [0, 1, 1],
+ &#39;DequanLi&#39;: array([[1, 1, 1],
+        [1, 1, 1],
         [1, 1, 1]]),
- &#39;PanXuZhou&#39;: array([[0, 1, 1],
-        [0, 1, 1],
+ &#39;PanXuZhou&#39;: array([[1, 1, 1],
+        [1, 1, 1],
         [1, 1, 1]]),
- &#39;Tsucs2&#39;: array([[0, 1, 1],
-        [0, 1, 1],
+ &#39;Tsucs2&#39;: array([[1, 1, 1],
+        [1, 1, 1],
         [1, 1, 1]]),
  &#39;NewtonLiepnik&#39;: array(1),
  &#39;SaltonSea&#39;: array(1),
@@ -654,15 +654,15 @@ document.write(`
  &#39;Aizawa&#39;: array(1),
  &#39;AnishchenkoAstakhov&#39;: array(1),
  &#39;ShimizuMorioka&#39;: array([[0, 1, 0],
-        [0, 1, 1],
+        [1, 1, 1],
         [1, 0, 1]]),
  &#39;GenesioTesi&#39;: array([[0, 1, 0],
         [0, 0, 1],
         [1, 1, 1]]),
  &#39;AtmosphericRegime&#39;: array(1),
  &#39;Hadley&#39;: array([[1, 1, 1],
-        [0, 0, 1],
-        [1, 1, 0]]),
+        [1, 1, 1],
+        [1, 1, 1]]),
  &#39;ForcedVanDerPol&#39;: array(1),
  &#39;ForcedFitzHughNagumo&#39;: array(1),
  &#39;HindmarshRose&#39;: array(1),
@@ -724,34 +724,38 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Network density (sorted):
+Lorenz84: 1.00
 Halvorsen: 1.00
+Sakarya: 1.00
+LiuChen: 1.00
 LuChenCheng: 1.00
+QiChen: 1.00
+ZhouChen: 1.00
 ChenLee: 1.00
+WangSun: 1.00
+DequanLi: 1.00
+PanXuZhou: 1.00
+Tsucs2: 1.00
+Hadley: 1.00
+Lorenz: 0.89
+RikitakeDynamo: 0.89
 SprottTorus: 0.89
-Sakarya: 0.89
-LiuChen: 0.89
 RayleighBenard: 0.89
 LuChen: 0.89
-QiChen: 0.89
-ZhouChen: 0.89
 Chen: 0.89
-WangSun: 0.89
-Lorenz: 0.78
-RikitakeDynamo: 0.78
+KawczynskiStrizhak: 0.78
+PehlivanWei: 0.78
 SprottG: 0.78
 SprottK: 0.78
 Finance: 0.78
 BurkeShaw: 0.78
-DequanLi: 0.78
-PanXuZhou: 0.78
-Tsucs2: 0.78
+YuWang: 0.78
+YuWang2: 0.78
 Laser: 0.78
-Lorenz84: 0.67
+Rossler: 0.67
 Thomas: 0.67
 ThomasLabyrinth: 0.67
 Chua: 0.67
-KawczynskiStrizhak: 0.67
-PehlivanWei: 0.67
 SprottB: 0.67
 SprottD: 0.67
 SprottF: 0.67
@@ -760,12 +764,11 @@ SprottI: 0.67
 SprottO: 0.67
 SprottP: 0.67
 SprottQ: 0.67
-YuWang: 0.67
-YuWang2: 0.67
+Rucklidge: 0.67
 SanUmSrisuchinwong: 0.67
-Hadley: 0.67
-Rossler: 0.56
+ShimizuMorioka: 0.67
 JerkCircuit: 0.56
+MooreSpiegel: 0.56
 SprottJerk: 0.56
 SprottA: 0.56
 SprottC: 0.56
@@ -778,13 +781,10 @@ SprottR: 0.56
 SprottS: 0.56
 Arneodo: 0.56
 Coullet: 0.56
-Rucklidge: 0.56
-ShimizuMorioka: 0.56
 GenesioTesi: 0.56
 Duffing: 0.44
-MooreSpiegel: 0.44
 
-Average network density: 0.70
+Average network density: 0.75
 </pre></div>
 </div>
 </div>
@@ -868,17 +868,8 @@ Average network density: 0.70
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9f5a1e190b04b46257d8c553134c1ba3517462e8294bf5f55941146b941fd10b.png" src="../_images/9f5a1e190b04b46257d8c553134c1ba3517462e8294bf5f55941146b941fd10b.png" />
-<img alt="../_images/fd7be2151538879a1517b61fb5dfd0165411f2c23835d9d3d57d6afd32f2d4b1.png" src="../_images/fd7be2151538879a1517b61fb5dfd0165411f2c23835d9d3d57d6afd32f2d4b1.png" />
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">Kernel</span> <span class="n">crashed</span> <span class="k">while</span> <span class="n">executing</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">current</span> <span class="n">cell</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">previous</span> <span class="n">cell</span><span class="o">.</span> 
-
-<span class="n">Please</span> <span class="n">review</span> <span class="n">the</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">cell</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">identify</span> <span class="n">a</span> <span class="n">possible</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">failure</span><span class="o">.</span> 
-
-<span class="n">Click</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;https://aka.ms/vscodeJupyterKernelCrash&#39;</span><span class="o">&gt;</span><span class="n">here</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">info</span><span class="o">.</span> 
-
-<span class="n">View</span> <span class="n">Jupyter</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;command:jupyter.viewOutput&#39;</span><span class="o">&gt;</span><span class="n">log</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">further</span> <span class="n">details</span><span class="o">.</span>
-</pre></div>
-</div>
+<img alt="../_images/d7bd6cb37dec8aaaec4a27a8da390ab1001d6baa00842878d236136f04d34fcd.png" src="../_images/d7bd6cb37dec8aaaec4a27a8da390ab1001d6baa00842878d236136f04d34fcd.png" />
+<img alt="../_images/60c6ca2242766a9c817817c6482fda0c90a5fa787ff8deaf0d2d5fa679f5c769.png" src="../_images/60c6ca2242766a9c817817c6482fda0c90a5fa787ff8deaf0d2d5fa679f5c769.png" />
 </div>
 </div>
 </section>

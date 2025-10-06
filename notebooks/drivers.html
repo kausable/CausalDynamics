@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -404,12 +404,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The autoreload extension is already loaded. To reload it, use:
-  %reload_ext autoreload
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -440,7 +434,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.plot.facetgrid.FacetGrid at 0x1073f3be0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.plot.facetgrid.FacetGrid at 0x107634790&gt;
 </pre></div>
 </div>
 <img alt="../_images/43f87630f27e8d36d21abce6877e5e50685ed229800a633ec1d3d2983c35ed67.png" src="../_images/43f87630f27e8d36d21abce6877e5e50685ed229800a633ec1d3d2983c35ed67.png" />
@@ -452,7 +446,7 @@ document.write(`
 <span class="n">num_nodes</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">num_timesteps</span> <span class="o">=</span> <span class="mi">500</span>
 <span class="n">dimensions</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">init_ratios</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="c1"># Set ratios of dynamical systems and periodic drivers at root nodes. Here: equal ratio.</span>
+<span class="n">init_ratios</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="c1"># Set ratios of dynamical systems, periodic drivers and linear drivers at root nodes. Here: equal ratio.</span>
 
 <span class="c1"># Sample the SCM, all hyperoparameters and propagate the Lorenz attractor through the SCM</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">GrowingNetworkWithRedirection</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
@@ -463,6 +457,12 @@ document.write(`
 <span class="n">x</span> <span class="o">=</span> <span class="n">propagate_mlp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init</span><span class="p">)</span>
 <span class="n">root_nodes</span> <span class="o">=</span> <span class="n">get_root_nodes_mask</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 <span class="n">da</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s2">&quot;dim&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/herdeanu/kausable/causaldynamics/.venv/lib/python3.10/site-packages/dysts/base.py:353: UserWarning: This system has at least one unbounded variable, which has been mapped to a bounded domain. Pass argument postprocess=False in order to generate trajectories from the raw system.
+  warnings.warn(
 </pre></div>
 </div>
 </div>
@@ -484,8 +484,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6cb552302dd5cf2c69d2b035c6fcad34c32c563705124848f141969ebe5adf79.png" src="../_images/6cb552302dd5cf2c69d2b035c6fcad34c32c563705124848f141969ebe5adf79.png" />
-<img alt="../_images/25a0e6f7b149b759f58812dbdbbf281b5bc338482474e61e9a2f15c9af20551b.png" src="../_images/25a0e6f7b149b759f58812dbdbbf281b5bc338482474e61e9a2f15c9af20551b.png" />
+<img alt="../_images/52e7de6f8257b7a6ec0ef58e3649f074b35e82e4a85a98c6f0490d27391098e4.png" src="../_images/52e7de6f8257b7a6ec0ef58e3649f074b35e82e4a85a98c6f0490d27391098e4.png" />
+<img alt="../_images/ce351707ea954ccd04d9c990273eefe31549258f7a921c43bce3dcb6ee2107f0.png" src="../_images/ce351707ea954ccd04d9c990273eefe31549258f7a921c43bce3dcb6ee2107f0.png" />
 </div>
 </div>
 

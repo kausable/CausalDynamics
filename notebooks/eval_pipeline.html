@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -412,23 +412,26 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.causaldynamics.scm</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm_graph</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_scm</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.causaldynamics.score</span><span class="w"> </span><span class="kn">import</span> <span class="n">score</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src.causaldynamics.baselines</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCMCIPlus</span><span class="p">,</span> <span class="n">FPCMCI</span><span class="p">,</span> <span class="n">VARLiNGAM</span><span class="p">,</span> <span class="n">DYNOTEARS</span><span class="p">,</span> <span class="n">NGC_LSTM</span><span class="p">,</span> <span class="n">TSCI</span><span class="p">,</span> <span class="n">CUTSPlus</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.scm</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_scm_graph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_scm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.score</span><span class="w"> </span><span class="kn">import</span> <span class="n">score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">causaldynamics.baselines</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCMCIPlus</span><span class="p">,</span> <span class="n">FPCMCI</span><span class="p">,</span> <span class="n">VARLiNGAM</span><span class="p">,</span> <span class="n">DYNOTEARS</span><span class="p">,</span> <span class="n">NGC_LSTM</span><span class="p">,</span> <span class="n">TSCI</span><span class="p">,</span> <span class="n">CUTSPlus</span><span class="p">,</span> <span class="n">RCD</span><span class="p">,</span> <span class="n">GIN</span><span class="p">,</span> <span class="n">GRASP</span><span class="p">,</span> <span class="n">TCDF</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/burg/glab/users/jn2808/.conda/envs/kausal/lib/python3.10/site-packages/jaxtyping/__init__.py:231: UserWarning: jaxtyping version &gt;=0.2.23 should be used with Equinox version &gt;=0.11.1
+  warnings.warn(
 </pre></div>
 </div>
 </div>
@@ -440,7 +443,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Once you have the dataset, either generated or downloaded</span>
 <span class="c1"># Notice that the dataset has `time_series` and `adjacency_matrix` variables.</span>
 <span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/simple/noise=0.00_confounder=False/data&quot;</span><span class="p">)</span>  <span class="c1"># (you can change this to your own path)</span>
-<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;Lorenz84_N10_T1000.nc&quot;</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;Rossler_N10_T1000.nc&quot;</span><span class="p">)</span>
 
 <span class="c1"># Extract timeseries and adjacency matrix as target</span>
 <span class="n">timeseries</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;time_series&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># shape of (N, T, D)</span>
@@ -456,6 +459,434 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Evaluation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>Evaluate TCDF</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TCDF</span>
+<span class="n">tau_max</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">## Estimate adjacency matrix</span>
+<span class="n">tcdf_adj_matrix</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">timeseries</span><span class="p">):</span>
+    <span class="n">tcdf_model</span> <span class="o">=</span> <span class="n">TCDF</span><span class="p">()</span>
+    <span class="n">tcdf_model</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">tcdf_adj_matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">tcdf_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">))</span>
+
+<span class="c1">## Compute scores</span>
+<span class="n">score</span><span class="p">(</span>
+    <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tcdf_adj_matrix</span><span class="p">),</span>
+    <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;TCDF&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:11&lt;00:00,  1.11s/it]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TCDF</th>
+    </tr>
+    <tr>
+      <th>Metric</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Joint AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Individual AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Null AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Joint AUPRC</th>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Individual AUPRC</th>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Null AUPRC</th>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Joint SHD</th>
+      <td>60.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">create_scm_graph</span><span class="p">(</span><span class="n">tcdf_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ec2e21c0501e63106df7fc814d5097c368717909e22ca9e9d96a0d2bfdec824f.png" src="../_images/ec2e21c0501e63106df7fc814d5097c368717909e22ca9e9d96a0d2bfdec824f.png" />
+</div>
+</div>
+<p>Evaluate GRASP</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># GRASP</span>
+<span class="n">tau_max</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">## Estimate adjacency matrix</span>
+<span class="n">grasp_adj_matrix</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">timeseries</span><span class="p">):</span>
+    <span class="n">grasp_model</span> <span class="o">=</span> <span class="n">GRASP</span><span class="p">(</span><span class="n">tau_max</span><span class="o">=</span><span class="n">tau_max</span><span class="p">)</span>
+    <span class="n">grasp_model</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">grasp_adj_matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">grasp_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">))</span>
+
+<span class="c1">## Compute scores</span>
+<span class="n">score</span><span class="p">(</span>
+    <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">grasp_adj_matrix</span><span class="p">),</span>
+    <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;GRASP&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                                                                          | 0/10 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GRaSP completed in: 0.00s 
+
+GRaSP completed in: 0.00s 
+
+GRaSP completed in: 0.00s 
+
+GRaSP completed in: 0.00s 
+GRaSP edge count: 2    
+GRaSP completed in: 0.00s 
+
+GRaSP completed in: 0.00s 
+
+GRaSP completed in: 0.00s 
+
+GRaSP completed in: 0.00s 
+
+GRaSP completed in: 0.00s 
+
+GRaSP completed in: 0.00s 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 250.20it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GRASP</th>
+    </tr>
+    <tr>
+      <th>Metric</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Joint AUROC</th>
+      <td>0.476667</td>
+    </tr>
+    <tr>
+      <th>Individual AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Null AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Joint AUPRC</th>
+      <td>0.684127</td>
+    </tr>
+    <tr>
+      <th>Individual AUPRC</th>
+      <td>0.690476</td>
+    </tr>
+    <tr>
+      <th>Null AUPRC</th>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Joint SHD</th>
+      <td>54.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">create_scm_graph</span><span class="p">(</span><span class="n">grasp_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4e363d520e58f0ab4b70a2ab60d90f6cf920659336e4c005c62db1c474ddc6a4.png" src="../_images/4e363d520e58f0ab4b70a2ab60d90f6cf920659336e4c005c62db1c474ddc6a4.png" />
+</div>
+</div>
+<p>Evaluate GIN</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># GIN</span>
+<span class="n">tau_max</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">## Estimate adjacency matrix</span>
+<span class="n">gin_adj_matrix</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">timeseries</span><span class="p">):</span>
+    <span class="n">gin_model</span> <span class="o">=</span> <span class="n">GIN</span><span class="p">(</span><span class="n">tau_max</span><span class="o">=</span><span class="n">tau_max</span><span class="p">)</span>
+    <span class="n">gin_model</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">gin_adj_matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">gin_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">))</span>
+
+<span class="c1">## Compute scores</span>
+<span class="n">score</span><span class="p">(</span>
+    <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gin_adj_matrix</span><span class="p">),</span>
+    <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;GIN&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:01&lt;00:00,  9.71it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GIN</th>
+    </tr>
+    <tr>
+      <th>Metric</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Joint AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Individual AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Null AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Joint AUPRC</th>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Individual AUPRC</th>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Null AUPRC</th>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Joint SHD</th>
+      <td>60.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">create_scm_graph</span><span class="p">(</span><span class="n">gin_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5b3f778368fa366ff2b7fb7717b6d187f384e09dcbc638f2de3fcb177d92cf0e.png" src="../_images/5b3f778368fa366ff2b7fb7717b6d187f384e09dcbc638f2de3fcb177d92cf0e.png" />
+</div>
+</div>
+<p>Evaluate RCD</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># RCD</span>
+<span class="n">tau_max</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">## Estimate adjacency matrix</span>
+<span class="n">rcd_adj_matrix</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">timeseries</span><span class="p">):</span>
+    <span class="n">rcd_model</span> <span class="o">=</span> <span class="n">RCD</span><span class="p">(</span><span class="n">tau_max</span><span class="o">=</span><span class="n">tau_max</span><span class="p">)</span>
+    <span class="n">rcd_model</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">rcd_adj_matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">rcd_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">))</span>
+
+<span class="c1">## Compute scores</span>
+<span class="n">score</span><span class="p">(</span>
+    <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rcd_adj_matrix</span><span class="p">),</span>
+    <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;RCD&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:02&lt;00:00,  4.44it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RCD</th>
+    </tr>
+    <tr>
+      <th>Metric</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Joint AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Individual AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Null AUROC</th>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>Joint AUPRC</th>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Individual AUPRC</th>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Null AUPRC</th>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Joint SHD</th>
+      <td>60.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">create_scm_graph</span><span class="p">(</span><span class="n">rcd_model</span><span class="o">.</span><span class="n">adj_matrix</span><span class="p">)</span>
+<span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6f32f513598e0fc6ed8df8d48540854b9a31c5e2eefb8a841a4bf0fbc0d765ed.png" src="../_images/6f32f513598e0fc6ed8df8d48540854b9a31c5e2eefb8a841a4bf0fbc0d765ed.png" />
+</div>
+</div>
 <p>Evaluate CUTS+</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -480,7 +911,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:07&lt;00:00,  1.39it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:33&lt;00:00,  3.34s/it]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
@@ -539,6 +970,10 @@ document.write(`
       <th>Null AUPRC</th>
       <td>0.666667</td>
     </tr>
+    <tr>
+      <th>Joint SHD</th>
+      <td>50.000000</td>
+    </tr>
   </tbody>
 </table>
 </div></div></div>
@@ -551,7 +986,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e3527710e4be0826cfa1b6e1ef8876ae9048ae85aef51204c70ba5263f4fe5c6.png" src="../_images/e3527710e4be0826cfa1b6e1ef8876ae9048ae85aef51204c70ba5263f4fe5c6.png" />
+<img alt="../_images/2782ab59a8871b313dd3280c1c0460458434ddf74794c2708e40bfddb5d98ff2.png" src="../_images/2782ab59a8871b313dd3280c1c0460458434ddf74794c2708e40bfddb5d98ff2.png" />
 </div>
 </div>
 <p>Evaluate PCMCI+</p>
@@ -578,10 +1013,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 30.79it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 18.66it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -612,11 +1050,11 @@ document.write(`
   <tbody>
     <tr>
       <th>Joint AUROC</th>
-      <td>0.416667</td>
+      <td>0.666667</td>
     </tr>
     <tr>
       <th>Individual AUROC</th>
-      <td>0.416667</td>
+      <td>0.666667</td>
     </tr>
     <tr>
       <th>Null AUROC</th>
@@ -624,15 +1062,19 @@ document.write(`
     </tr>
     <tr>
       <th>Joint AUPRC</th>
-      <td>0.631944</td>
+      <td>0.750000</td>
     </tr>
     <tr>
       <th>Individual AUPRC</th>
-      <td>0.633135</td>
+      <td>0.750000</td>
     </tr>
     <tr>
       <th>Null AUPRC</th>
       <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Joint SHD</th>
+      <td>20.000000</td>
     </tr>
   </tbody>
 </table>
@@ -646,7 +1088,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2df2cad796006a30a9ed731f6e044ef95f258a6f816c40d0385b20948525c2bc.png" src="../_images/2df2cad796006a30a9ed731f6e044ef95f258a6f816c40d0385b20948525c2bc.png" />
+<img alt="../_images/cf40309ec8f44a97393b4dc11510c7262518409d57c79c2d70776e6ee15270fa.png" src="../_images/cf40309ec8f44a97393b4dc11510c7262518409d57c79c2d70776e6ee15270fa.png" />
 </div>
 </div>
 <p>Evaluate VARLiNGAM</p>
@@ -672,7 +1114,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 24.06it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 23.45it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
@@ -709,11 +1151,11 @@ document.write(`
   <tbody>
     <tr>
       <th>Joint AUROC</th>
-      <td>0.575000</td>
+      <td>0.658333</td>
     </tr>
     <tr>
       <th>Individual AUROC</th>
-      <td>0.575000</td>
+      <td>0.658333</td>
     </tr>
     <tr>
       <th>Null AUROC</th>
@@ -721,15 +1163,19 @@ document.write(`
     </tr>
     <tr>
       <th>Joint AUPRC</th>
-      <td>0.701786</td>
+      <td>0.746195</td>
     </tr>
     <tr>
       <th>Individual AUPRC</th>
-      <td>0.704861</td>
+      <td>0.755258</td>
     </tr>
     <tr>
       <th>Null AUPRC</th>
       <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Joint SHD</th>
+      <td>23.000000</td>
     </tr>
   </tbody>
 </table>
@@ -743,7 +1189,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/68c645c249261683e3e6cb3ccfce7fcbe9f96395ff2a165dcd52bbf2cb5e8805.png" src="../_images/68c645c249261683e3e6cb3ccfce7fcbe9f96395ff2a165dcd52bbf2cb5e8805.png" />
+<img alt="../_images/65726b71132e882abfe3dc555d738d71eb7412a7ae41f2c26a1111d953e198bc.png" src="../_images/65726b71132e882abfe3dc555d738d71eb7412a7ae41f2c26a1111d953e198bc.png" />
 </div>
 </div>
 <p>Evaluate DYNOTEARS</p>
@@ -769,7 +1215,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 68.94it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:00&lt;00:00, 90.10it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
@@ -806,11 +1252,11 @@ document.write(`
   <tbody>
     <tr>
       <th>Joint AUROC</th>
-      <td>0.508333</td>
+      <td>0.733333</td>
     </tr>
     <tr>
       <th>Individual AUROC</th>
-      <td>0.508333</td>
+      <td>0.733333</td>
     </tr>
     <tr>
       <th>Null AUROC</th>
@@ -818,15 +1264,19 @@ document.write(`
     </tr>
     <tr>
       <th>Joint AUPRC</th>
-      <td>0.670401</td>
+      <td>0.789474</td>
     </tr>
     <tr>
       <th>Individual AUPRC</th>
-      <td>0.670635</td>
+      <td>0.792857</td>
     </tr>
     <tr>
       <th>Null AUPRC</th>
       <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Joint SHD</th>
+      <td>16.000000</td>
     </tr>
   </tbody>
 </table>
@@ -840,7 +1290,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/81f1a00c66f06568594c5855e465974673428cf1a7496f8dfb385147df54e75e.png" src="../_images/81f1a00c66f06568594c5855e465974673428cf1a7496f8dfb385147df54e75e.png" />
+<img alt="../_images/e1097cd92a430f6127f089db12fb82de6de2d1c68e72236f0dfe1a7066aecc64.png" src="../_images/e1097cd92a430f6127f089db12fb82de6de2d1c68e72236f0dfe1a7066aecc64.png" />
 </div>
 </div>
 <p>Evaluate NeuralGC (cLSTM)</p>
@@ -866,7 +1316,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:06&lt;00:00,  1.55it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:11&lt;00:00,  1.19s/it]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scoring...
@@ -903,11 +1353,11 @@ document.write(`
   <tbody>
     <tr>
       <th>Joint AUROC</th>
-      <td>0.475000</td>
+      <td>0.500000</td>
     </tr>
     <tr>
       <th>Individual AUROC</th>
-      <td>0.475000</td>
+      <td>0.500000</td>
     </tr>
     <tr>
       <th>Null AUROC</th>
@@ -915,15 +1365,19 @@ document.write(`
     </tr>
     <tr>
       <th>Joint AUPRC</th>
-      <td>0.655747</td>
+      <td>0.666667</td>
     </tr>
     <tr>
       <th>Individual AUPRC</th>
-      <td>0.656845</td>
+      <td>0.666667</td>
     </tr>
     <tr>
       <th>Null AUPRC</th>
       <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>Joint SHD</th>
+      <td>30.000000</td>
     </tr>
   </tbody>
 </table>
@@ -937,7 +1391,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ac5c5b0628aa42605a0244c8030a4aecc0aca6f56ee04d69626335deef8afdbb.png" src="../_images/ac5c5b0628aa42605a0244c8030a4aecc0aca6f56ee04d69626335deef8afdbb.png" />
+<img alt="../_images/ed53060140ab0b9c625dce45938ece424ed1df25448865a42edda513995dc922.png" src="../_images/ed53060140ab0b9c625dce45938ece424ed1df25448865a42edda513995dc922.png" />
 </div>
 </div>
 </section>
