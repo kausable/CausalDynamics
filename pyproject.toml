@@ -41,33 +41,25 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+[project.optional-dependencies]
+tigramite = ["tigramite>=5.2.7.0"]
+fpcmci = ["fpcmci>=4.4.1"]
+lingam = ["lingam>=1.9.1"]
+causalnex = ["causalnex>=0.12.1"]
+
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/causaldynamics"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src/causaldynamics", "/tests", "/README.md", "/LICENSE.txt"]
 
 [project.urls]
 Homepage = "https://kausable.github.io/CausalDynamics"
 Issues = "https://github.com/kausable/CausalDynamics/issues"
-
-[tool.pdm]
-distribution = true
-
-[tool.pdm.resolution.overrides]
-numpy = ">=1.25,<2.0"
-
-[tool.pdm.dev-dependencies]
-lint = [
-    "isort>=5.13.2",
-    "black>=24.10.0",
-    "flake8-pyproject>=1.2.3",
-]
-
-[tool.pdm.optional-dependencies]
-tigramite = ["tigramite>=5.2.7.0"]
-fpcmci = ["fpcmci>=4.4.1"]
-lingam = ["lingam>=1.9.1"]
-idtxl = ["idtxl @ git+https://github.com/pwollstadt/IDTxl.git"]
-causalnex = ["causalnex @ git+https://github.com/mckinsey/causalnex.git@develop"]
 
 [tool.flake8]
 ignore = ['E203']
@@ -101,3 +93,21 @@ ensure_newline_before_comments = true
 
 [dependency-groups]
 dev = ["pre-commit>=4.0.1", "pytest>=8.3.3"]
+lint = [
+    "isort>=5.13.2",
+    "black>=24.10.0",
+    "flake8-pyproject>=1.2.3",
+]
+
+[tool.uv]
+default-groups = ["dev", "lint"]
+override-dependencies = ["numpy>=1.25,<2.0"]
+# DYNOTEARS (causalnex) requires pandas<2, so it is resolved in its own environment.
+conflicts = [
+    [{ extra = "causalnex" }, { extra = "tigramite" }],
+    [{ extra = "causalnex" }, { extra = "fpcmci" }],
+    [{ extra = "causalnex" }, { extra = "lingam" }],
+]
+
+[tool.uv.sources]
+causalnex = { git = "https://github.com/mckinsey/causalnex.git", branch = "develop" }
