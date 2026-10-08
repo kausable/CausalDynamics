@@ -2,4 +2,6 @@ name: causaldynamics-docs-env
 channels: 
   - conda-forge
 dependencies: 
-  - jupyter-book
+  # The website uses the Jupyter Book 1 format (_config.yml, _toc.yml);
+  # Jupyter Book 2 needs a myst.yml and does not build it.
+  - jupyter-book <2
