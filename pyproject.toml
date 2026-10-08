@@ -45,7 +45,10 @@ classifiers = [
 tigramite = ["tigramite>=5.2.7.0"]
 fpcmci = ["fpcmci>=4.4.1"]
 lingam = ["lingam>=1.9.1"]
+causallearn = ["causal-learn>=0.1.4"]
 causalnex = ["causalnex>=0.12.1"]
+# All baselines that can share one environment (DYNOTEARS/causalnex is installed separately)
+baselines = ["causaldynamics[tigramite,fpcmci,lingam,causallearn]"]
 
 [build-system]
 requires = ["hatchling>=1.27"]
@@ -107,6 +110,8 @@ conflicts = [
     [{ extra = "causalnex" }, { extra = "tigramite" }],
     [{ extra = "causalnex" }, { extra = "fpcmci" }],
     [{ extra = "causalnex" }, { extra = "lingam" }],
+    [{ extra = "causalnex" }, { extra = "causallearn" }],
+    [{ extra = "causalnex" }, { extra = "baselines" }],
 ]
 
 [tool.uv.sources]
