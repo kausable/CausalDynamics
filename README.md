@@ -52,20 +52,25 @@ conda activate venv
 pip install causaldynamics
 ```
 
-### Using pdm
-Clone the repository and install it using [pdm](https://pdm-project.org/en/latest/): 
+To run the [baselines](https://kausable.github.io/CausalDynamics/baseline.html), install the optional dependencies:
+
+```bash
+pip install "causaldynamics[baselines]"
+```
+
+### Using uv
+Clone the repository and install it using [uv](https://docs.astral.sh/uv/): 
 
 ```shell
 git clone https://github.com/kausable/CausalDynamics.git
 cd CausalDynamics
-pdm install
+uv sync
 ```
 
 You can test whether the installation succeded by creating some coupled causal model data:
 
 ```shell
-$(pdm venv activate)
-python src/causaldynamics/creator.py --config config.yaml
+uv run python src/causaldynamics/creator.py --config config.yaml
 ```
 
 You find the output at `output/<timestamp>` as default location.
