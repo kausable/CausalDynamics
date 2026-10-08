@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -392,7 +392,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pip">Using pip</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pdm">Using pdm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-uv">Using uv</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
@@ -454,18 +454,21 @@ conda<span class="w"> </span>activate<span class="w"> </span>venv
 pip<span class="w"> </span>install<span class="w"> </span>causaldynamics
 </pre></div>
 </div>
+<p>To run the <a class="reference external" href="https://kausable.github.io/CausalDynamics/baseline.html">baselines</a>, install the optional dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"causaldynamics[baselines]"</span>
+</pre></div>
+</div>
 </section>
-<section id="using-pdm">
-<h3>Using pdm<a class="headerlink" href="#using-pdm" title="Link to this heading">#</a></h3>
-<p>Clone the repository and install it using <a class="reference external" href="https://pdm-project.org/en/latest/">pdm</a>:</p>
+<section id="using-uv">
+<h3>Using uv<a class="headerlink" href="#using-uv" title="Link to this heading">#</a></h3>
+<p>Clone the repository and install it using <a class="reference external" href="https://docs.astral.sh/uv/">uv</a>:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/kausable/CausalDynamics.git
 <span class="nb">cd</span><span class="w"> </span>CausalDynamics
-pdm<span class="w"> </span>install
+uv<span class="w"> </span>sync
 </pre></div>
 </div>
 <p>You can test whether the installation succeded by creating some coupled causal model data:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="k">$(</span>pdm<span class="w"> </span>venv<span class="w"> </span>activate<span class="k">)</span>
-python<span class="w"> </span>src/causaldynamics/creator.py<span class="w"> </span>--config<span class="w"> </span>config.yaml
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>src/causaldynamics/creator.py<span class="w"> </span>--config<span class="w"> </span>config.yaml
 </pre></div>
 </div>
 <p>You find the output at <code class="docutils literal notranslate"><span class="pre">output/&lt;timestamp&gt;</span></code> as default location.</p>
@@ -498,11 +501,12 @@ python<span class="w"> </span>src/causaldynamics/creator.py<span class="w"> </sp
 <section id="citation">
 <h2>Citation<a class="headerlink" href="#citation" title="Link to this heading">#</a></h2>
 <p>If you find any of the code and dataset useful, feel free to acknowledge our work through:</p>
-<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">herdeanu2025causaldynamics</span><span class="p">,</span>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">herdeanu2026causaldynamics</span><span class="p">,</span>
 <span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{CausalDynamics: A large-scale benchmark for structural discovery of dynamical causal models}</span><span class="p">,</span>
 <span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Herdeanu, Benjamin and Nathaniel, Juan and Roesch, Carla and Buch, Jatan and Ramien, Gregor and Haux, Johannes and Gentine, Pierre}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">journal</span><span class="p">=</span><span class="s">{arXiv preprint arXiv:2505.16620}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2025}</span>
+<span class="w">  </span><span class="na">journal</span><span class="p">=</span><span class="s">{Advances in Neural Information Processing Systems}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="p">=</span><span class="s">{38}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2026}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -570,7 +574,7 @@ python<span class="w"> </span>src/causaldynamics/creator.py<span class="w"> </sp
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pip">Using pip</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pdm">Using pdm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-uv">Using uv</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>

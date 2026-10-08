@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -443,7 +443,7 @@ document.write(`
 <span class="n">node_dim</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">num_timesteps</span> <span class="o">=</span> <span class="mi">1000</span>
 
-<span class="n">system_name</span><span class="o">=</span><span class="s1">&#39;Lorenz&#39;</span>
+<span class="n">system_name</span><span class="o">=</span><span class="s1">'Lorenz'</span>
 <span class="n">confounders</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">create_scm</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">node_dim</span><span class="p">,</span> <span class="n">confounders</span><span class="o">=</span><span class="n">confounders</span><span class="p">)</span>
@@ -457,7 +457,7 @@ document.write(`
             <span class="n">data</span><span class="p">,</span>
             <span class="n">A</span><span class="p">,</span>
             <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">,</span>
-            <span class="n">out_dir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span>
+            <span class="n">out_dir</span><span class="o">=</span><span class="s1">'.'</span><span class="p">,</span>
             <span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">save_plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">return_html_anim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -492,8 +492,8 @@ INFO - Generating visualizations
 <span class="n">confounders</span> <span class="o">=</span> <span class="kc">False</span>    <span class="c1"># set to True to add scale-free confounders</span>
 <span class="n">standardize</span> <span class="o">=</span> <span class="kc">False</span>    <span class="c1"># set to True to standardize the data</span>
 <span class="n">init_ratios</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>   <span class="c1"># set ratios of dynamical systems, periodic and linear drivers at root nodes. Here: equal ratio.</span>
-<span class="n">system_name</span><span class="o">=</span><span class="s1">&#39;random&#39;</span>   <span class="c1"># sample random dynamical system for the root nodes</span>
-<span class="n">activations_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;identity&#39;</span><span class="p">,</span> <span class="s1">&#39;sin&#39;</span><span class="p">,</span> <span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span> <span class="s1">&#39;tanh&#39;</span><span class="p">,</span> <span class="s1">&#39;relu&#39;</span><span class="p">]</span>
+<span class="n">system_name</span><span class="o">=</span><span class="s1">'random'</span>   <span class="c1"># sample random dynamical system for the root nodes</span>
+<span class="n">activations_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'identity'</span><span class="p">,</span> <span class="s1">'sin'</span><span class="p">,</span> <span class="s1">'sigmoid'</span><span class="p">,</span> <span class="s1">'tanh'</span><span class="p">,</span> <span class="s1">'relu'</span><span class="p">]</span>
 <span class="n">noise</span> <span class="o">=</span> <span class="mf">0.5</span>            <span class="c1"># set noise for the dynamical systems</span>
 
 <span class="n">time_lag</span> <span class="o">=</span> <span class="mi">10</span>                   <span class="c1"># set time lag for time-lagged edges</span>
@@ -514,7 +514,7 @@ INFO - Generating visualizations
                       <span class="n">time_lag</span><span class="o">=</span><span class="n">time_lag</span><span class="p">,</span>
                       <span class="n">standardize</span><span class="o">=</span><span class="n">standardize</span><span class="p">,</span>
                       <span class="n">activations_names</span><span class="o">=</span><span class="n">activations_names</span><span class="p">,</span>
-                      <span class="n">make_trajectory_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;noise&#39;</span><span class="p">:</span> <span class="n">noise</span><span class="p">})</span> 
+                      <span class="n">make_trajectory_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">'noise'</span><span class="p">:</span> <span class="n">noise</span><span class="p">})</span> 
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
@@ -549,7 +549,7 @@ INFO - Simulating random system for 1000 timesteps...
 <span class="n">N_dimensions</span> <span class="o">=</span> <span class="mi">3</span>
 
 <span class="c1"># Generate Lorenz attractor trajectory</span>
-<span class="n">d_lorenz</span> <span class="o">=</span> <span class="n">solve_system</span><span class="p">(</span><span class="n">N_timesteps</span><span class="p">,</span> <span class="n">N_nodes</span><span class="p">,</span> <span class="s2">&quot;Lorenz&quot;</span><span class="p">)</span>
+<span class="n">d_lorenz</span> <span class="o">=</span> <span class="n">solve_system</span><span class="p">(</span><span class="n">N_timesteps</span><span class="p">,</span> <span class="n">N_nodes</span><span class="p">,</span> <span class="s2">"Lorenz"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -615,7 +615,7 @@ INFO - Simulating random system for 1000 timesteps...
 <span class="n">x</span> <span class="o">=</span> <span class="n">propagate_mlp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init</span><span class="p">)</span>
 
 <span class="c1"># Visualize the results using xarray</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s2">&quot;dim&quot;</span><span class="p">])</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">'time'</span><span class="p">,</span> <span class="s1">'node'</span><span class="p">,</span> <span class="s2">"dim"</span><span class="p">])</span>
 <span class="n">root_nodes</span> <span class="o">=</span> <span class="n">get_root_nodes_mask</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
@@ -637,16 +637,16 @@ INFO - Simulating random system for 1000 timesteps...
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an animation of the simple coupled Lorenz attractor. </span>
 
 <span class="c1"># Increase the animation limit to 50MB</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;animation.embed_limit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span> 
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'animation.embed_limit'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span> 
 
 <span class="n">da_sel</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
-<span class="n">anim</span> <span class="o">=</span> <span class="n">animate_3d_trajectories</span><span class="p">(</span><span class="n">da_sel</span><span class="p">,</span> <span class="n">frame_skip</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">rotate</span><span class="o">=</span><span class="kc">True</span> <span class="p">,</span> <span class="n">show_history</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;subplots&#39;</span><span class="p">,</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animate_3d_trajectories</span><span class="p">(</span><span class="n">da_sel</span><span class="p">,</span> <span class="n">frame_skip</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">rotate</span><span class="o">=</span><span class="kc">True</span> <span class="p">,</span> <span class="n">show_history</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">'subplots'</span><span class="p">,</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">anim</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO - Animation.save using &lt;class &#39;matplotlib.animation.HTMLWriter&#39;&gt;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO - Animation.save using &lt;class 'matplotlib.animation.HTMLWriter'&gt;
 </pre></div>
 </div>
 <div class="output text_html">
@@ -262856,13 +262856,13 @@ AAAAHyBABwAAAADABwjQAQAAAADwAQJ0AAAAAABc3fsfNz5HRFc5wRIAAAAASUVORK5CYII=\
                   <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
 <span class="n">W</span> <span class="o">=</span> <span class="n">initialize_weights</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">initialize_biases</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">)</span>
-<span class="n">init</span> <span class="o">=</span> <span class="n">solve_system</span><span class="p">(</span><span class="n">num_timesteps</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="s2">&quot;Lorenz&quot;</span><span class="p">)</span>
-<span class="n">init2</span> <span class="o">=</span> <span class="n">solve_system</span><span class="p">(</span><span class="n">num_timesteps</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="s2">&quot;Rossler&quot;</span><span class="p">)</span>
+<span class="n">init</span> <span class="o">=</span> <span class="n">solve_system</span><span class="p">(</span><span class="n">num_timesteps</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="s2">"Lorenz"</span><span class="p">)</span>
+<span class="n">init2</span> <span class="o">=</span> <span class="n">solve_system</span><span class="p">(</span><span class="n">num_timesteps</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="s2">"Rossler"</span><span class="p">)</span>
 <span class="n">init</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">init2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="n">init</span> <span class="o">=</span> <span class="n">initialize_x</span><span class="p">(</span><span class="n">init</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">propagate_mlp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init</span><span class="p">)</span>
 <span class="n">root_nodes</span> <span class="o">=</span> <span class="n">get_root_nodes_mask</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s2">&quot;dim&quot;</span><span class="p">])</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">'time'</span><span class="p">,</span> <span class="s1">'node'</span><span class="p">,</span> <span class="s2">"dim"</span><span class="p">])</span>
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
@@ -262886,11 +262886,11 @@ AAAAHyBABwAAAADABwjQAQAAAADwAQJ0AAAAAABc3fsfNz5HRFc5wRIAAAAASUVORK5CYII=\
         <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
 <span class="n">W</span> <span class="o">=</span> <span class="n">initialize_weights</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">initialize_biases</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">)</span>
-<span class="n">init</span> <span class="o">=</span> <span class="n">solve_system</span><span class="p">(</span><span class="n">num_timesteps</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="s2">&quot;Lorenz&quot;</span><span class="p">)</span>
+<span class="n">init</span> <span class="o">=</span> <span class="n">solve_system</span><span class="p">(</span><span class="n">num_timesteps</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="s2">"Lorenz"</span><span class="p">)</span>
 <span class="n">init</span> <span class="o">=</span> <span class="n">initialize_x</span><span class="p">(</span><span class="n">init</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">propagate_mlp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init</span><span class="p">)</span>
 <span class="n">root_nodes</span> <span class="o">=</span> <span class="n">get_root_nodes_mask</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="s2">&quot;dim&quot;</span><span class="p">])</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="s1">'time'</span><span class="p">,</span> <span class="s1">'node'</span><span class="p">,</span> <span class="s2">"dim"</span><span class="p">])</span>
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
 <span class="n">plot_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">root_nodes</span><span class="p">,</span> <span class="n">line_alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>

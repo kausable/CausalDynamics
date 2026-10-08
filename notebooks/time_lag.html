@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -424,13 +424,13 @@ document.write(`
     <span class="n">num_nodes</span><span class="p">,</span>
     <span class="n">node_dim</span><span class="o">=</span><span class="n">node_dim</span><span class="p">,</span>
     <span class="n">confounders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">graph</span><span class="o">=</span><span class="s2">&quot;scale-free&quot;</span><span class="p">,</span>
+    <span class="n">graph</span><span class="o">=</span><span class="s2">"scale-free"</span><span class="p">,</span>
     <span class="n">time_lag</span><span class="o">=</span><span class="n">time_lag</span><span class="p">,</span>
     <span class="n">time_lag_edge_probability</span><span class="o">=</span><span class="n">time_lag_edge_probability</span>
 <span class="p">)</span>
 
 <span class="c1"># Print the adjacency matrix</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A has the shape </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> representing (lag, num_nodes, node_dim&#39;)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"A has the shape </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> representing (lag, num_nodes, node_dim')"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -439,7 +439,7 @@ document.write(`
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO - Creating SCM with 4 nodes and 3 dimensions each...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A has the shape torch.Size([2, 4, 4]) representing (lag, num_nodes, node_dim&#39;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A has the shape torch.Size([2, 4, 4]) representing (lag, num_nodes, node_dim')
 tensor([[[0., 0., 0., 0.],
          [1., 0., 0., 0.],
          [0., 1., 0., 0.],
@@ -455,7 +455,7 @@ tensor([[[0., 0., 0., 0.],
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s have a look at the adjacency matrix without time-lag edges:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let's have a look at the adjacency matrix without time-lag edges:</span>
 <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -495,9 +495,9 @@ tensor([[[0., 0., 0., 0.],
             <span class="n">init_ratios</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
             <span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">standardize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">system_name</span><span class="o">=</span><span class="s2">&quot;random&quot;</span><span class="p">,</span>
+            <span class="n">system_name</span><span class="o">=</span><span class="s2">"random"</span><span class="p">,</span>
             <span class="n">time_lag</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">make_trajectory_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;resample&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;noise&quot;</span><span class="p">:</span> <span class="mf">0.</span><span class="p">}</span>
+            <span class="n">make_trajectory_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">"resample"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"noise"</span><span class="p">:</span> <span class="mf">0.</span><span class="p">}</span>
         <span class="p">)</span>
 </pre></div>
 </div>
@@ -527,8 +527,8 @@ tensor([[[0., 0., 0., 0.],
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Animate the trajectories (takes a while to run...)</span>
-<span class="c1"># mpl.rcParams[&#39;animation.embed_limit&#39;] = 50 * 1024**2  # Increase the memory limit to 50MB</span>
-<span class="c1"># anim = animate_3d_trajectories(da, frame_skip=5, rotation_speed=0.2, rotate=True , show_history=True, plot_type=&#39;subplots&#39;, root_nodes=root_nodes)</span>
+<span class="c1"># mpl.rcParams['animation.embed_limit'] = 50 * 1024**2  # Increase the memory limit to 50MB</span>
+<span class="c1"># anim = animate_3d_trajectories(da, frame_skip=5, rotation_speed=0.2, rotate=True , show_history=True, plot_type='subplots', root_nodes=root_nodes)</span>
 <span class="c1"># display(anim)</span>
 </pre></div>
 </div>

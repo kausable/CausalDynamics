@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -418,7 +418,7 @@ document.write(`
 <span class="n">node_dim</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">num_timesteps</span> <span class="o">=</span> <span class="mi">200</span>
 
-<span class="n">system_name</span><span class="o">=</span><span class="s1">&#39;random&#39;</span>
+<span class="n">system_name</span><span class="o">=</span><span class="s1">'random'</span>
 <span class="n">confounders</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># Create the coupled structural causal model</span>
@@ -443,11 +443,11 @@ INFO - Simulating random system for 200 timesteps...
   warnings.warn(
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={&#39;center&#39;: &#39;Node 0&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 1&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Node 2&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 3&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;,
- &lt;Axes3D: title={&#39;center&#39;: &#39;Root node 4&#39;}, xlabel=&#39;X&#39;, ylabel=&#39;Y&#39;, zlabel=&#39;Z&#39;&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes3D: title={'center': 'Node 0'}, xlabel='X', ylabel='Y', zlabel='Z'&gt;,
+ &lt;Axes3D: title={'center': 'Root node 1'}, xlabel='X', ylabel='Y', zlabel='Z'&gt;,
+ &lt;Axes3D: title={'center': 'Node 2'}, xlabel='X', ylabel='Y', zlabel='Z'&gt;,
+ &lt;Axes3D: title={'center': 'Root node 3'}, xlabel='X', ylabel='Y', zlabel='Z'&gt;,
+ &lt;Axes3D: title={'center': 'Root node 4'}, xlabel='X', ylabel='Y', zlabel='Z'&gt;)
 </pre></div>
 </div>
 <img alt="../_images/b0fa359c0c30008f9e9e441132287ecce6a5c7c0ca554bdd44d98c983979f305.png" src="../_images/b0fa359c0c30008f9e9e441132287ecce6a5c7c0ca554bdd44d98c983979f305.png" />
@@ -462,11 +462,11 @@ INFO - Simulating random system for 200 timesteps...
 
 <span class="c1"># Creating an animation of the trajectories. </span>
 <span class="c1"># This may take a while to run...</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;animation.embed_limit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># Increase the memory limit to 50MB</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"animation.embed_limit"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># Increase the memory limit to 50MB</span>
 
 <span class="n">animate_3d_trajectories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> 
                         <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">,</span> 
-                        <span class="n">plot_type</span><span class="o">=</span><span class="s2">&quot;subplots&quot;</span><span class="p">,</span>
+                        <span class="n">plot_type</span><span class="o">=</span><span class="s2">"subplots"</span><span class="p">,</span>
                         <span class="n">frame_skip</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
                         <span class="n">rotation_speed</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> 
                         <span class="n">rotate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
@@ -481,7 +481,7 @@ INFO - Simulating random system for 200 timesteps...
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO - Animation.save using &lt;class &#39;matplotlib.animation.HTMLWriter&#39;&gt;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO - Animation.save using &lt;class 'matplotlib.animation.HTMLWriter'&gt;
 </pre></div>
 </div>
 <div class="output text_html">

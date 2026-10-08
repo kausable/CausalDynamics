@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -421,7 +421,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: Update the path to the data</span>
-<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;../output/20250509_174743/data/SLorenz_N5_T300_seedNone.nc&quot;</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"../output/20250509_174743/data/SLorenz_N5_T300_seedNone.nc"</span><span class="p">)</span>
 <span class="n">ds</span>
 </pre></div>
 </div>
@@ -891,7 +891,7 @@ Data variables:
 <p>The data is stored in the <code class="docutils literal notranslate"><span class="pre">Data</span> <span class="pre">variables</span></code>. To get the data, e.g. the time_series, you can index it like a dictionary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_series</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;time_series&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_series</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"time_series"</span><span class="p">]</span>
 <span class="n">time_series</span> 
 </pre></div>
 </div>
@@ -1352,8 +1352,8 @@ Coordinates:
 <p>Let’s plot the time series.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">root_nodes</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;root_nodes&quot;</span><span class="p">]</span>
-<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">root_node_color</span><span class="o">=</span><span class="s2">&quot;dimgrey&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">root_nodes</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"root_nodes"</span><span class="p">]</span>
+<span class="n">plot_trajectories</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">"orange"</span><span class="p">,</span> <span class="n">root_node_color</span><span class="o">=</span><span class="s2">"dimgrey"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1367,7 +1367,7 @@ Coordinates:
 <p>The adjacency matrix encodes the SCM graph structure. The first dimension are the incoming nodes and the second dimension are the outgoing nodes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;adjacency_matrix&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"adjacency_matrix"</span><span class="p">]</span>
 <span class="n">A</span>
 </pre></div>
 </div>
@@ -1761,7 +1761,7 @@ Coordinates:
 <p>Note: The <code class="docutils literal notranslate"><span class="pre">adjacency_matrix_summary</span></code> is especially relevant for causal discovery algorithms.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_summary</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;adjacency_matrix_summary&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_summary</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">"adjacency_matrix_summary"</span><span class="p">]</span>
 <span class="n">A_summary</span>
 </pre></div>
 </div>
@@ -2206,7 +2206,7 @@ node_in node_out
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes: title={&#39;center&#39;: &#39;Structural Causal Model&#39;}&gt;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Axes: title={'center': 'Structural Causal Model'}&gt;,
  {0: array([0.8812986, 0.9558141]),
   1: array([ 0.20354476, -0.10179732]),
   2: array([-0.94359961,  0.58761031]),
@@ -2221,11 +2221,11 @@ node_in node_out
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating an animation of the trajectories. </span>
 <span class="c1"># This may take a while to run...</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;animation.embed_limit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># Increase the limit to 50MB</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"animation.embed_limit"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># Increase the limit to 50MB</span>
 
 <span class="n">animate_3d_trajectories</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> 
                         <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">,</span> 
-                        <span class="n">plot_type</span><span class="o">=</span><span class="s2">&quot;subplots&quot;</span><span class="p">,</span>
+                        <span class="n">plot_type</span><span class="o">=</span><span class="s2">"subplots"</span><span class="p">,</span>
                         <span class="n">frame_skip</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
                         <span class="n">rotation_speed</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> 
                         <span class="n">rotate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 

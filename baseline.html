@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -387,6 +387,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models">Models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 </ul>
             </nav>
         </div>
@@ -408,15 +409,35 @@ document.write(`
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> PCMCI+: <a class="github reference external" href="https://github.com/jakobrunge/tigramite">jakobrunge/tigramite</a></p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> FPCMCI: <a class="github reference external" href="https://github.com/lcastri/fpcmci">lcastri/fpcmci</a></p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> VARLiNGAM: <a class="github reference external" href="https://github.com/cdt15/lingam">cdt15/lingam</a></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> RCD: <a class="github reference external" href="https://github.com/py-why/causal-learn">py-why/causal-learn</a></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> GIN: <a class="github reference external" href="https://github.com/py-why/causal-learn">py-why/causal-learn</a></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> GRaSP: <a class="github reference external" href="https://github.com/py-why/causal-learn">py-why/causal-learn</a></p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> DYNOTEARS: <a class="github reference external" href="https://github.com/mckinsey/causalnex">mckinsey/causalnex</a></p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Neural GC: <a class="github reference external" href="https://github.com/iancovert/Neural-GC">iancovert/Neural-GC</a></p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> CUTS+: <a class="github reference external" href="https://github.com/jarrycyx/unn">jarrycyx/unn</a></p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> TSCI: <a class="github reference external" href="https://github.com/KurtButler/tangentspace">KurtButler/tangentspace</a></p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> TCDF: <a class="github reference external" href="https://github.com/M-Nauta/TCDF">M-Nauta/TCDF</a></p></li>
 </ul>
 </section>
 <section id="metrics">
 <h2>Metrics<a class="headerlink" href="#metrics" title="Link to this heading">#</a></h2>
-<p>We use <code class="docutils literal notranslate"><span class="pre">AUROC</span></code> and <code class="docutils literal notranslate"><span class="pre">AUPRC</span></code> scores to evaluate the accuracy of discoverd summary graph.</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">AUROC</span></code> and <code class="docutils literal notranslate"><span class="pre">AUPRC</span></code> scores to evaluate the accuracy of discoverd summary graph. The structural Hamming distance (<code class="docutils literal notranslate"><span class="pre">SHD</span></code>) of the thresholded graph is reported as well.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>The baselines need optional dependencies. Install them with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"causaldynamics[baselines]"</span>
+<span class="c1"># FPCMCI and PCMCI+ also need IDTxl, which is only available from GitHub</span>
+pip<span class="w"> </span>install<span class="w"> </span>cython
+pip<span class="w"> </span>install<span class="w"> </span>--no-build-isolation<span class="w"> </span>git+https://github.com/pwollstadt/IDTxl.git
+</pre></div>
+</div>
+<p>DYNOTEARS (<code class="docutils literal notranslate"><span class="pre">causalnex</span></code>) requires <code class="docutils literal notranslate"><span class="pre">pandas&lt;2</span></code> and an outdated <code class="docutils literal notranslate"><span class="pre">numpy</span></code> pin, so install it in a separate environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>causaldynamics<span class="w"> </span><span class="s2">"pandas&lt;2"</span><span class="w"> </span><span class="s2">"pgmpy&lt;0.1.20"</span><span class="w"> </span>pathos<span class="w"> </span>pyvis
+pip<span class="w"> </span>install<span class="w"> </span>--no-deps<span class="w"> </span><span class="s2">"causalnex @ git+https://github.com/mckinsey/causalnex.git@develop"</span>
+</pre></div>
+</div>
+<p>From a clone of the repository, use <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span> <span class="pre">--extra</span> <span class="pre">baselines</span> <span class="pre">--group</span> <span class="pre">idtxl</span></code>, or <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span> <span class="pre">--group</span> <span class="pre">causalnex</span></code> for DYNOTEARS. These install the exact versions from <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code>.</p>
 </section>
 </section>
 
@@ -486,6 +507,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models">Models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 </ul>
   </nav></div>
 

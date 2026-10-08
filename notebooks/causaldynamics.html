@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -426,7 +426,7 @@ document.write(`
 <span class="n">num_timesteps</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="n">confounders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="n">system_name</span><span class="o">=</span><span class="s1">&#39;Lorenz&#39;</span>
+<span class="n">system_name</span><span class="o">=</span><span class="s1">'Lorenz'</span>
 
 <span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
@@ -508,7 +508,7 @@ INFO - Simulating Lorenz system for 1000 timesteps...
     <span class="n">num_nodes</span><span class="p">,</span>
     <span class="n">node_dim</span><span class="o">=</span><span class="n">node_dim</span><span class="p">,</span>
     <span class="n">confounders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">graph</span><span class="o">=</span><span class="s2">&quot;scale-free&quot;</span><span class="p">,</span>
+    <span class="n">graph</span><span class="o">=</span><span class="s2">"scale-free"</span><span class="p">,</span>
     <span class="n">time_lag</span><span class="o">=</span><span class="n">time_lag</span><span class="p">,</span>
     <span class="n">time_lag_edge_probability</span><span class="o">=</span><span class="n">time_lag_edge_probability</span>
 <span class="p">)</span>
@@ -547,7 +547,7 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 <span class="n">noise</span> <span class="o">=</span> <span class="mf">1.</span>
 
 <span class="n">confounders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="n">system_name</span><span class="o">=</span><span class="s1">&#39;Lorenz&#39;</span>
+<span class="n">system_name</span><span class="o">=</span><span class="s1">'Lorenz'</span>
 
 <span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
@@ -562,7 +562,7 @@ INFO - Simulating Lorenz system for 1000 timesteps...
                       <span class="n">num_timesteps</span><span class="o">=</span><span class="n">num_timesteps</span><span class="p">,</span> 
                       <span class="n">num_nodes</span><span class="o">=</span><span class="n">num_nodes</span><span class="p">,</span>
                       <span class="n">system_name</span><span class="o">=</span><span class="n">system_name</span><span class="p">,</span>
-                      <span class="n">make_trajectory_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;noise&#39;</span><span class="p">:</span> <span class="n">noise</span><span class="p">})</span> 
+                      <span class="n">make_trajectory_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">'noise'</span><span class="p">:</span> <span class="n">noise</span><span class="p">})</span> 
 
 
 <span class="n">plot_scm</span><span class="p">(</span><span class="n">G</span><span class="o">=</span><span class="n">create_scm_graph</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">root_nodes</span><span class="o">=</span><span class="n">root_nodes</span><span class="p">)</span>
@@ -592,7 +592,7 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 <span class="n">num_timesteps</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="n">confounders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="n">system_name</span><span class="o">=</span><span class="s1">&#39;Lorenz&#39;</span>
+<span class="n">system_name</span><span class="o">=</span><span class="s1">'Lorenz'</span>
 
 <span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
@@ -637,7 +637,7 @@ INFO - Simulating Lorenz system for 1000 timesteps...
 <span class="n">standardize</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">confounders</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="n">system_name</span><span class="o">=</span><span class="s1">&#39;Lorenz&#39;</span>
+<span class="n">system_name</span><span class="o">=</span><span class="s1">'Lorenz'</span>
 
 <span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>

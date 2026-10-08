@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -425,7 +425,7 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -442,16 +442,16 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Once you have the dataset, either generated or downloaded</span>
 <span class="c1"># Notice that the dataset has `time_series` and `adjacency_matrix` variables.</span>
-<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data/simple/noise=0.00_confounder=False/data&quot;</span><span class="p">)</span>  <span class="c1"># (you can change this to your own path)</span>
-<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;Rossler_N10_T1000.nc&quot;</span><span class="p">)</span>
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"../data/simple/noise=0.00_confounder=False/data"</span><span class="p">)</span>  <span class="c1"># (you can change this to your own path)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">"Rossler_N10_T1000.nc"</span><span class="p">)</span>
 
 <span class="c1"># Extract timeseries and adjacency matrix as target</span>
-<span class="n">timeseries</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;time_series&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># shape of (N, T, D)</span>
-<span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">&#39;adjacency_matrix&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">timeseries</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">'time_series'</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># shape of (N, T, D)</span>
+<span class="n">adj_matrix</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s1">'adjacency_matrix'</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 
-<span class="c1"># NOTE: If dataset is from coupled system e.g., &quot;../data/coupled/...&quot;, follow these changes to load the data:</span>
-<span class="c1">## timeseries = ds[&#39;time_series&#39;].to_numpy()[..., 0].transpose(1, 0, 2) ## select the first dimension of each multidimensional node</span>
-<span class="c1">## adj_matrix = ds[&#39;adjacency_matrix_summary&#39;].to_numpy() ## `adjacency_matrix_summary` is the true adjacency matrix for coupled system</span>
+<span class="c1"># NOTE: If dataset is from coupled system e.g., "../data/coupled/...", follow these changes to load the data:</span>
+<span class="c1">## timeseries = ds['time_series'].to_numpy()[..., 0].transpose(1, 0, 2) ## select the first dimension of each multidimensional node</span>
+<span class="c1">## adj_matrix = ds['adjacency_matrix_summary'].to_numpy() ## `adjacency_matrix_summary` is the true adjacency matrix for coupled system</span>
 </pre></div>
 </div>
 </div>
@@ -476,7 +476,7 @@ document.write(`
 <span class="n">score</span><span class="p">(</span>
     <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tcdf_adj_matrix</span><span class="p">),</span>
     <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;TCDF&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'TCDF'</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -577,7 +577,7 @@ document.write(`
 <span class="n">score</span><span class="p">(</span>
     <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">grasp_adj_matrix</span><span class="p">),</span>
     <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;GRASP&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'GRASP'</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -702,7 +702,7 @@ GRaSP completed in: 0.00s
 <span class="n">score</span><span class="p">(</span>
     <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gin_adj_matrix</span><span class="p">),</span>
     <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;GIN&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'GIN'</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -803,7 +803,7 @@ GRaSP completed in: 0.00s
 <span class="n">score</span><span class="p">(</span>
     <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rcd_adj_matrix</span><span class="p">),</span>
     <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;RCD&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'RCD'</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -905,7 +905,7 @@ GRaSP completed in: 0.00s
 <span class="n">score</span><span class="p">(</span>
     <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cuts_adj_matrix</span><span class="p">),</span>
     <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CUTS+&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'CUTS+'</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1007,7 +1007,7 @@ GRaSP completed in: 0.00s
 <span class="n">score</span><span class="p">(</span>
     <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pcmci_plus_adj_matrix</span><span class="p">),</span>
     <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;PCMCI+&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'PCMCI+'</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1108,7 +1108,7 @@ GRaSP completed in: 0.00s
 <span class="n">score</span><span class="p">(</span>
     <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">varlingam_adj_matrix</span><span class="p">),</span>
     <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;VARLiNGAM&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'VARLiNGAM'</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1209,7 +1209,7 @@ GRaSP completed in: 0.00s
 <span class="n">score</span><span class="p">(</span>
     <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dynotears_adj_matrix</span><span class="p">),</span>
     <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;DYNOTEARS&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'DYNOTEARS'</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1310,7 +1310,7 @@ GRaSP completed in: 0.00s
 <span class="n">score</span><span class="p">(</span>
     <span class="n">preds</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">clstm_adj_matrix</span><span class="p">),</span>
     <span class="n">labs</span><span class="o">=</span> <span class="n">adj_matrix</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cLSTM&#39;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'cLSTM'</span>
 <span class="p">)</span>
 </pre></div>
 </div>

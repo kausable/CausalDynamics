@@ -52,20 +52,25 @@ conda activate venv
 pip install causaldynamics
 ```
 
-### Using pdm
-Clone the repository and install it using [pdm](https://pdm-project.org/en/latest/): 
+To run the [baselines](https://kausable.github.io/CausalDynamics/baseline.html), install the optional dependencies:
+
+```bash
+pip install "causaldynamics[baselines]"
+```
+
+### Using uv
+Clone the repository and install it using [uv](https://docs.astral.sh/uv/): 
 
 ```shell
 git clone https://github.com/kausable/CausalDynamics.git
 cd CausalDynamics
-pdm install
+uv sync
 ```
 
 You can test whether the installation succeded by creating some coupled causal model data:
 
 ```shell
-$(pdm venv activate)
-python src/causaldynamics/creator.py --config config.yaml
+uv run python src/causaldynamics/creator.py --config config.yaml
 ```
 
 You find the output at `output/<timestamp>` as default location.
@@ -91,10 +96,11 @@ You find the output at `output/<timestamp>` as default location.
 If you find any of the code and dataset useful, feel free to acknowledge our work through:
 
 ```bibtex
-@article{herdeanu2025causaldynamics,
+@article{herdeanu2026causaldynamics,
   title={CausalDynamics: A large-scale benchmark for structural discovery of dynamical causal models},
   author={Herdeanu, Benjamin and Nathaniel, Juan and Roesch, Carla and Buch, Jatan and Ramien, Gregor and Haux, Johannes and Gentine, Pierre},
-  journal={arXiv preprint arXiv:2505.16620},
-  year={2025}
+  journal={Advances in Neural Information Processing Systems},
+  volume={38},
+  year={2026}
 }
 ```
