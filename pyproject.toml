@@ -46,7 +46,6 @@ tigramite = ["tigramite>=5.2.7.0"]
 fpcmci = ["fpcmci>=4.4.1", "dcor<0.7"]
 lingam = ["lingam>=1.9.1"]
 causallearn = ["causal-learn>=0.1.4"]
-causalnex = ["causalnex>=0.12.1"]
 # All baselines that can share one environment (DYNOTEARS/causalnex is installed separately)
 baselines = ["causaldynamics[tigramite,fpcmci,lingam,causallearn]"]
 
@@ -99,6 +98,10 @@ dev = ["pre-commit>=4.0.1", "pytest>=8.3.3"]
 # fpcmci imports idtxl without declaring it; idtxl is only available from
 # GitHub, so it cannot be part of the published extras.
 idtxl = ["idtxl"]
+# causalnex (DYNOTEARS) declares numpy<1.24 and pandas<2, which conflicts with the
+# core dependencies. It only installs with the numpy override below, which pip cannot
+# apply, so it is a uv-only group instead of a published extra.
+causalnex = ["causalnex"]
 lint = [
     "isort>=5.13.2",
     "black>=25.1.0",
@@ -110,11 +113,12 @@ default-groups = ["dev", "lint"]
 override-dependencies = ["numpy>=1.25,<2.0"]
 # DYNOTEARS (causalnex) requires pandas<2, so it is resolved in its own environment.
 conflicts = [
-    [{ extra = "causalnex" }, { extra = "tigramite" }],
-    [{ extra = "causalnex" }, { extra = "fpcmci" }],
-    [{ extra = "causalnex" }, { extra = "lingam" }],
-    [{ extra = "causalnex" }, { extra = "causallearn" }],
-    [{ extra = "causalnex" }, { extra = "baselines" }],
+    [{ group = "causalnex" }, { extra = "tigramite" }],
+    [{ group = "causalnex" }, { extra = "fpcmci" }],
+    [{ group = "causalnex" }, { extra = "lingam" }],
+    [{ group = "causalnex" }, { extra = "causallearn" }],
+    [{ group = "causalnex" }, { extra = "baselines" }],
+    [{ group = "causalnex" }, { group = "idtxl" }],
 ]
 
 [tool.uv.extra-build-dependencies]
