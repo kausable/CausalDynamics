@@ -243,7 +243,6 @@ name = "causaldynamics"
 version = "1.0.0"
 source = { editable = "." }
 dependencies = [
-    { name = "black" },
     { name = "dysts" },
     { name = "einops" },
     { name = "ipywidgets" },
@@ -305,7 +304,6 @@ lint = [
 
 [package.metadata]
 requires-dist = [
-    { name = "black", specifier = ">=25.1.0" },
     { name = "causal-learn", marker = "extra == 'causallearn'", specifier = ">=0.1.4" },
     { name = "causaldynamics", extras = ["tigramite", "fpcmci", "lingam", "causallearn"], marker = "extra == 'baselines'" },
     { name = "causalnex", marker = "extra == 'causalnex'", git = "https://github.com/mckinsey/causalnex.git?branch=develop" },
@@ -343,7 +341,7 @@ dev = [
     { name = "pytest", specifier = ">=8.3.3" },
 ]
 lint = [
-    { name = "black", specifier = ">=24.10.0" },
+    { name = "black", specifier = ">=25.1.0" },
     { name = "flake8-pyproject", specifier = ">=1.2.3" },
     { name = "isort", specifier = ">=5.13.2" },
 ]
