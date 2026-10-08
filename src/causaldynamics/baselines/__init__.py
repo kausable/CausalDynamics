@@ -11,7 +11,7 @@ _BASELINES = {
     "FPCMCI": ".pcmci",
     "PCMCIPlus": ".pcmci",
     "VARLiNGAM": ".varlingam",
-    "RCD": ".varlingam",
+    "RCD": ".rcd",
     "GIN": ".gin",
     "GRASP": ".perm",
     "TCDF": ".tcdf",
