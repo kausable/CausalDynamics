@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: "If you use CausalDynamics, please cite our NeurIPS paper."
+title: "CausalDynamics: A large-scale benchmark for structural discovery of dynamical causal models"
+type: software
+license: MIT
+repository-code: "https://github.com/kausable/CausalDynamics"
+url: "https://kausable.github.io/CausalDynamics"
+authors:
+  - given-names: Benjamin
+    family-names: Herdeanu
+  - given-names: Juan
+    family-names: Nathaniel
+  - given-names: Carla
+    family-names: Roesch
+  - given-names: Jatan
+    family-names: Buch
+  - given-names: Gregor
+    family-names: Ramien
+  - given-names: Johannes
+    family-names: Haux
+  - given-names: Pierre
+    family-names: Gentine
+preferred-citation:
+  type: conference-paper
+  title: "CausalDynamics: A large-scale benchmark for structural discovery of dynamical causal models"
+  authors:
+    - given-names: Benjamin
+      family-names: Herdeanu
+    - given-names: Juan
+      family-names: Nathaniel
+    - given-names: Carla
+      family-names: Roesch
+    - given-names: Jatan
+      family-names: Buch
+    - given-names: Gregor
+      family-names: Ramien
+    - given-names: Johannes
+      family-names: Haux
+    - given-names: Pierre
+      family-names: Gentine
+  collection-title: "Advances in Neural Information Processing Systems"
+  volume: 38
+  year: 2026
