@@ -42,7 +42,8 @@ classifiers = [
 
 [project.optional-dependencies]
 tigramite = ["tigramite>=5.2.7.0"]
-fpcmci = ["fpcmci>=4.4.1"]
+# dcor>=0.7 pulls in array-api-compat, which breaks fpcmci's sklearn import
+fpcmci = ["fpcmci>=4.4.1", "dcor<0.7"]
 lingam = ["lingam>=1.9.1"]
 causallearn = ["causal-learn>=0.1.4"]
 causalnex = ["causalnex>=0.12.1"]
@@ -95,6 +96,9 @@ ensure_newline_before_comments = true
 
 [dependency-groups]
 dev = ["pre-commit>=4.0.1", "pytest>=8.3.3"]
+# fpcmci imports idtxl without declaring it; idtxl is only available from
+# GitHub, so it cannot be part of the published extras.
+idtxl = ["idtxl"]
 lint = [
     "isort>=5.13.2",
     "black>=25.1.0",
@@ -113,5 +117,9 @@ conflicts = [
     [{ extra = "causalnex" }, { extra = "baselines" }],
 ]
 
+[tool.uv.extra-build-dependencies]
+idtxl = ["cython", "numpy<2.0"]
+
 [tool.uv.sources]
+idtxl = { git = "https://github.com/pwollstadt/IDTxl.git" }
 causalnex = { git = "https://github.com/mckinsey/causalnex.git", branch = "develop" }
